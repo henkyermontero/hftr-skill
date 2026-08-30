@@ -31,6 +31,12 @@ git add data/board.json && git commit -m "chore: refresh snapshot" && git push
   an empty snapshot and exits 1, so the workflow goes red *without committing*
   and the previous snapshot stays live. A red run here means "the refresh did
   not happen", never "the board is broken".
-- **Check the row count** the builder prints. A gradual drop is normal as rows
-  age out of the 30-day window. A sudden collapse usually means the API was
-  throttling — it retries once on a 429.
+- **The file is deterministic.** The same board produces byte-identical JSON:
+  keys are sorted and no build timestamp is written into it (build time is
+  printed in the log, and the commit records it). That is what lets the
+  workflow skip a commit when nothing actually changed.
+- **A throttled run cannot damage the snapshot.** Queries retry on the API's
+  60/min limit, and the builder refuses to write a file with more than 20%
+  fewer rows than the one it would replace. Rows aging out of the window is
+  gradual; a sudden collapse is a failure, so the job goes red and the previous
+  snapshot keeps serving.

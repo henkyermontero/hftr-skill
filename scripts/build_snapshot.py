@@ -81,8 +81,13 @@ def main(argv: list[str] | None = None) -> int:
         print("would fetch:", ", ".join(repr(q) for q in queries))
         return 0
 
+    # NOTE: no "generated_at" field. It changed on every run, so the committed
+    # file differed even when the board did not, and the workflow's
+    # commit-only-if-changed guard could never fire. Build time is reported
+    # below and recorded by the commit itself; `updated_at` (when the board was
+    # last ingested) is the timestamp that actually means something.
+    built_at = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
     snapshot: dict = {
-        "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "updated_at": None,
         "window_days": 30,
         "capped": True,
@@ -103,13 +108,25 @@ def main(argv: list[str] | None = None) -> int:
                 snapshot["rows"].append(r)
 
     for q in queries:
-        try:
-            payload = board(q or "")
-        except Exception as exc:
-            print(f"  skip {q!r}: {type(exc).__name__}", file=sys.stderr)
-            continue
-        absorb(q.strip().lower(), payload)
-        print(f"  {q or '(all)':<22} {len(payload.get('rows') or [])} rows")
+        for attempt in range(3):
+            try:
+                payload = board(q or "")
+                absorb(q.strip().lower(), payload)
+                print(f"  {q or '(all)':<22} {len(payload.get('rows') or [])} rows")
+                break
+            except urllib.error.HTTPError as exc:
+                if exc.code == 429 and attempt < 2:
+                    # The API allows 60/min and a full snapshot brushes that.
+                    # Without this a throttled run silently drops topics, and
+                    # the file differs from the last one for no real reason.
+                    print(f"  {q!r}: rate limited, waiting", file=sys.stderr)
+                    time.sleep(20)
+                    continue
+                print(f"  skip {q!r}: HTTP {exc.code}", file=sys.stderr)
+                break
+            except Exception as exc:
+                print(f"  skip {q!r}: {type(exc).__name__}", file=sys.stderr)
+                break
 
     # A handful of author pages, chosen from who is actually on the board.
     authors: list[tuple[str, str]] = []
@@ -160,12 +177,30 @@ def main(argv: list[str] | None = None) -> int:
         print("refusing to write an empty snapshot", file=sys.stderr)
         return 1
 
+    if OUT.exists():
+        try:
+            previous = json.loads(OUT.read_text())
+        except Exception:
+            previous = {}
+        was, now_ = len(previous.get("rows") or []), len(snapshot["rows"])
+        if was and now_ < was * 0.8:
+            # A run degraded by rate limits or a half-awake board must not
+            # replace a good snapshot with a thinner one. Rows aging out of the
+            # window is gradual; a 20% collapse in one run is a failure.
+            print(f"refusing to shrink the snapshot: {was} -> {now_} rows",
+                  file=sys.stderr)
+            return 1
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1))
+    # Sorted keys so an identical board always produces an identical file -
+    # the workflow's commit-only-if-changed guard depends on it.
+    OUT.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1,
+                              sort_keys=True))
     kb = OUT.stat().st_size / 1024
     print(f"\nwrote {OUT} · {len(snapshot['rows'])} unique rows · "
           f"{len(snapshot['queries'])} queries · {kb:.0f} KB")
     print(f"board updated_at: {snapshot['updated_at']}")
+    print(f"built at:         {built_at}")
     return 0
 
 
