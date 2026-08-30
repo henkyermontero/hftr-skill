@@ -378,6 +378,7 @@ def main(argv: list[str] | None = None) -> int:
         # a search returns, so asking for exactly `limit` rows leaves one card.
         pool_size = max(limit * 4, 25)
         notes, rows = [], []
+        no_creds = []
 
         def from_x():
             try:
@@ -387,6 +388,7 @@ def main(argv: list[str] | None = None) -> int:
             try:
                 return livex.search_replies(args.q, args.days, pool_size)
             except livex.NoCredentials:
+                no_creds.append(True)
                 notes.append("X: no credential on this machine")
                 return []
             except Exception:
@@ -431,9 +433,16 @@ def main(argv: list[str] | None = None) -> int:
         if not rows:
             # Name every source we consulted, not only the ones that errored -
             # "Reddit: 403" alone reads as if X was never asked.
-            looked = ["X", "Reddit"]
             detail = ("; ".join(notes)) if notes else "nothing matched"
-            reason_out.append(f"looked at {' and '.join(looked)}: {detail}")
+            reason_out.append(f"looked at X and Reddit: {detail}")
+            if no_creds:
+                # A machine-readable handoff: this install cannot search X
+                # itself, but the agent running it may be able to. Exit 0 -
+                # "I cannot reach X" is an answer, not a crash.
+                since = (dt.date.today() - dt.timedelta(days=args.days)).isoformat()
+                reason_out.append(
+                    f'NO_CREDS · search with your own X tool: '
+                    f'filter:replies "{args.q}" since:{since} min_faves:1')
         if not is_identity(args.q):
             rows = rank_brand(rows, args.q)
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
@@ -443,18 +452,14 @@ def main(argv: list[str] | None = None) -> int:
     # give the sleeping board a short window rather than a long one.
     payload = from_api(args.q, args.days, limit, 0 if args.raw else 1,
                        timeout=API_TIMEOUT_AFTER_SNAPSHOT if snap else API_TIMEOUT)
-    if payload is None:
-        if snap is None:
-            print("HFTR: board unreachable (it may be waking). Try again in a minute.",
-                  file=sys.stderr)
-            return 2
-        # snapshot answered, it simply had nothing for this query
-        print(render(args.q, [], days=args.days, capped=not args.raw,
-                     source="board", mode=mode, links=args.links,
-                     updated_at=(snap or {}).get("updated_at")))
-        return 0
+    if payload is None and snap is None:
+        # Nothing answered at all: no snapshot, no board. Live search still gets
+        # its turn below; only a total failure is worth an error exit.
+        payload = None
 
-    rows = payload.get("rows") or []
+    # An unreachable board is not the end of the answer - a sleeping Render
+    # used to stop the run here, before live search ever got a turn.
+    rows = (payload or {}).get("rows") or []
 
     # 3. Nothing on the board: look at X itself before saying no.
     note: list[str] = []
@@ -472,16 +477,24 @@ def main(argv: list[str] | None = None) -> int:
                              updated_at=None, links=args.links))
             return 0
 
+    if payload is None and snap is None and not rows:
+        print("HFTR: board unreachable (it may be waking). Try again in a minute.",
+              file=sys.stderr)
+        return 2
+
     if args.json:
-        payload["source"] = "live"
-        print(json.dumps(payload, indent=2))
+        print(json.dumps(payload or {"query": args.q, "count": 0, "rows": []},
+                         indent=2))
         return 0
-    out = render(args.q, rows, days=payload.get("window_days", args.days),
-                 capped=bool(payload.get("capped")), source="board",
-                 mode=payload.get("mode", mode), links=args.links,
-                 updated_at=payload.get("updated_at"))
+    out = render(args.q, rows, days=(payload or {}).get("window_days", args.days),
+                 capped=bool((payload or {}).get("capped", not args.raw)),
+                 source="board", mode=(payload or {}).get("mode", mode),
+                 links=args.links,
+                 updated_at=(payload or (snap or {})).get("updated_at"))
     if not rows and note:
-        out += f"\n{note[0]}."
+        # Every note matters: the second one is the NO_CREDS handoff a host
+        # needs in order to take over the search itself.
+        out += "\n" + "\n".join(note)
     print(out)
     return 0
 

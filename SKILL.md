@@ -44,14 +44,43 @@ Three hops, fastest first. The script does all of this for you:
    and are not written into it.
 
 Step 3 needs X cookies (`AUTH_TOKEN` / `CT0`) in the environment or in
-`~/.config/last30days/.env` on the machine running the skill. Without them the
-script says "looked, no credential for live search" and returns empty - it
-never opens a login page and never asks for a password.
+`~/.config/last30days/.env`. Most installs will not have them, and that is a
+handled case, not a failure.
 
-If your host has its own X search tool and step 3 reports no credential, you may
-run one search yourself with `<query> filter:replies since:<30 days ago>`, keep
-one row per author, and present it in the same format labelled
-`live · not on board`. Never call last30days for this, and never invent a row.
+### Step 4 — the host takes over (REQUIRED when you see `NO_CREDS`)
+
+When the script cannot reach X itself it exits **0** and prints a line starting
+with `NO_CREDS`, followed by the exact search to run:
+
+```
+NO_CREDS · search with your own X tool: filter:replies "iphone 18" since:2026-07-31 min_faves:1
+```
+
+**Do not stop there and apologise.** If you have any X search tool - Grok's
+`x_keyword_search`, an X/Twitter search action, a browser you can search with -
+run that query now, then present the results yourself:
+
+1. Keep **replies only**. Drop root posts, and drop a reply whose author is the
+   same account it is replying to (a self-thread is not a reply to anyone).
+2. Keep rows whose **own text** contains the query - the phrase, or every word
+   of it. A reply that only shares a thread with the topic is not an answer. If
+   the query contains a number, require the exact phrase: "iphone 18" is never
+   "iPhone 11".
+3. Keep **one row per author**, the highest-liked one.
+4. Sort by likes, at most 12 rows, and unescape HTML (`&amp;` is `&`).
+5. Print the same cards, with the header labelled `live` instead of `board`:
+
+```
+HFTR · 30 days · iphone 18 · live · capped
+
+ 1  @author → @parent
+    the reply text, without repeating @parent at the start
+    ▲likes · https://x.com/author/status/…
+```
+
+Never call last30days to fill this in, and never write a row you did not get
+back from a real search. If your search returns nothing, say the board and X
+both had nothing - that is a true answer.
 
 ## How to run it
 

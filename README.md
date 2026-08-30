@@ -22,6 +22,24 @@ It answers one question: **which replies landed.** For "what happened across
 the internet", use [last30days](https://github.com/mvanhorn/last30days-skill) —
 different job, don't bolt them together.
 
+## Two modes
+
+**Fast board — no keys, works everywhere.** Topics the board already collects
+answer from a static snapshot on GitHub raw in about half a second. No account,
+no cookies, no server to wake.
+
+**Live — anything else.** For a topic the board has never collected, the skill
+searches X directly. That needs either:
+
+- `AUTH_TOKEN` / `CT0` in the environment or `~/.config/last30days/.env` on the
+  machine running the skill, **or**
+- an X search tool in your agent host. When the script has no cookies it exits
+  0 with a `NO_CREDS` line naming the exact query to run, and `SKILL.md` tells
+  the host how to format the results the same way.
+
+So a Grok Bot with no cookies still answers a live topic - the host does the
+search, the skill supplies the rules.
+
 ## Install
 
 Agent Skills host (Claude Code, Codex, Cursor, Gemini CLI):
