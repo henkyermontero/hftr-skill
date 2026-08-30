@@ -191,14 +191,28 @@ def needs_exact_phrase(q: str) -> bool:
     return any(ch.isdigit() for ch in q)
 
 
-def matches_query(row: dict, q: str) -> bool:
-    """Does this row actually answer the query, not just share its words."""
+def matches_query(row: dict, q: str, *, text_only: bool = False) -> bool:
+    """Does this row actually answer the query, not just share a thread with it?
+
+    X search returns thread siblings, so a reply about broadband pricing can
+    come back for "lg tv" because the CONVERSATION mentioned an LG TV. The card
+    shows only the reply, so the reply itself has to carry the query - a reader
+    cannot verify a row whose text never mentions what they asked for.
+    """
     needle = normalize(q).strip('"')
     if not needle:
         return True
-    hay = " ".join(str(row.get(f) or "") for f in
-                   ("text", "topic", "parent_handle", "author")).lower()
-    return needle in hay
+    text = str(row.get("text") or "").lower()
+    if not text_only:
+        hay = " ".join(str(row.get(f) or "") for f in
+                       ("text", "topic", "parent_handle", "author")).lower()
+        return needle in hay
+    if needle in text:
+        return True
+    if needs_exact_phrase(q):
+        return False                      # a numbered query means that number
+    tokens = [t for t in needle.split() if len(t) > 1]
+    return bool(tokens) and all(t in text for t in tokens)
 
 
 def search_rows(rows: list[dict], q: str) -> list[dict]:
@@ -408,9 +422,11 @@ def main(argv: list[str] | None = None) -> int:
             return bool(parent) and parent != (r.get("author") or "").strip().lower()
 
         rows = [r for r in rows if is_real_reply(r)]
-        # And a numbered query means that number: "iphone 18" is not "iPhone 11".
-        if needs_exact_phrase(args.q) and not is_identity(args.q):
-            rows = [r for r in rows if matches_query(r, args.q)]
+        # The reply itself must carry the query. Search hands back thread
+        # siblings, and a card showing a reply that never mentions what was
+        # asked is unverifiable to whoever reads it.
+        if not is_identity(args.q):
+            rows = [r for r in rows if matches_query(r, args.q, text_only=True)]
 
         if not rows:
             # Name every source we consulted, not only the ones that errored -
