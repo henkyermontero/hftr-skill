@@ -19,6 +19,7 @@ import os
 import sys
 import urllib.error
 import urllib.parse
+import re
 import urllib.request
 
 DEFAULT_BASE = "https://here-for-the-replies.onrender.com"
@@ -44,6 +45,53 @@ def _get(url: str, timeout: int) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": "hftr-skill/0.2"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8", "replace"))
+
+
+# --- brand queries -----------------------------------------------------------
+# A short brand name is also an ordinary word: "stripe" matched "a black stripe
+# on the side" of some shorts and outranked a reply to @stripe. Evidence about
+# who the reply addresses beats raw likes. Mirrors backend/app/relevance.py.
+
+BRAND_ALIASES = {
+    "stripe": {"stripe", "stripehq"},
+    "openai": {"openai"},
+    "grok": {"grok", "xai"},
+    "tesla": {"tesla", "teslamotors"},
+    "spacex": {"spacex"},
+    "xai": {"xai", "grok"},
+}
+TIER_HANDLE, TIER_MENTION, TIER_WORD, TIER_SUBSTRING = 0, 1, 2, 3
+
+
+def brand_for(query: str):
+    q = normalize(query)
+    return (q, BRAND_ALIASES[q]) if q in BRAND_ALIASES else None
+
+
+def tier_of(row: dict, aliases: set) -> int:
+    author = (row.get("author") or "").strip().lower()
+    parent = (row.get("parent_handle") or "").strip().lower()
+    if author in aliases or parent in aliases:
+        return TIER_HANDLE
+    text = (row.get("text") or "").lower()
+    if any(f"@{a}" in text for a in aliases):
+        return TIER_MENTION
+    if any(re.search(rf"\b{re.escape(a)}\b", text) for a in aliases):
+        return TIER_WORD
+    return TIER_SUBSTRING
+
+
+def rank_brand(rows: list[dict], query: str) -> list[dict]:
+    found = brand_for(query)
+    if not found:
+        return rows
+    _, aliases = found
+    tiered = [(tier_of(r, aliases), -int(r.get("like_count") or 0), i, r)
+              for i, r in enumerate(rows)]
+    strong = [t for t in tiered if t[0] <= TIER_MENTION]
+    keep = strong or tiered
+    keep.sort(key=lambda t: (t[0], t[1], t[2]))
+    return [t[3] for t in keep]
 
 
 # --- matching ----------------------------------------------------------------
@@ -82,10 +130,16 @@ def in_window(row: dict, days: int, now: dt.datetime) -> bool:
     return (now - when).total_seconds() <= days * 86400
 
 
-def cap_by_author(rows: list[dict]) -> list[dict]:
-    """One row per (source, author), highest likes first - same rule as the site."""
+def cap_by_author(rows: list[dict], preserve_order: bool = False) -> list[dict]:
+    """One row per (source, author) - same rule as the site.
+
+    ``preserve_order`` keeps a brand ranking intact instead of re-sorting by
+    likes, which would put the ambiguous word back on top.
+    """
     out, seen = [], set()
-    for r in sorted(rows, key=lambda r: -(r.get("like_count") or 0)):
+    ordered = rows if preserve_order else sorted(
+        rows, key=lambda r: -(r.get("like_count") or 0))
+    for r in ordered:
         key = ((r.get("source") or "").lower(), (r.get("author") or "").lower())
         if key in seen:
             continue
@@ -136,7 +190,9 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
         if not rows:
             rows = search_rows(snap.get("rows") or [], q)
     rows = [r for r in rows if in_window(r, days, now)]
-    return cap_by_author(rows), snap
+    if not is_identity(q):
+        rows = rank_brand(rows, q)
+    return cap_by_author(rows, preserve_order=bool(brand_for(q))), snap
 
 
 def from_api(q: str, days: int, limit: int, cap: int,

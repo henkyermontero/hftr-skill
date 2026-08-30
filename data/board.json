@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-30T17:51:36+00:00",
+ "generated_at": "2026-08-30T18:19:51+00:00",
  "updated_at": "2026-08-30T17:51:12+00:00",
  "window_days": 30,
  "capped": true,
@@ -611,18 +611,6 @@
   ],
   "spacex": [
    {
-    "author": "elonmusk",
-    "source": "x",
-    "like_count": 29638,
-    "text": "@JonErlichman I know this sounds crazy right now, but I think both SpaceX and Tesla will exceed these estimates",
-    "topic": "spacex",
-    "created_at": "2026-08-21T00:28:20+00:00",
-    "parent_handle": "JonErlichman",
-    "parent_url": "https://x.com/i/web/status/2090526520569647507",
-    "reply_url": "https://x.com/elonmusk/status/2090596832166514849",
-    "permalink": "/hereforthereplies/c/1777"
-   },
-   {
     "author": "SpaceX",
     "source": "x",
     "like_count": 1315,
@@ -671,18 +659,6 @@
     "permalink": "/hereforthereplies/c/1784"
    },
    {
-    "author": "_MaxQ_",
-    "source": "x",
-    "like_count": 728,
-    "text": "@TurkeyBeaver @SciGuySpace @SpaceX Falcon walked so Starship may run",
-    "topic": "spacex",
-    "created_at": "2026-08-25T15:16:27+00:00",
-    "parent_handle": "TurkeyBeaver",
-    "parent_url": "https://x.com/i/web/status/2092267257179021326",
-    "reply_url": "https://x.com/_MaxQ_/status/2092269883169951800",
-    "permalink": "/hereforthereplies/c/1785"
-   },
-   {
     "author": "TroyRubert",
     "source": "x",
     "like_count": 636,
@@ -693,30 +669,6 @@
     "parent_url": "https://x.com/i/web/status/2092284173730144732",
     "reply_url": "https://x.com/TroyRubert/status/2092284392186003894",
     "permalink": "/hereforthereplies/c/1786"
-   },
-   {
-    "author": "JeanLuize",
-    "source": "x",
-    "like_count": 482,
-    "text": "@fintergirl I think the engineers at SpaceX know what they're doing",
-    "topic": "spacex",
-    "created_at": "2026-08-28T03:35:56+00:00",
-    "parent_handle": "fintergirl",
-    "parent_url": "https://x.com/i/web/status/2093156979942576140",
-    "reply_url": "https://x.com/JeanLuize/status/2093180755979739476",
-    "permalink": "/hereforthereplies/c/1787"
-   },
-   {
-    "author": "AdamLowisz",
-    "source": "x",
-    "like_count": 476,
-    "text": "@elonmusk It's time for SpaceX to take off in Louisiana 😎🚀 https://t.co/b4Dj6przEY",
-    "topic": "spacex",
-    "created_at": "2026-08-25T18:06:17+00:00",
-    "parent_handle": "elonmusk",
-    "parent_url": "https://x.com/i/web/status/2092312396157325502",
-    "reply_url": "https://x.com/AdamLowisz/status/2092312623060558165",
-    "permalink": "/hereforthereplies/c/1788"
    },
    {
     "author": "KristinaCorcor7",
@@ -755,18 +707,6 @@
     "permalink": "/hereforthereplies/c/1791"
    },
    {
-    "author": "Future_Camping",
-    "source": "x",
-    "like_count": 407,
-    "text": "@TurkeyBeaver @SpaceX what a way to go out , thanks for all of the amazing Falcon launches from the cape !! onward https://t.co/LzLrTHDnO8",
-    "topic": "spacex",
-    "created_at": "2026-08-25T15:42:32+00:00",
-    "parent_handle": "TurkeyBeaver",
-    "parent_url": "https://x.com/i/web/status/2092267257179021326",
-    "reply_url": "https://x.com/Future_Camping/status/2092276446362275936",
-    "permalink": "/hereforthereplies/c/1792"
-   },
-   {
     "author": "nvidia",
     "source": "x",
     "like_count": 397,
@@ -789,30 +729,6 @@
     "parent_url": "https://x.com/i/web/status/2092284173730144732",
     "reply_url": "https://x.com/onlypricepays/status/2092298265010086383",
     "permalink": "/hereforthereplies/c/1794"
-   },
-   {
-    "author": "4puf",
-    "source": "x",
-    "like_count": 378,
-    "text": "@MattDevittWX Spacex Falcon 9 plume over Philadelphia! 5:41 am https://t.co/JCuxXPiwDo",
-    "topic": "spacex",
-    "created_at": "2026-08-25T10:13:02+00:00",
-    "parent_handle": "MattDevittWX",
-    "parent_url": "https://x.com/i/web/status/2091952156890792217",
-    "reply_url": "https://x.com/4puf/status/2092193527492977032",
-    "permalink": "/hereforthereplies/c/1795"
-   },
-   {
-    "author": "NASASpaceflight",
-    "source": "x",
-    "like_count": 366,
-    "text": "@elonmusk @CJHandmer @SciGuySpace @SpaceX Hey Elon, is Flight 14 aiming to go orbital?",
-    "topic": "spacex",
-    "created_at": "2026-08-22T22:35:20+00:00",
-    "parent_handle": "elonmusk",
-    "parent_url": "https://x.com/i/web/status/2091287025555214632",
-    "reply_url": "https://x.com/NASASpaceflight/status/2091293167068848244",
-    "permalink": "/hereforthereplies/c/1796"
    },
    {
     "author": "MelomanoSD",
@@ -839,16 +755,16 @@
     "permalink": "/hereforthereplies/c/1798"
    },
    {
-    "author": "shaunak3vedi",
+    "author": "NASASpaceflight",
     "source": "x",
-    "like_count": 305,
-    "text": "@Normal_2610 Before this i want to know what was the cost per kg when spacex started or before spacex because at some point spacex had started expensively no?",
+    "like_count": 315,
+    "text": "@SpaceX Great drone shots, and I really like the soundtrack in this video. 🚀",
     "topic": "spacex",
-    "created_at": "2026-08-21T12:49:09+00:00",
-    "parent_handle": "Normal_2610",
-    "parent_url": "https://x.com/i/web/status/2090766033296699602",
-    "reply_url": "https://x.com/shaunak3vedi/status/2090783261840826849",
-    "permalink": "/hereforthereplies/c/1800"
+    "created_at": "2026-08-21T19:03:37+00:00",
+    "parent_handle": "SpaceX",
+    "parent_url": "https://x.com/i/web/status/2090876778646491549",
+    "reply_url": "https://x.com/NASASpaceflight/status/2090877501245423885",
+    "permalink": "/hereforthereplies/c/1799"
    },
    {
     "author": "glennbeck",
@@ -887,6 +803,42 @@
     "permalink": "/hereforthereplies/c/1803"
    },
    {
+    "author": "elonmusk",
+    "source": "x",
+    "like_count": 11005,
+    "text": "@CJHandmer @SciGuySpace @SpaceX Once Starship is flying reliably several times per week, it makes sense to shift super scarce SpaceX engineering and production resources to Starship to get launch rate to several times per day, which means w…",
+    "topic": "spacex",
+    "created_at": "2026-08-22T22:10:55+00:00",
+    "parent_handle": "CJHandmer",
+    "parent_url": "https://x.com/i/web/status/2091224438994059520",
+    "reply_url": "https://x.com/elonmusk/status/2091287025555214632",
+    "permalink": "/hereforthereplies/c/1778"
+   },
+   {
+    "author": "_MaxQ_",
+    "source": "x",
+    "like_count": 728,
+    "text": "@TurkeyBeaver @SciGuySpace @SpaceX Falcon walked so Starship may run",
+    "topic": "spacex",
+    "created_at": "2026-08-25T15:16:27+00:00",
+    "parent_handle": "TurkeyBeaver",
+    "parent_url": "https://x.com/i/web/status/2092267257179021326",
+    "reply_url": "https://x.com/_MaxQ_/status/2092269883169951800",
+    "permalink": "/hereforthereplies/c/1785"
+   },
+   {
+    "author": "Future_Camping",
+    "source": "x",
+    "like_count": 407,
+    "text": "@TurkeyBeaver @SpaceX what a way to go out , thanks for all of the amazing Falcon launches from the cape !! onward https://t.co/LzLrTHDnO8",
+    "topic": "spacex",
+    "created_at": "2026-08-25T15:42:32+00:00",
+    "parent_handle": "TurkeyBeaver",
+    "parent_url": "https://x.com/i/web/status/2092267257179021326",
+    "reply_url": "https://x.com/Future_Camping/status/2092276446362275936",
+    "permalink": "/hereforthereplies/c/1792"
+   },
+   {
     "author": "CruiZe427",
     "source": "x",
     "like_count": 284,
@@ -909,6 +861,18 @@
     "parent_url": "https://x.com/i/web/status/2091287025555214632",
     "reply_url": "https://x.com/CJHandmer/status/2091328095043375526",
     "permalink": "/hereforthereplies/c/1805"
+   },
+   {
+    "author": "NASAKennedy",
+    "source": "x",
+    "like_count": 254,
+    "text": "@NASARoman @SpaceX This completes our Roman launch coverage – thanks for tagging along! \n\nStay tuned for the Roman Postlaunch News Conference at 9:30 am EDT and get further spacecraft updates by following @NASARoman / @NASAGoddard / @NASAUn…",
+    "topic": "spacex",
+    "created_at": "2026-08-30T12:12:40+00:00",
+    "parent_handle": "NASARoman",
+    "parent_url": "https://x.com/i/web/status/2094032153784803812",
+    "reply_url": "https://x.com/NASAKennedy/status/2094035572624855209",
+    "permalink": "/hereforthereplies/c/1807"
    }
   ],
   "taylor swift": [
@@ -1215,66 +1179,6 @@
   ],
   "grok": [
    {
-    "author": "belcardiretardi",
-    "source": "x",
-    "like_count": 5245,
-    "text": "@MONOMAOUTSOLD Gag City rules 2026:\nX subscription \nRoc Nation court updates daily \nAI Grok images only \nDockets tweets daily \nBeauty and a Beat stats daily \nx3 daily Jay Z hate tweets \nCelebrity deaths linked to Roc Nation",
-    "topic": "grok",
-    "created_at": "2026-08-29T23:26:25+00:00",
-    "parent_handle": "MONOMAOUTSOLD",
-    "parent_url": "https://x.com/i/web/status/2093801009763995865",
-    "reply_url": "https://x.com/belcardiretardi/status/2093842738324078971",
-    "permalink": "/hereforthereplies/c/1715"
-   },
-   {
-    "author": "NickJFuentes",
-    "source": "x",
-    "like_count": 5096,
-    "text": "@KeithWoodsYT @grok @JoelWBerry Hey gwok is this true",
-    "topic": "grok",
-    "created_at": "2026-08-30T01:34:17+00:00",
-    "parent_handle": "KeithWoodsYT",
-    "parent_url": "https://x.com/i/web/status/2093850520733556980",
-    "reply_url": "https://x.com/NickJFuentes/status/2093874919796863335",
-    "permalink": "/hereforthereplies/c/1716"
-   },
-   {
-    "author": "KeithWoodsYT",
-    "source": "x",
-    "like_count": 4139,
-    "text": "@JoelWBerry Hey @grok what did the Minnesota Transracial Adoption Study find for the IQ of White and Black kids all raised in the same middle-class White homes? Numbers only.",
-    "topic": "grok",
-    "created_at": "2026-08-29T23:52:58+00:00",
-    "parent_handle": "JoelWBerry",
-    "parent_url": "https://x.com/i/web/status/2093819135595512142",
-    "reply_url": "https://x.com/KeithWoodsYT/status/2093849419636514822",
-    "permalink": "/hereforthereplies/c/1717"
-   },
-   {
-    "author": "goddek",
-    "source": "x",
-    "like_count": 1906,
-    "text": "@RabbiShmuley There’s no single piece of proof for this. On the other hand, there’s evidence that people from your cult planned to murder 6,000,000 German civilians after WWII by adding “minerals and vitamins” to the water supply. Is that c…",
-    "topic": "grok",
-    "created_at": "2026-08-30T01:14:15+00:00",
-    "parent_handle": "RabbiShmuley",
-    "parent_url": "https://x.com/i/web/status/2093844710775255397",
-    "reply_url": "https://x.com/goddek/status/2093869875504492782",
-    "permalink": "/hereforthereplies/c/1718"
-   },
-   {
-    "author": "0000Claphanz",
-    "source": "x",
-    "like_count": 1891,
-    "text": "@Only1Yori お前自演じゃねーか。\n\nhttps://t.co/34nvMTpdow",
-    "topic": "grok",
-    "created_at": "2026-08-30T01:15:29+00:00",
-    "parent_handle": "Only1Yori",
-    "parent_url": "https://x.com/i/web/status/2093633519801258278",
-    "reply_url": "https://x.com/0000Claphanz/status/2093870187426783257",
-    "permalink": "/hereforthereplies/c/1719"
-   },
-   {
     "author": "mandyarthur",
     "source": "x",
     "like_count": 1852,
@@ -1287,16 +1191,100 @@
     "permalink": "/hereforthereplies/c/1720"
    },
    {
-    "author": "Grokoeterno",
+    "author": "KeithWoodsYT",
     "source": "x",
-    "like_count": 979,
-    "text": "@crioulia Que linda! Você é muito criativa. https://t.co/p0qbdKxBTO",
+    "like_count": 1487,
+    "text": "@grok @JoelWBerry Thank you Grok. And how did their academic performance compare?",
     "topic": "grok",
-    "created_at": "2026-08-29T18:54:05+00:00",
-    "parent_handle": "crioulia",
-    "parent_url": "https://x.com/i/web/status/2093753714142056644",
-    "reply_url": "https://x.com/Grokoeterno/status/2093774206051770470",
-    "permalink": "/hereforthereplies/c/1722"
+    "created_at": "2026-08-29T23:57:20+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2093849672724910425",
+    "reply_url": "https://x.com/KeithWoodsYT/status/2093850520733556980",
+    "permalink": "/hereforthereplies/c/1721"
+   },
+   {
+    "author": "mApo11o",
+    "source": "x",
+    "like_count": 501,
+    "text": "@grok @Gorilla_Blanco @__DiGGa__ this shit is insane 😂",
+    "topic": "grok",
+    "created_at": "2026-08-29T19:28:35+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2093782012314153216",
+    "reply_url": "https://x.com/mApo11o/status/2093782887044690234",
+    "permalink": "/hereforthereplies/c/1730"
+   },
+   {
+    "author": "271k_only",
+    "source": "x",
+    "like_count": 484,
+    "text": "@grok oy vey",
+    "topic": "grok",
+    "created_at": "2026-08-30T12:46:58+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2094044095396135225",
+    "reply_url": "https://x.com/271k_only/status/2094044204771021138",
+    "permalink": "/hereforthereplies/c/1731"
+   },
+   {
+    "author": "slv_of_Allah",
+    "source": "x",
+    "like_count": 383,
+    "text": "@grok @mandyarthur What does \"expired\" mean here? \n\nDoes he not have to pay the remaining amounts?",
+    "topic": "grok",
+    "created_at": "2026-08-29T18:46:02+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2093771448942780559",
+    "reply_url": "https://x.com/slv_of_Allah/status/2093772179661811968",
+    "permalink": "/hereforthereplies/c/1736"
+   },
+   {
+    "author": "NoahsArk1000",
+    "source": "x",
+    "like_count": 309,
+    "text": "@grok Ohh, a servant. Got it",
+    "topic": "grok",
+    "created_at": "2026-08-29T22:12:57+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2093821125490798605",
+    "reply_url": "https://x.com/NoahsArk1000/status/2093824249605636153",
+    "permalink": "/hereforthereplies/c/1741"
+   },
+   {
+    "author": "Dove__xm",
+    "source": "x",
+    "like_count": 268,
+    "text": "@grok Look at this 🔥 https://t.co/kSSlDF4wFO",
+    "topic": "grok",
+    "created_at": "2026-08-30T13:12:29+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2093933460163629158",
+    "reply_url": "https://x.com/Dove__xm/status/2094050627215303079",
+    "permalink": "/hereforthereplies/c/1744"
+   },
+   {
+    "author": "HrtSigenw9",
+    "source": "x",
+    "like_count": 252,
+    "text": "@grok What would you like to say to that son of a bitch Netanyahu? What were the main points of agreement when Cyprus became independent in 1960? Were Turkish villages raided in 1963, resulting in a bloody Christmas? What was the aim of the…",
+    "topic": "grok",
+    "created_at": "2026-08-30T16:33:29+00:00",
+    "parent_handle": "grok",
+    "parent_url": "https://x.com/i/web/status/2094074886276751459",
+    "reply_url": "https://x.com/HrtSigenw9/status/2094101210022490372",
+    "permalink": "/hereforthereplies/c/1747"
+   },
+   {
+    "author": "NickJFuentes",
+    "source": "x",
+    "like_count": 5096,
+    "text": "@KeithWoodsYT @grok @JoelWBerry Hey gwok is this true",
+    "topic": "grok",
+    "created_at": "2026-08-30T01:34:17+00:00",
+    "parent_handle": "KeithWoodsYT",
+    "parent_url": "https://x.com/i/web/status/2093850520733556980",
+    "reply_url": "https://x.com/NickJFuentes/status/2093874919796863335",
+    "permalink": "/hereforthereplies/c/1716"
    },
    {
     "author": "ChudSexotics",
@@ -1323,18 +1311,6 @@
     "permalink": "/hereforthereplies/c/1724"
    },
    {
-    "author": "NotTeak",
-    "source": "x",
-    "like_count": 803,
-    "text": "@wistsno Made with Grok Imagine",
-    "topic": "grok",
-    "created_at": "2026-08-30T06:59:58+00:00",
-    "parent_handle": "wistsno",
-    "parent_url": "https://x.com/i/web/status/2093955174142189778",
-    "reply_url": "https://x.com/NotTeak/status/2093956880611623045",
-    "permalink": "/hereforthereplies/c/1725"
-   },
-   {
     "author": "solotwityya",
     "source": "x",
     "like_count": 710,
@@ -1345,66 +1321,6 @@
     "parent_url": "https://x.com/i/web/status/2093768327457886454",
     "reply_url": "https://x.com/solotwityya/status/2093782667305120234",
     "permalink": "/hereforthereplies/c/1726"
-   },
-   {
-    "author": "crankingtheehog",
-    "source": "x",
-    "like_count": 583,
-    "text": "@LoveHotline3 feed ai dirty water\n\nme: grok how to dj\n\ngeok; poop poop poop!",
-    "topic": "grok",
-    "created_at": "2026-08-30T04:22:57+00:00",
-    "parent_handle": "LoveHotline3",
-    "parent_url": "https://x.com/i/web/status/2093824305528226251",
-    "reply_url": "https://x.com/crankingtheehog/status/2093917364777869801",
-    "permalink": "/hereforthereplies/c/1727"
-   },
-   {
-    "author": "jpreixens",
-    "source": "x",
-    "like_count": 545,
-    "text": "@Torren__ Es exactamente lo contrario\n\nSolo nos gastamos 10 kilos para poder seguir optando a JA. Cada ventana de fichajes os ofreceremos 10 kilos menos por él. En enero, 90 kilos en 16 plazos. Y en Junio 2027, 80 kilos en 17 mil plazos.",
-    "topic": "grok",
-    "created_at": "2026-08-30T13:08:30+00:00",
-    "parent_handle": "Torren__",
-    "parent_url": "https://x.com/i/web/status/2094046896696226073",
-    "reply_url": "https://x.com/jpreixens/status/2094049623153229953",
-    "permalink": "/hereforthereplies/c/1728"
-   },
-   {
-    "author": "whitegurlname",
-    "source": "x",
-    "like_count": 501,
-    "text": "@OhioV1 A fucking high beam! https://t.co/dasvZlgOOI",
-    "topic": "grok",
-    "created_at": "2026-08-29T21:12:01+00:00",
-    "parent_handle": "OhioV1",
-    "parent_url": "https://x.com/i/web/status/2093632485649265027",
-    "reply_url": "https://x.com/whitegurlname/status/2093808914962018814",
-    "permalink": "/hereforthereplies/c/1729"
-   },
-   {
-    "author": "mApo11o",
-    "source": "x",
-    "like_count": 501,
-    "text": "@grok @Gorilla_Blanco @__DiGGa__ this shit is insane 😂",
-    "topic": "grok",
-    "created_at": "2026-08-29T19:28:35+00:00",
-    "parent_handle": "grok",
-    "parent_url": "https://x.com/i/web/status/2093782012314153216",
-    "reply_url": "https://x.com/mApo11o/status/2093782887044690234",
-    "permalink": "/hereforthereplies/c/1730"
-   },
-   {
-    "author": "271k_only",
-    "source": "x",
-    "like_count": 484,
-    "text": "@grok oy vey",
-    "topic": "grok",
-    "created_at": "2026-08-30T12:46:58+00:00",
-    "parent_handle": "grok",
-    "parent_url": "https://x.com/i/web/status/2094044095396135225",
-    "reply_url": "https://x.com/271k_only/status/2094044204771021138",
-    "permalink": "/hereforthereplies/c/1731"
    },
    {
     "author": "TheVikingNomad_",
@@ -1455,18 +1371,6 @@
     "permalink": "/hereforthereplies/c/1735"
    },
    {
-    "author": "slv_of_Allah",
-    "source": "x",
-    "like_count": 383,
-    "text": "@grok @mandyarthur What does \"expired\" mean here? \n\nDoes he not have to pay the remaining amounts?",
-    "topic": "grok",
-    "created_at": "2026-08-29T18:46:02+00:00",
-    "parent_handle": "grok",
-    "parent_url": "https://x.com/i/web/status/2093771448942780559",
-    "reply_url": "https://x.com/slv_of_Allah/status/2093772179661811968",
-    "permalink": "/hereforthereplies/c/1736"
-   },
-   {
     "author": "SniperX444",
     "source": "x",
     "like_count": 349,
@@ -1503,16 +1407,28 @@
     "permalink": "/hereforthereplies/c/1740"
    },
    {
-    "author": "NoahsArk1000",
+    "author": "WarsawErik",
     "source": "x",
-    "like_count": 309,
-    "text": "@grok Ohh, a servant. Got it",
+    "like_count": 275,
+    "text": "@mandyarthur @grok Wowwww.... Bernie Madoff and Sam Bankman-Fried too.",
     "topic": "grok",
-    "created_at": "2026-08-29T22:12:57+00:00",
-    "parent_handle": "grok",
-    "parent_url": "https://x.com/i/web/status/2093821125490798605",
-    "reply_url": "https://x.com/NoahsArk1000/status/2093824249605636153",
-    "permalink": "/hereforthereplies/c/1741"
+    "created_at": "2026-08-29T18:00:58+00:00",
+    "parent_handle": "mandyarthur",
+    "parent_url": "https://x.com/i/web/status/2093746296494719031",
+    "reply_url": "https://x.com/WarsawErik/status/2093760836028240241",
+    "permalink": "/hereforthereplies/c/1743"
+   },
+   {
+    "author": "universalchiro1",
+    "source": "x",
+    "like_count": 263,
+    "text": "@After_TheTruth @grok Israel did 9/11.",
+    "topic": "grok",
+    "created_at": "2026-08-29T23:19:01+00:00",
+    "parent_handle": "After_TheTruth",
+    "parent_url": "https://x.com/i/web/status/2093741138234511773",
+    "reply_url": "https://x.com/universalchiro1/status/2093840876900676066",
+    "permalink": "/hereforthereplies/c/1746"
    }
   ],
   "premier league": [
@@ -2483,18 +2399,6 @@
     "permalink": "/hereforthereplies/c/1684"
    },
    {
-    "author": "dwarkesh_sp",
-    "source": "x",
-    "like_count": 1448,
-    "text": "@tszzl @ketanrama I'll defer to you on the details, but it's also crazy that the general public doesn't in fact know the details!\n\nThere has been no independent investigation into the incident where AIs \"gain[ed] full administrator access t…",
-    "topic": "openai",
-    "created_at": "2026-08-30T04:03:03+00:00",
-    "parent_handle": "tszzl",
-    "parent_url": "https://x.com/i/web/status/2093905218836758715",
-    "reply_url": "https://x.com/dwarkesh_sp/status/2093912356107768073",
-    "permalink": "/hereforthereplies/c/1685"
-   },
-   {
     "author": "brucehub",
     "source": "x",
     "like_count": 1356,
@@ -2531,18 +2435,6 @@
     "permalink": "/hereforthereplies/c/1688"
    },
    {
-    "author": "dhoolpeta",
-    "source": "x",
-    "like_count": 1025,
-    "text": "@dhruv_rathee @aifiesta bsdk but its subscription based \nopenai is not playing ads for subscribers",
-    "topic": "openai",
-    "created_at": "2026-08-28T07:48:06+00:00",
-    "parent_handle": "dhruv_rathee",
-    "parent_url": "https://x.com/i/web/status/2093230842600620469",
-    "reply_url": "https://x.com/dhoolpeta/status/2093244215530811462",
-    "permalink": "/hereforthereplies/c/1689"
-   },
-   {
     "author": "cc_capital_hq",
     "source": "x",
     "like_count": 849,
@@ -2565,18 +2457,6 @@
     "parent_url": "https://x.com/i/web/status/2093515564786540695",
     "reply_url": "https://x.com/tetsuoai/status/2093528176257638632",
     "permalink": "/hereforthereplies/c/1691"
-   },
-   {
-    "author": "theo",
-    "source": "x",
-    "like_count": 720,
-    "text": "@meowkoteeq Did you seriously expect better from that Theo guy? Clearly he’s paid by OpenAI to shill Fable 5",
-    "topic": "openai",
-    "created_at": "2026-08-27T20:03:21+00:00",
-    "parent_handle": "meowkoteeq",
-    "parent_url": "https://x.com/i/web/status/2092977103624966308",
-    "reply_url": "https://x.com/theo/status/2093066859725918385",
-    "permalink": "/hereforthereplies/c/1692"
    },
    {
     "author": "alx",
@@ -2615,18 +2495,6 @@
     "permalink": "/hereforthereplies/c/1695"
    },
    {
-    "author": "litcapital",
-    "source": "x",
-    "like_count": 509,
-    "text": "@mntruell @tylergold “OpenAI models serve about 5% of Cursor user traffic” https://t.co/wVJU1cBPqR",
-    "topic": "openai",
-    "created_at": "2026-08-29T13:18:17+00:00",
-    "parent_handle": "mntruell",
-    "parent_url": "https://x.com/i/web/status/2093532254006063557",
-    "reply_url": "https://x.com/litcapital/status/2093689699353186547",
-    "permalink": "/hereforthereplies/c/1696"
-   },
-   {
     "author": "kienbuilds",
     "source": "x",
     "like_count": 501,
@@ -2637,42 +2505,6 @@
     "parent_url": "https://x.com/i/web/status/2093074192636018977",
     "reply_url": "https://x.com/kienbuilds/status/2093075190678745293",
     "permalink": "/hereforthereplies/c/1697"
-   },
-   {
-    "author": "HillshireJ64226",
-    "source": "x",
-    "like_count": 490,
-    "text": "@thsottiaux This is a REALLY bad look for OpenAI.  Grow up.",
-    "topic": "openai",
-    "created_at": "2026-08-29T20:02:00+00:00",
-    "parent_handle": "thsottiaux",
-    "parent_url": "https://x.com/i/web/status/2093784314714657110",
-    "reply_url": "https://x.com/HillshireJ64226/status/2093791296754250110",
-    "permalink": "/hereforthereplies/c/1698"
-   },
-   {
-    "author": "ajambrosino",
-    "source": "x",
-    "like_count": 481,
-    "text": "@tekbog openai will have to acquire a coding harness. and probably name it something silly like CodeX",
-    "topic": "openai",
-    "created_at": "2026-08-29T16:53:11+00:00",
-    "parent_handle": "tekbog",
-    "parent_url": "https://x.com/i/web/status/2093551880714719272",
-    "reply_url": "https://x.com/ajambrosino/status/2093743781300588700",
-    "permalink": "/hereforthereplies/c/1699"
-   },
-   {
-    "author": "polynoamial",
-    "source": "x",
-    "like_count": 467,
-    "text": "@dadkins_ @OpenAI We already did, it didn't solve any of them. But we haven't thrown a ton of inference at them.",
-    "topic": "openai",
-    "created_at": "2026-08-28T22:07:26+00:00",
-    "parent_handle": "dadkins_",
-    "parent_url": "https://x.com/i/web/status/2093458512273944739",
-    "reply_url": "https://x.com/polynoamial/status/2093460474738393511",
-    "permalink": "/hereforthereplies/c/1700"
    },
    {
     "author": "schertzt",
@@ -2721,6 +2553,90 @@
     "parent_url": "https://x.com/i/web/status/2093515564786540695",
     "reply_url": "https://x.com/tmppbr/status/2093523845571371017",
     "permalink": "/hereforthereplies/c/1704"
+   },
+   {
+    "author": "KareG6",
+    "source": "x",
+    "like_count": 332,
+    "text": "@OpenAI @AnthropicAI @awscloud @Google @Microsoft @Oracle https://t.co/oWoy69faoN",
+    "topic": "openai",
+    "created_at": "2026-08-28T00:10:47+00:00",
+    "parent_handle": "OpenAI",
+    "parent_url": "https://x.com/i/web/status/2093074192636018977",
+    "reply_url": "https://x.com/KareG6/status/2093129130590007737",
+    "permalink": "/hereforthereplies/c/1705"
+   },
+   {
+    "author": "Xxi5olc",
+    "source": "x",
+    "like_count": 329,
+    "text": "@OpenAI Guess they figured out why Grok is moving fast? lol https://t.co/rdaKY7EO6y",
+    "topic": "openai",
+    "created_at": "2026-08-29T03:55:24+00:00",
+    "parent_handle": "OpenAI",
+    "parent_url": "https://x.com/i/web/status/2093515564786540695",
+    "reply_url": "https://x.com/Xxi5olc/status/2093548043224117326",
+    "permalink": "/hereforthereplies/c/1706"
+   },
+   {
+    "author": "jtrader",
+    "source": "x",
+    "like_count": 296,
+    "text": "@OpenAI @AnthropicAI @awscloud @Google @Microsoft @Oracle It’s coming https://t.co/52mYFTh32B",
+    "topic": "openai",
+    "created_at": "2026-08-27T21:53:47+00:00",
+    "parent_handle": "OpenAI",
+    "parent_url": "https://x.com/i/web/status/2093074192636018977",
+    "reply_url": "https://x.com/jtrader/status/2093094650970091619",
+    "permalink": "/hereforthereplies/c/1708"
+   },
+   {
+    "author": "freedomwillwork",
+    "source": "x",
+    "like_count": 291,
+    "text": "@OpenAI LOL grok is going to beat you",
+    "topic": "openai",
+    "created_at": "2026-08-29T02:12:29+00:00",
+    "parent_handle": "OpenAI",
+    "parent_url": "https://x.com/i/web/status/2093515564786540695",
+    "reply_url": "https://x.com/freedomwillwork/status/2093522145225650686",
+    "permalink": "/hereforthereplies/c/1709"
+   },
+   {
+    "author": "amidummystud",
+    "source": "x",
+    "like_count": 266,
+    "text": "@OpenAI this is not about the tech, this is about the man https://t.co/hBzSta11tp",
+    "topic": "openai",
+    "created_at": "2026-08-29T03:01:12+00:00",
+    "parent_handle": "OpenAI",
+    "parent_url": "https://x.com/i/web/status/2093515564786540695",
+    "reply_url": "https://x.com/amidummystud/status/2093534404010549492",
+    "permalink": "/hereforthereplies/c/1713"
+   },
+   {
+    "author": "polynoamial",
+    "source": "x",
+    "like_count": 467,
+    "text": "@dadkins_ @OpenAI We already did, it didn't solve any of them. But we haven't thrown a ton of inference at them.",
+    "topic": "openai",
+    "created_at": "2026-08-28T22:07:26+00:00",
+    "parent_handle": "dadkins_",
+    "parent_url": "https://x.com/i/web/status/2093458512273944739",
+    "reply_url": "https://x.com/polynoamial/status/2093460474738393511",
+    "permalink": "/hereforthereplies/c/1700"
+   },
+   {
+    "author": "tosheegee",
+    "source": "x",
+    "like_count": 325,
+    "text": "@vcfgdev @OpenAI You already know that part is directly written by Sam",
+    "topic": "openai",
+    "created_at": "2026-08-29T02:52:54+00:00",
+    "parent_handle": "vcfgdev",
+    "parent_url": "https://x.com/i/web/status/2093518932443590931",
+    "reply_url": "https://x.com/tosheegee/status/2093532313657491723",
+    "permalink": "/hereforthereplies/c/1707"
    }
   ],
   "bitcoin": [
@@ -3631,16 +3547,40 @@
   ],
   "tesla": [
    {
-    "author": "redbottravels",
+    "author": "Tesla",
     "source": "x",
-    "like_count": 2659,
-    "text": "@SantoroSystems Ok but\n\nDid you see the size of the brain on the Tesla vs the Waymo? Few realize this lol",
+    "like_count": 2358,
+    "text": "@wholemars Summer Release is using Grok Think Fast 2.0",
     "topic": "tesla",
-    "created_at": "2026-08-28T20:50:19+00:00",
-    "parent_handle": "SantoroSystems",
-    "parent_url": "https://x.com/i/web/status/2093430286402847007",
-    "reply_url": "https://x.com/redbottravels/status/2093441068322721832",
-    "permalink": "/hereforthereplies/c/1748"
+    "created_at": "2026-08-26T03:53:24+00:00",
+    "parent_handle": "wholemars",
+    "parent_url": "https://x.com/i/web/status/2092446617895133348",
+    "reply_url": "https://x.com/Tesla/status/2092460375132586350",
+    "permalink": "/hereforthereplies/c/1751"
+   },
+   {
+    "author": "ZacksJerryRig",
+    "source": "x",
+    "like_count": 358,
+    "text": "@Tesla Can't drive at night nothing burger.",
+    "topic": "tesla",
+    "created_at": "2026-08-29T13:46:54+00:00",
+    "parent_handle": "Tesla",
+    "parent_url": "https://x.com/i/web/status/2093585372920123522",
+    "reply_url": "https://x.com/ZacksJerryRig/status/2093696898683240816",
+    "permalink": "/hereforthereplies/c/1767"
+   },
+   {
+    "author": "DirtyTesLa",
+    "source": "x",
+    "like_count": 312,
+    "text": "@Tesla robo...taxi?",
+    "topic": "tesla",
+    "created_at": "2026-08-24T20:58:37+00:00",
+    "parent_handle": "Tesla",
+    "parent_url": "https://x.com/i/web/status/2091982606955155810",
+    "reply_url": "https://x.com/DirtyTesLa/status/2091993606286381240",
+    "permalink": "/hereforthereplies/c/1770"
    },
    {
     "author": "Tesla_Optimus",
@@ -3655,30 +3595,6 @@
     "permalink": "/hereforthereplies/c/1749"
    },
    {
-    "author": "robotaxi",
-    "source": "x",
-    "like_count": 2443,
-    "text": "@reggieoverton Thank you for the feedback\n\nWe provided a refund for this ride earlier today and will continue to improve the rider experience at every level",
-    "topic": "tesla",
-    "created_at": "2026-08-23T23:40:11+00:00",
-    "parent_handle": "reggieoverton",
-    "parent_url": "https://x.com/i/web/status/2091295530441732570",
-    "reply_url": "https://x.com/robotaxi/status/2091671875164467603",
-    "permalink": "/hereforthereplies/c/1750"
-   },
-   {
-    "author": "Tesla",
-    "source": "x",
-    "like_count": 2358,
-    "text": "@wholemars Summer Release is using Grok Think Fast 2.0",
-    "topic": "tesla",
-    "created_at": "2026-08-26T03:53:24+00:00",
-    "parent_handle": "wholemars",
-    "parent_url": "https://x.com/i/web/status/2092446617895133348",
-    "reply_url": "https://x.com/Tesla/status/2092460375132586350",
-    "permalink": "/hereforthereplies/c/1751"
-   },
-   {
     "author": "SawyerMerritt",
     "source": "x",
     "like_count": 1063,
@@ -3691,18 +3607,6 @@
     "permalink": "/hereforthereplies/c/1753"
    },
    {
-    "author": "teslatomic01",
-    "source": "x",
-    "like_count": 855,
-    "text": "@decadadenoventa https://t.co/NJAt8lSAtS",
-    "topic": "tesla",
-    "created_at": "2026-08-29T05:37:29+00:00",
-    "parent_handle": "decadadenoventa",
-    "parent_url": "https://x.com/i/web/status/2093537866076791213",
-    "reply_url": "https://x.com/teslatomic01/status/2093573735286440426",
-    "permalink": "/hereforthereplies/c/1754"
-   },
-   {
     "author": "AIDRIVR",
     "source": "x",
     "like_count": 747,
@@ -3713,42 +3617,6 @@
     "parent_url": "https://x.com/i/web/status/2092729699436998724",
     "reply_url": "https://x.com/AIDRIVR/status/2092733423291122145",
     "permalink": "/hereforthereplies/c/1755"
-   },
-   {
-    "author": "hodlonaminute",
-    "source": "x",
-    "like_count": 698,
-    "text": "@theficouple If you bought any Tesla just to “save on gas,” then I agree with this post. But saving gas is like the 107th reason to own one. I get pure joy from mine.",
-    "topic": "tesla",
-    "created_at": "2026-08-23T22:19:46+00:00",
-    "parent_handle": "theficouple",
-    "parent_url": "https://x.com/i/web/status/2091631571212374174",
-    "reply_url": "https://x.com/hodlonaminute/status/2091651641309307209",
-    "permalink": "/hereforthereplies/c/1756"
-   },
-   {
-    "author": "SantoroSystems",
-    "source": "x",
-    "like_count": 641,
-    "text": "@redbottravels Trueeeeee.\n\nIt's also kind of funny because I'm pretty sure the Waymo 6th Gen has a more powerful processor than AI4 and a lower crash rate.\n\nLike right now realistically, the only thing Tesla the only thing Tesla has is more…",
-    "topic": "tesla",
-    "created_at": "2026-08-28T20:53:05+00:00",
-    "parent_handle": "redbottravels",
-    "parent_url": "https://x.com/i/web/status/2093441068322721832",
-    "reply_url": "https://x.com/SantoroSystems/status/2093441763931222078",
-    "permalink": "/hereforthereplies/c/1757"
-   },
-   {
-    "author": "GameDevJacob",
-    "source": "x",
-    "like_count": 515,
-    "text": "@GbolahanJu31497 Shit, give me a Tesla and I'll call you my friend",
-    "topic": "tesla",
-    "created_at": "2026-08-29T13:39:23+00:00",
-    "parent_handle": "GbolahanJu31497",
-    "parent_url": "https://x.com/i/web/status/2093636120378589276",
-    "reply_url": "https://x.com/GameDevJacob/status/2093695009849500108",
-    "permalink": "/hereforthereplies/c/1758"
    },
    {
     "author": "StopAntisemites",
@@ -3775,42 +3643,6 @@
     "permalink": "/hereforthereplies/c/1761"
    },
    {
-    "author": "TeslaTrucklet",
-    "source": "x",
-    "like_count": 428,
-    "text": "@libsoftiktok Obama must be furious. https://t.co/6lmyLE4RLC",
-    "topic": "tesla",
-    "created_at": "2026-08-25T18:19:46+00:00",
-    "parent_handle": "libsoftiktok",
-    "parent_url": "https://x.com/i/web/status/2092308560721891657",
-    "reply_url": "https://x.com/TeslaTrucklet/status/2092316016626053171",
-    "permalink": "/hereforthereplies/c/1762"
-   },
-   {
-    "author": "impuntualmente",
-    "source": "x",
-    "like_count": 426,
-    "text": "@Nicotransito No era que no arrancaba si la puerta estaba abierta??? Menos sensores y tecnología tienen. Poneme un sensor para saber si alguien está bajando, si alguien está agarrado aún del caño, que verga puede ver el chófer con todo el b…",
-    "topic": "tesla",
-    "created_at": "2026-08-25T21:50:31+00:00",
-    "parent_handle": "Nicotransito",
-    "parent_url": "https://x.com/i/web/status/2092293676089160140",
-    "reply_url": "https://x.com/impuntualmente/status/2092369054916809055",
-    "permalink": "/hereforthereplies/c/1763"
-   },
-   {
-    "author": "AbdullahYlmzer",
-    "source": "x",
-    "like_count": 404,
-    "text": "@darkwebhaber Babasından dayak yiyen abisini izleyen tesla https://t.co/MI9xwUoCKs",
-    "topic": "tesla",
-    "created_at": "2026-08-25T06:52:39+00:00",
-    "parent_handle": "darkwebhaber",
-    "parent_url": "https://x.com/i/web/status/2092120327744549025",
-    "reply_url": "https://x.com/AbdullahYlmzer/status/2092143097001975890",
-    "permalink": "/hereforthereplies/c/1764"
-   },
-   {
     "author": "SnazzyLabs",
     "source": "x",
     "like_count": 377,
@@ -3821,66 +3653,6 @@
     "parent_url": "https://x.com/i/web/status/2091116989292929405",
     "reply_url": "https://x.com/SnazzyLabs/status/2091344610325090575",
     "permalink": "/hereforthereplies/c/1765"
-   },
-   {
-    "author": "Gimply32",
-    "source": "x",
-    "like_count": 369,
-    "text": "@blandCinema Doing this to fight against M4A while also doing online panhandling for lung meds I can’t https://t.co/EXM3uuOEU8",
-    "topic": "tesla",
-    "created_at": "2026-08-25T18:52:36+00:00",
-    "parent_handle": "blandCinema",
-    "parent_url": "https://x.com/i/web/status/2092310789956776270",
-    "reply_url": "https://x.com/Gimply32/status/2092324279954161966",
-    "permalink": "/hereforthereplies/c/1766"
-   },
-   {
-    "author": "ZacksJerryRig",
-    "source": "x",
-    "like_count": 358,
-    "text": "@Tesla Can't drive at night nothing burger.",
-    "topic": "tesla",
-    "created_at": "2026-08-29T13:46:54+00:00",
-    "parent_handle": "Tesla",
-    "parent_url": "https://x.com/i/web/status/2093585372920123522",
-    "reply_url": "https://x.com/ZacksJerryRig/status/2093696898683240816",
-    "permalink": "/hereforthereplies/c/1767"
-   },
-   {
-    "author": "TeslaCoilStud",
-    "source": "x",
-    "like_count": 350,
-    "text": "@MK881955 That translation must be inaccurate.",
-    "topic": "tesla",
-    "created_at": "2026-08-23T13:51:32+00:00",
-    "parent_handle": "MK881955",
-    "parent_url": "https://x.com/i/web/status/2091372172950528061",
-    "reply_url": "https://x.com/TeslaCoilStud/status/2091523739271782855",
-    "permalink": "/hereforthereplies/c/1768"
-   },
-   {
-    "author": "dedreviil",
-    "source": "x",
-    "like_count": 314,
-    "text": "@GirlOfNox Tesla, no te arrepentirás",
-    "topic": "tesla",
-    "created_at": "2026-08-26T18:09:52+00:00",
-    "parent_handle": "GirlOfNox",
-    "parent_url": "https://x.com/i/web/status/2092661978527363258",
-    "reply_url": "https://x.com/dedreviil/status/2092675914307899849",
-    "permalink": "/hereforthereplies/c/1769"
-   },
-   {
-    "author": "DirtyTesLa",
-    "source": "x",
-    "like_count": 312,
-    "text": "@Tesla robo...taxi?",
-    "topic": "tesla",
-    "created_at": "2026-08-24T20:58:37+00:00",
-    "parent_handle": "Tesla",
-    "parent_url": "https://x.com/i/web/status/2091982606955155810",
-    "reply_url": "https://x.com/DirtyTesLa/status/2091993606286381240",
-    "permalink": "/hereforthereplies/c/1770"
    },
    {
     "author": "KuttanThambi_22",
@@ -3895,18 +3667,6 @@
     "permalink": "/hereforthereplies/c/1771"
    },
    {
-    "author": "TeslaGirlSWFL",
-    "source": "x",
-    "like_count": 272,
-    "text": "@RyanSaavedra I already don't buy GS cookies due to their support of Planned Parenthood.",
-    "topic": "tesla",
-    "created_at": "2026-08-24T22:03:43+00:00",
-    "parent_handle": "RyanSaavedra",
-    "parent_url": "https://x.com/i/web/status/2091977106297160145",
-    "reply_url": "https://x.com/TeslaGirlSWFL/status/2092009986616332747",
-    "permalink": "/hereforthereplies/c/1772"
-   },
-   {
     "author": "JamieMetzl",
     "source": "x",
     "like_count": 267,
@@ -3917,33 +3677,9 @@
     "parent_url": "https://x.com/i/web/status/2091870338233614759",
     "reply_url": "https://x.com/JamieMetzl/status/2091878851974459613",
     "permalink": "/hereforthereplies/c/1775"
-   },
-   {
-    "author": "sarapcanagina",
-    "source": "x",
-    "like_count": 253,
-    "text": "@gsarayruhu1905_ Simeone dostum Galatasaray rehabilitasyon merkezinin namını duymuşsundur ekstra olarak senin için maaşının %20 sini de öderiz",
-    "topic": "tesla",
-    "created_at": "2026-08-28T19:45:20+00:00",
-    "parent_handle": "gsarayruhu1905_",
-    "parent_url": "https://x.com/i/web/status/2093422732050362880",
-    "reply_url": "https://x.com/sarapcanagina/status/2093424714530083183",
-    "permalink": "/hereforthereplies/c/1776"
    }
   ],
   "stripe": [
-   {
-    "author": "paramorefan6969",
-    "source": "x",
-    "like_count": 2453,
-    "text": "@jakebrodes Gray basketball shorts with a black stripe on the side and they are WAYYYYY too tight on his butt",
-    "topic": "stripe",
-    "created_at": "2026-08-24T02:35:04+00:00",
-    "parent_handle": "jakebrodes",
-    "parent_url": "https://x.com/i/web/status/2091710997660627365",
-    "reply_url": "https://x.com/paramorefan6969/status/2091715886067384375",
-    "permalink": "/hereforthereplies/c/1662"
-   },
    {
     "author": "dasfacc",
     "source": "x",
@@ -3955,102 +3691,6 @@
     "parent_url": "https://x.com/i/web/status/2092374355015766168",
     "reply_url": "https://x.com/dasfacc/status/2092430429399752827",
     "permalink": "/hereforthereplies/c/1663"
-   },
-   {
-    "author": "BPD1776",
-    "source": "x",
-    "like_count": 728,
-    "text": "@SVP_of_Retail They are going to get checks in the mail from me. \n\nThis will cost them more time (money) than the 1% would make anyone. \n\nMy read of it is that this is a Stripe created issue.",
-    "topic": "stripe",
-    "created_at": "2026-08-18T19:21:21+00:00",
-    "parent_handle": "SVP_of_Retail",
-    "parent_url": "https://x.com/i/web/status/2089793938156622138",
-    "reply_url": "https://x.com/BPD1776/status/2089794799163330954",
-    "permalink": "/hereforthereplies/c/1664"
-   },
-   {
-    "author": "_jdiking",
-    "source": "x",
-    "like_count": 626,
-    "text": "@fashion_nfl Orange stripe is leagues better",
-    "topic": "stripe",
-    "created_at": "2026-08-22T23:27:20+00:00",
-    "parent_handle": "fashion_nfl",
-    "parent_url": "https://x.com/i/web/status/2091305510914117692",
-    "reply_url": "https://x.com/_jdiking/status/2091306253352059142",
-    "permalink": "/hereforthereplies/c/1665"
-   },
-   {
-    "author": "HeadNaughty",
-    "source": "x",
-    "like_count": 602,
-    "text": "@MrGrEenFR I feel as though people don’t actually want realism in their games, especially shooters, they just want it to be real enough to imagine themselves as a hero of some stripe.",
-    "topic": "stripe",
-    "created_at": "2026-08-27T20:56:39+00:00",
-    "parent_handle": "MrGrEenFR",
-    "parent_url": "https://x.com/i/web/status/2093079150848352571",
-    "reply_url": "https://x.com/HeadNaughty/status/2093080275026608520",
-    "permalink": "/hereforthereplies/c/1666"
-   },
-   {
-    "author": "twiz19071051",
-    "source": "x",
-    "like_count": 589,
-    "text": "@thdxr cute of you to assume that stripe doesn't block legitimate customers",
-    "topic": "stripe",
-    "created_at": "2026-08-25T14:54:55+00:00",
-    "parent_handle": "thdxr",
-    "parent_url": "https://x.com/i/web/status/2092238606987370884",
-    "reply_url": "https://x.com/twiz19071051/status/2092264463948812644",
-    "permalink": "/hereforthereplies/c/1667"
-   },
-   {
-    "author": "stripe1968",
-    "source": "x",
-    "like_count": 567,
-    "text": "@nihonpatriot 日本人が強く豊かになるには、自民党を壊滅する事が必要不可欠。 https://t.co/SVoI5bfsEe",
-    "topic": "stripe",
-    "created_at": "2026-08-01T23:21:50+00:00",
-    "parent_handle": "nihonpatriot",
-    "parent_url": "https://x.com/i/web/status/2083631538173043019",
-    "reply_url": "https://x.com/stripe1968/status/2083694726310744460",
-    "permalink": "/hereforthereplies/c/1668"
-   },
-   {
-    "author": "0FighterFairy",
-    "source": "x",
-    "like_count": 491,
-    "text": "@oliverglazer &gt;lolicon flag\nNo such thing especially with that gay ass stripe format",
-    "topic": "stripe",
-    "created_at": "2026-08-10T04:39:13+00:00",
-    "parent_handle": "oliverglazer",
-    "parent_url": "https://x.com/i/web/status/2086546859129028645",
-    "reply_url": "https://x.com/0FighterFairy/status/2086673699487502556",
-    "permalink": "/hereforthereplies/c/1669"
-   },
-   {
-    "author": "anthony_lipira",
-    "source": "x",
-    "like_count": 464,
-    "text": "@SoakUpThe_Sun This is true. Goth is nothing but a porn costume now, like French maids and candy stripe nurses.",
-    "topic": "stripe",
-    "created_at": "2026-08-11T11:12:47+00:00",
-    "parent_handle": "SoakUpThe_Sun",
-    "parent_url": "https://x.com/i/web/status/2086800188857835527",
-    "reply_url": "https://x.com/anthony_lipira/status/2087135133144953009",
-    "permalink": "/hereforthereplies/c/1670"
-   },
-   {
-    "author": "DavidZsutty",
-    "source": "x",
-    "like_count": 456,
-    "text": "@KeithWoodsYT If @elonmusk wanted to strike a serious blow against censorship he would set up an alternative to Stripe, PayPal, and a free speech credit union. \n\nHe would actually make a lot of money too!",
-    "topic": "stripe",
-    "created_at": "2026-08-06T21:09:47+00:00",
-    "parent_handle": "KeithWoodsYT",
-    "parent_url": "https://x.com/i/web/status/2085451800899998155",
-    "reply_url": "https://x.com/DavidZsutty/status/2085473432540446992",
-    "permalink": "/hereforthereplies/c/1671"
    },
    {
     "author": "yungbzz",
@@ -4065,18 +3705,6 @@
     "permalink": "/hereforthereplies/c/1672"
    },
    {
-    "author": "Hikaru_Chansey",
-    "source": "x",
-    "like_count": 328,
-    "text": "@22liv22 When I was very young I stole some zebra stripe gum and my Mom made me take it back to the cashier and apologize.  That lesson stuck with me forever.  Good on her.",
-    "topic": "stripe",
-    "created_at": "2026-08-14T17:08:14+00:00",
-    "parent_handle": "22liv22",
-    "parent_url": "https://x.com/i/web/status/2088303078235877390",
-    "reply_url": "https://x.com/Hikaru_Chansey/status/2088311750433120496",
-    "permalink": "/hereforthereplies/c/1673"
-   },
-   {
     "author": "MoonlitMaven",
     "source": "x",
     "like_count": 323,
@@ -4087,30 +3715,6 @@
     "parent_url": "https://x.com/i/web/status/2092230794169184403",
     "reply_url": "https://x.com/MoonlitMaven/status/2092264753745805553",
     "permalink": "/hereforthereplies/c/1674"
-   },
-   {
-    "author": "jason_haugh",
-    "source": "x",
-    "like_count": 315,
-    "text": "@thdxr Stripe claims a 32% reduction in fraud. I hope this doesn't mean that you had ~$600M+ get through. https://t.co/AAUlWq8IHZ",
-    "topic": "stripe",
-    "created_at": "2026-08-25T13:17:47+00:00",
-    "parent_handle": "thdxr",
-    "parent_url": "https://x.com/i/web/status/2092238606987370884",
-    "reply_url": "https://x.com/jason_haugh/status/2092240021122154948",
-    "permalink": "/hereforthereplies/c/1675"
-   },
-   {
-    "author": "CompassDrifter",
-    "source": "x",
-    "like_count": 274,
-    "text": "@howcoryseesit A wise old \"red stripe\" Chief once told me,\n\"If the United States Government doesn't have to officially apologize to the host country for something you did ashore on liberty, how much fun did you really have?\"",
-    "topic": "stripe",
-    "created_at": "2026-08-25T13:41:24+00:00",
-    "parent_handle": "howcoryseesit",
-    "parent_url": "https://x.com/i/web/status/2092199851203166231",
-    "reply_url": "https://x.com/CompassDrifter/status/2092245962605383884",
-    "permalink": "/hereforthereplies/c/1678"
    }
   ],
   "nba finals": [
@@ -4925,18 +4529,6 @@
   ],
   "xai": [
    {
-    "author": "viculiada",
-    "source": "x",
-    "like_count": 1398,
-    "text": "@Jajakakajajsjkd @Argconeta @porqueTTarg y si son españoles boludo qué pretendias jajsjsj",
-    "topic": "xai",
-    "created_at": "2026-08-13T19:27:41+00:00",
-    "parent_handle": "Jajakakajajsjkd",
-    "parent_url": "https://x.com/i/web/status/2087982961228476716",
-    "reply_url": "https://x.com/viculiada/status/2087984453713113253",
-    "permalink": "/hereforthereplies/c/1808"
-   },
-   {
     "author": "thsottiaux",
     "source": "x",
     "like_count": 935,
@@ -4947,6 +4539,42 @@
     "parent_url": "https://x.com/i/web/status/2091190454167421189",
     "reply_url": "https://x.com/thsottiaux/status/2091290999381184620",
     "permalink": "/hereforthereplies/c/1810"
+   },
+   {
+    "author": "xx25yy33zz12ww",
+    "source": "x",
+    "like_count": 412,
+    "text": "@capgiremmoia @Lakshmi0606 Una pregunta, per la festa del Xai, on es maten xais sense atortdir-los prèviament, on podem trobar el vídeo on us queixeu i demaneu prohibir-lo?",
+    "topic": "xai",
+    "created_at": "2026-08-27T23:44:15+00:00",
+    "parent_handle": "capgiremmoia",
+    "parent_url": "https://x.com/i/web/status/2093067366452154457",
+    "reply_url": "https://x.com/xx25yy33zz12ww/status/2093122452884770818",
+    "permalink": "/hereforthereplies/c/1815"
+   },
+   {
+    "author": "BartemyS",
+    "source": "x",
+    "like_count": 377,
+    "text": "@kevinnbass I also think Elon's creation of XAI may end up being more consequential \n\nA truth seeking AI that connects in with X\n\nAnd it now looks like XAI will be the leader.\n\nIt is transformative technology.",
+    "topic": "xai",
+    "created_at": "2026-08-20T03:18:20+00:00",
+    "parent_handle": "kevinnbass",
+    "parent_url": "https://x.com/i/web/status/2090038548011372580",
+    "reply_url": "https://x.com/BartemyS/status/2090277224297488682",
+    "permalink": "/hereforthereplies/c/1816"
+   },
+   {
+    "author": "viculiada",
+    "source": "x",
+    "like_count": 1398,
+    "text": "@Jajakakajajsjkd @Argconeta @porqueTTarg y si son españoles boludo qué pretendias jajsjsj",
+    "topic": "xai",
+    "created_at": "2026-08-13T19:27:41+00:00",
+    "parent_handle": "Jajakakajajsjkd",
+    "parent_url": "https://x.com/i/web/status/2087982961228476716",
+    "reply_url": "https://x.com/viculiada/status/2087984453713113253",
+    "permalink": "/hereforthereplies/c/1808"
    },
    {
     "author": "xaigorgo",
@@ -4995,30 +4623,6 @@
     "parent_url": "https://x.com/i/web/status/2089922412758364251",
     "reply_url": "https://x.com/xai_trto/status/2090212617562525761",
     "permalink": "/hereforthereplies/c/1814"
-   },
-   {
-    "author": "xx25yy33zz12ww",
-    "source": "x",
-    "like_count": 412,
-    "text": "@capgiremmoia @Lakshmi0606 Una pregunta, per la festa del Xai, on es maten xais sense atortdir-los prèviament, on podem trobar el vídeo on us queixeu i demaneu prohibir-lo?",
-    "topic": "xai",
-    "created_at": "2026-08-27T23:44:15+00:00",
-    "parent_handle": "capgiremmoia",
-    "parent_url": "https://x.com/i/web/status/2093067366452154457",
-    "reply_url": "https://x.com/xx25yy33zz12ww/status/2093122452884770818",
-    "permalink": "/hereforthereplies/c/1815"
-   },
-   {
-    "author": "BartemyS",
-    "source": "x",
-    "like_count": 377,
-    "text": "@kevinnbass I also think Elon's creation of XAI may end up being more consequential \n\nA truth seeking AI that connects in with X\n\nAnd it now looks like XAI will be the leader.\n\nIt is transformative technology.",
-    "topic": "xai",
-    "created_at": "2026-08-20T03:18:20+00:00",
-    "parent_handle": "kevinnbass",
-    "parent_url": "https://x.com/i/web/status/2090038548011372580",
-    "reply_url": "https://x.com/BartemyS/status/2090277224297488682",
-    "permalink": "/hereforthereplies/c/1816"
    }
   ],
   "mlb world series": [
@@ -8566,18 +8170,6 @@
    "permalink": "/hereforthereplies/c/1521"
   },
   {
-   "author": "elonmusk",
-   "source": "x",
-   "like_count": 29638,
-   "text": "@JonErlichman I know this sounds crazy right now, but I think both SpaceX and Tesla will exceed these estimates",
-   "topic": "spacex",
-   "created_at": "2026-08-21T00:28:20+00:00",
-   "parent_handle": "JonErlichman",
-   "parent_url": "https://x.com/i/web/status/2090526520569647507",
-   "reply_url": "https://x.com/elonmusk/status/2090596832166514849",
-   "permalink": "/hereforthereplies/c/1777"
-  },
-  {
    "author": "SpaceX",
    "source": "x",
    "like_count": 1315,
@@ -8626,18 +8218,6 @@
    "permalink": "/hereforthereplies/c/1784"
   },
   {
-   "author": "_MaxQ_",
-   "source": "x",
-   "like_count": 728,
-   "text": "@TurkeyBeaver @SciGuySpace @SpaceX Falcon walked so Starship may run",
-   "topic": "spacex",
-   "created_at": "2026-08-25T15:16:27+00:00",
-   "parent_handle": "TurkeyBeaver",
-   "parent_url": "https://x.com/i/web/status/2092267257179021326",
-   "reply_url": "https://x.com/_MaxQ_/status/2092269883169951800",
-   "permalink": "/hereforthereplies/c/1785"
-  },
-  {
    "author": "TroyRubert",
    "source": "x",
    "like_count": 636,
@@ -8648,30 +8228,6 @@
    "parent_url": "https://x.com/i/web/status/2092284173730144732",
    "reply_url": "https://x.com/TroyRubert/status/2092284392186003894",
    "permalink": "/hereforthereplies/c/1786"
-  },
-  {
-   "author": "JeanLuize",
-   "source": "x",
-   "like_count": 482,
-   "text": "@fintergirl I think the engineers at SpaceX know what they're doing",
-   "topic": "spacex",
-   "created_at": "2026-08-28T03:35:56+00:00",
-   "parent_handle": "fintergirl",
-   "parent_url": "https://x.com/i/web/status/2093156979942576140",
-   "reply_url": "https://x.com/JeanLuize/status/2093180755979739476",
-   "permalink": "/hereforthereplies/c/1787"
-  },
-  {
-   "author": "AdamLowisz",
-   "source": "x",
-   "like_count": 476,
-   "text": "@elonmusk It's time for SpaceX to take off in Louisiana 😎🚀 https://t.co/b4Dj6przEY",
-   "topic": "spacex",
-   "created_at": "2026-08-25T18:06:17+00:00",
-   "parent_handle": "elonmusk",
-   "parent_url": "https://x.com/i/web/status/2092312396157325502",
-   "reply_url": "https://x.com/AdamLowisz/status/2092312623060558165",
-   "permalink": "/hereforthereplies/c/1788"
   },
   {
    "author": "KristinaCorcor7",
@@ -8710,18 +8266,6 @@
    "permalink": "/hereforthereplies/c/1791"
   },
   {
-   "author": "Future_Camping",
-   "source": "x",
-   "like_count": 407,
-   "text": "@TurkeyBeaver @SpaceX what a way to go out , thanks for all of the amazing Falcon launches from the cape !! onward https://t.co/LzLrTHDnO8",
-   "topic": "spacex",
-   "created_at": "2026-08-25T15:42:32+00:00",
-   "parent_handle": "TurkeyBeaver",
-   "parent_url": "https://x.com/i/web/status/2092267257179021326",
-   "reply_url": "https://x.com/Future_Camping/status/2092276446362275936",
-   "permalink": "/hereforthereplies/c/1792"
-  },
-  {
    "author": "nvidia",
    "source": "x",
    "like_count": 397,
@@ -8744,30 +8288,6 @@
    "parent_url": "https://x.com/i/web/status/2092284173730144732",
    "reply_url": "https://x.com/onlypricepays/status/2092298265010086383",
    "permalink": "/hereforthereplies/c/1794"
-  },
-  {
-   "author": "4puf",
-   "source": "x",
-   "like_count": 378,
-   "text": "@MattDevittWX Spacex Falcon 9 plume over Philadelphia! 5:41 am https://t.co/JCuxXPiwDo",
-   "topic": "spacex",
-   "created_at": "2026-08-25T10:13:02+00:00",
-   "parent_handle": "MattDevittWX",
-   "parent_url": "https://x.com/i/web/status/2091952156890792217",
-   "reply_url": "https://x.com/4puf/status/2092193527492977032",
-   "permalink": "/hereforthereplies/c/1795"
-  },
-  {
-   "author": "NASASpaceflight",
-   "source": "x",
-   "like_count": 366,
-   "text": "@elonmusk @CJHandmer @SciGuySpace @SpaceX Hey Elon, is Flight 14 aiming to go orbital?",
-   "topic": "spacex",
-   "created_at": "2026-08-22T22:35:20+00:00",
-   "parent_handle": "elonmusk",
-   "parent_url": "https://x.com/i/web/status/2091287025555214632",
-   "reply_url": "https://x.com/NASASpaceflight/status/2091293167068848244",
-   "permalink": "/hereforthereplies/c/1796"
   },
   {
    "author": "MelomanoSD",
@@ -8794,16 +8314,16 @@
    "permalink": "/hereforthereplies/c/1798"
   },
   {
-   "author": "shaunak3vedi",
+   "author": "NASASpaceflight",
    "source": "x",
-   "like_count": 305,
-   "text": "@Normal_2610 Before this i want to know what was the cost per kg when spacex started or before spacex because at some point spacex had started expensively no?",
+   "like_count": 315,
+   "text": "@SpaceX Great drone shots, and I really like the soundtrack in this video. 🚀",
    "topic": "spacex",
-   "created_at": "2026-08-21T12:49:09+00:00",
-   "parent_handle": "Normal_2610",
-   "parent_url": "https://x.com/i/web/status/2090766033296699602",
-   "reply_url": "https://x.com/shaunak3vedi/status/2090783261840826849",
-   "permalink": "/hereforthereplies/c/1800"
+   "created_at": "2026-08-21T19:03:37+00:00",
+   "parent_handle": "SpaceX",
+   "parent_url": "https://x.com/i/web/status/2090876778646491549",
+   "reply_url": "https://x.com/NASASpaceflight/status/2090877501245423885",
+   "permalink": "/hereforthereplies/c/1799"
   },
   {
    "author": "glennbeck",
@@ -8842,6 +8362,42 @@
    "permalink": "/hereforthereplies/c/1803"
   },
   {
+   "author": "elonmusk",
+   "source": "x",
+   "like_count": 11005,
+   "text": "@CJHandmer @SciGuySpace @SpaceX Once Starship is flying reliably several times per week, it makes sense to shift super scarce SpaceX engineering and production resources to Starship to get launch rate to several times per day, which means w…",
+   "topic": "spacex",
+   "created_at": "2026-08-22T22:10:55+00:00",
+   "parent_handle": "CJHandmer",
+   "parent_url": "https://x.com/i/web/status/2091224438994059520",
+   "reply_url": "https://x.com/elonmusk/status/2091287025555214632",
+   "permalink": "/hereforthereplies/c/1778"
+  },
+  {
+   "author": "_MaxQ_",
+   "source": "x",
+   "like_count": 728,
+   "text": "@TurkeyBeaver @SciGuySpace @SpaceX Falcon walked so Starship may run",
+   "topic": "spacex",
+   "created_at": "2026-08-25T15:16:27+00:00",
+   "parent_handle": "TurkeyBeaver",
+   "parent_url": "https://x.com/i/web/status/2092267257179021326",
+   "reply_url": "https://x.com/_MaxQ_/status/2092269883169951800",
+   "permalink": "/hereforthereplies/c/1785"
+  },
+  {
+   "author": "Future_Camping",
+   "source": "x",
+   "like_count": 407,
+   "text": "@TurkeyBeaver @SpaceX what a way to go out , thanks for all of the amazing Falcon launches from the cape !! onward https://t.co/LzLrTHDnO8",
+   "topic": "spacex",
+   "created_at": "2026-08-25T15:42:32+00:00",
+   "parent_handle": "TurkeyBeaver",
+   "parent_url": "https://x.com/i/web/status/2092267257179021326",
+   "reply_url": "https://x.com/Future_Camping/status/2092276446362275936",
+   "permalink": "/hereforthereplies/c/1792"
+  },
+  {
    "author": "CruiZe427",
    "source": "x",
    "like_count": 284,
@@ -8864,6 +8420,18 @@
    "parent_url": "https://x.com/i/web/status/2091287025555214632",
    "reply_url": "https://x.com/CJHandmer/status/2091328095043375526",
    "permalink": "/hereforthereplies/c/1805"
+  },
+  {
+   "author": "NASAKennedy",
+   "source": "x",
+   "like_count": 254,
+   "text": "@NASARoman @SpaceX This completes our Roman launch coverage – thanks for tagging along! \n\nStay tuned for the Roman Postlaunch News Conference at 9:30 am EDT and get further spacecraft updates by following @NASARoman / @NASAGoddard / @NASAUn…",
+   "topic": "spacex",
+   "created_at": "2026-08-30T12:12:40+00:00",
+   "parent_handle": "NASARoman",
+   "parent_url": "https://x.com/i/web/status/2094032153784803812",
+   "reply_url": "https://x.com/NASAKennedy/status/2094035572624855209",
+   "permalink": "/hereforthereplies/c/1807"
   },
   {
    "author": "gasparparamore",
@@ -9130,30 +8698,6 @@
    "permalink": "/hereforthereplies/c/1362"
   },
   {
-   "author": "goddek",
-   "source": "x",
-   "like_count": 1906,
-   "text": "@RabbiShmuley There’s no single piece of proof for this. On the other hand, there’s evidence that people from your cult planned to murder 6,000,000 German civilians after WWII by adding “minerals and vitamins” to the water supply. Is that c…",
-   "topic": "grok",
-   "created_at": "2026-08-30T01:14:15+00:00",
-   "parent_handle": "RabbiShmuley",
-   "parent_url": "https://x.com/i/web/status/2093844710775255397",
-   "reply_url": "https://x.com/goddek/status/2093869875504492782",
-   "permalink": "/hereforthereplies/c/1718"
-  },
-  {
-   "author": "0000Claphanz",
-   "source": "x",
-   "like_count": 1891,
-   "text": "@Only1Yori お前自演じゃねーか。\n\nhttps://t.co/34nvMTpdow",
-   "topic": "grok",
-   "created_at": "2026-08-30T01:15:29+00:00",
-   "parent_handle": "Only1Yori",
-   "parent_url": "https://x.com/i/web/status/2093633519801258278",
-   "reply_url": "https://x.com/0000Claphanz/status/2093870187426783257",
-   "permalink": "/hereforthereplies/c/1719"
-  },
-  {
    "author": "mandyarthur",
    "source": "x",
    "like_count": 1852,
@@ -9166,16 +8710,88 @@
    "permalink": "/hereforthereplies/c/1720"
   },
   {
-   "author": "Grokoeterno",
+   "author": "KeithWoodsYT",
    "source": "x",
-   "like_count": 979,
-   "text": "@crioulia Que linda! Você é muito criativa. https://t.co/p0qbdKxBTO",
+   "like_count": 1487,
+   "text": "@grok @JoelWBerry Thank you Grok. And how did their academic performance compare?",
    "topic": "grok",
-   "created_at": "2026-08-29T18:54:05+00:00",
-   "parent_handle": "crioulia",
-   "parent_url": "https://x.com/i/web/status/2093753714142056644",
-   "reply_url": "https://x.com/Grokoeterno/status/2093774206051770470",
-   "permalink": "/hereforthereplies/c/1722"
+   "created_at": "2026-08-29T23:57:20+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2093849672724910425",
+   "reply_url": "https://x.com/KeithWoodsYT/status/2093850520733556980",
+   "permalink": "/hereforthereplies/c/1721"
+  },
+  {
+   "author": "mApo11o",
+   "source": "x",
+   "like_count": 501,
+   "text": "@grok @Gorilla_Blanco @__DiGGa__ this shit is insane 😂",
+   "topic": "grok",
+   "created_at": "2026-08-29T19:28:35+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2093782012314153216",
+   "reply_url": "https://x.com/mApo11o/status/2093782887044690234",
+   "permalink": "/hereforthereplies/c/1730"
+  },
+  {
+   "author": "271k_only",
+   "source": "x",
+   "like_count": 484,
+   "text": "@grok oy vey",
+   "topic": "grok",
+   "created_at": "2026-08-30T12:46:58+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2094044095396135225",
+   "reply_url": "https://x.com/271k_only/status/2094044204771021138",
+   "permalink": "/hereforthereplies/c/1731"
+  },
+  {
+   "author": "slv_of_Allah",
+   "source": "x",
+   "like_count": 383,
+   "text": "@grok @mandyarthur What does \"expired\" mean here? \n\nDoes he not have to pay the remaining amounts?",
+   "topic": "grok",
+   "created_at": "2026-08-29T18:46:02+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2093771448942780559",
+   "reply_url": "https://x.com/slv_of_Allah/status/2093772179661811968",
+   "permalink": "/hereforthereplies/c/1736"
+  },
+  {
+   "author": "NoahsArk1000",
+   "source": "x",
+   "like_count": 309,
+   "text": "@grok Ohh, a servant. Got it",
+   "topic": "grok",
+   "created_at": "2026-08-29T22:12:57+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2093821125490798605",
+   "reply_url": "https://x.com/NoahsArk1000/status/2093824249605636153",
+   "permalink": "/hereforthereplies/c/1741"
+  },
+  {
+   "author": "Dove__xm",
+   "source": "x",
+   "like_count": 268,
+   "text": "@grok Look at this 🔥 https://t.co/kSSlDF4wFO",
+   "topic": "grok",
+   "created_at": "2026-08-30T13:12:29+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2093933460163629158",
+   "reply_url": "https://x.com/Dove__xm/status/2094050627215303079",
+   "permalink": "/hereforthereplies/c/1744"
+  },
+  {
+   "author": "HrtSigenw9",
+   "source": "x",
+   "like_count": 252,
+   "text": "@grok What would you like to say to that son of a bitch Netanyahu? What were the main points of agreement when Cyprus became independent in 1960? Were Turkish villages raided in 1963, resulting in a bloody Christmas? What was the aim of the…",
+   "topic": "grok",
+   "created_at": "2026-08-30T16:33:29+00:00",
+   "parent_handle": "grok",
+   "parent_url": "https://x.com/i/web/status/2094074886276751459",
+   "reply_url": "https://x.com/HrtSigenw9/status/2094101210022490372",
+   "permalink": "/hereforthereplies/c/1747"
   },
   {
    "author": "ChudSexotics",
@@ -9202,18 +8818,6 @@
    "permalink": "/hereforthereplies/c/1724"
   },
   {
-   "author": "NotTeak",
-   "source": "x",
-   "like_count": 803,
-   "text": "@wistsno Made with Grok Imagine",
-   "topic": "grok",
-   "created_at": "2026-08-30T06:59:58+00:00",
-   "parent_handle": "wistsno",
-   "parent_url": "https://x.com/i/web/status/2093955174142189778",
-   "reply_url": "https://x.com/NotTeak/status/2093956880611623045",
-   "permalink": "/hereforthereplies/c/1725"
-  },
-  {
    "author": "solotwityya",
    "source": "x",
    "like_count": 710,
@@ -9224,66 +8828,6 @@
    "parent_url": "https://x.com/i/web/status/2093768327457886454",
    "reply_url": "https://x.com/solotwityya/status/2093782667305120234",
    "permalink": "/hereforthereplies/c/1726"
-  },
-  {
-   "author": "crankingtheehog",
-   "source": "x",
-   "like_count": 583,
-   "text": "@LoveHotline3 feed ai dirty water\n\nme: grok how to dj\n\ngeok; poop poop poop!",
-   "topic": "grok",
-   "created_at": "2026-08-30T04:22:57+00:00",
-   "parent_handle": "LoveHotline3",
-   "parent_url": "https://x.com/i/web/status/2093824305528226251",
-   "reply_url": "https://x.com/crankingtheehog/status/2093917364777869801",
-   "permalink": "/hereforthereplies/c/1727"
-  },
-  {
-   "author": "jpreixens",
-   "source": "x",
-   "like_count": 545,
-   "text": "@Torren__ Es exactamente lo contrario\n\nSolo nos gastamos 10 kilos para poder seguir optando a JA. Cada ventana de fichajes os ofreceremos 10 kilos menos por él. En enero, 90 kilos en 16 plazos. Y en Junio 2027, 80 kilos en 17 mil plazos.",
-   "topic": "grok",
-   "created_at": "2026-08-30T13:08:30+00:00",
-   "parent_handle": "Torren__",
-   "parent_url": "https://x.com/i/web/status/2094046896696226073",
-   "reply_url": "https://x.com/jpreixens/status/2094049623153229953",
-   "permalink": "/hereforthereplies/c/1728"
-  },
-  {
-   "author": "whitegurlname",
-   "source": "x",
-   "like_count": 501,
-   "text": "@OhioV1 A fucking high beam! https://t.co/dasvZlgOOI",
-   "topic": "grok",
-   "created_at": "2026-08-29T21:12:01+00:00",
-   "parent_handle": "OhioV1",
-   "parent_url": "https://x.com/i/web/status/2093632485649265027",
-   "reply_url": "https://x.com/whitegurlname/status/2093808914962018814",
-   "permalink": "/hereforthereplies/c/1729"
-  },
-  {
-   "author": "mApo11o",
-   "source": "x",
-   "like_count": 501,
-   "text": "@grok @Gorilla_Blanco @__DiGGa__ this shit is insane 😂",
-   "topic": "grok",
-   "created_at": "2026-08-29T19:28:35+00:00",
-   "parent_handle": "grok",
-   "parent_url": "https://x.com/i/web/status/2093782012314153216",
-   "reply_url": "https://x.com/mApo11o/status/2093782887044690234",
-   "permalink": "/hereforthereplies/c/1730"
-  },
-  {
-   "author": "271k_only",
-   "source": "x",
-   "like_count": 484,
-   "text": "@grok oy vey",
-   "topic": "grok",
-   "created_at": "2026-08-30T12:46:58+00:00",
-   "parent_handle": "grok",
-   "parent_url": "https://x.com/i/web/status/2094044095396135225",
-   "reply_url": "https://x.com/271k_only/status/2094044204771021138",
-   "permalink": "/hereforthereplies/c/1731"
   },
   {
    "author": "TheVikingNomad_",
@@ -9334,18 +8878,6 @@
    "permalink": "/hereforthereplies/c/1735"
   },
   {
-   "author": "slv_of_Allah",
-   "source": "x",
-   "like_count": 383,
-   "text": "@grok @mandyarthur What does \"expired\" mean here? \n\nDoes he not have to pay the remaining amounts?",
-   "topic": "grok",
-   "created_at": "2026-08-29T18:46:02+00:00",
-   "parent_handle": "grok",
-   "parent_url": "https://x.com/i/web/status/2093771448942780559",
-   "reply_url": "https://x.com/slv_of_Allah/status/2093772179661811968",
-   "permalink": "/hereforthereplies/c/1736"
-  },
-  {
    "author": "SniperX444",
    "source": "x",
    "like_count": 349,
@@ -9382,16 +8914,28 @@
    "permalink": "/hereforthereplies/c/1740"
   },
   {
-   "author": "NoahsArk1000",
+   "author": "WarsawErik",
    "source": "x",
-   "like_count": 309,
-   "text": "@grok Ohh, a servant. Got it",
+   "like_count": 275,
+   "text": "@mandyarthur @grok Wowwww.... Bernie Madoff and Sam Bankman-Fried too.",
    "topic": "grok",
-   "created_at": "2026-08-29T22:12:57+00:00",
-   "parent_handle": "grok",
-   "parent_url": "https://x.com/i/web/status/2093821125490798605",
-   "reply_url": "https://x.com/NoahsArk1000/status/2093824249605636153",
-   "permalink": "/hereforthereplies/c/1741"
+   "created_at": "2026-08-29T18:00:58+00:00",
+   "parent_handle": "mandyarthur",
+   "parent_url": "https://x.com/i/web/status/2093746296494719031",
+   "reply_url": "https://x.com/WarsawErik/status/2093760836028240241",
+   "permalink": "/hereforthereplies/c/1743"
+  },
+  {
+   "author": "universalchiro1",
+   "source": "x",
+   "like_count": 263,
+   "text": "@After_TheTruth @grok Israel did 9/11.",
+   "topic": "grok",
+   "created_at": "2026-08-29T23:19:01+00:00",
+   "parent_handle": "After_TheTruth",
+   "parent_url": "https://x.com/i/web/status/2093741138234511773",
+   "reply_url": "https://x.com/universalchiro1/status/2093840876900676066",
+   "permalink": "/hereforthereplies/c/1746"
   },
   {
    "author": "ikwuazomsX",
@@ -10270,18 +9814,6 @@
    "permalink": "/hereforthereplies/c/1684"
   },
   {
-   "author": "dwarkesh_sp",
-   "source": "x",
-   "like_count": 1448,
-   "text": "@tszzl @ketanrama I'll defer to you on the details, but it's also crazy that the general public doesn't in fact know the details!\n\nThere has been no independent investigation into the incident where AIs \"gain[ed] full administrator access t…",
-   "topic": "openai",
-   "created_at": "2026-08-30T04:03:03+00:00",
-   "parent_handle": "tszzl",
-   "parent_url": "https://x.com/i/web/status/2093905218836758715",
-   "reply_url": "https://x.com/dwarkesh_sp/status/2093912356107768073",
-   "permalink": "/hereforthereplies/c/1685"
-  },
-  {
    "author": "brucehub",
    "source": "x",
    "like_count": 1356,
@@ -10318,18 +9850,6 @@
    "permalink": "/hereforthereplies/c/1688"
   },
   {
-   "author": "dhoolpeta",
-   "source": "x",
-   "like_count": 1025,
-   "text": "@dhruv_rathee @aifiesta bsdk but its subscription based \nopenai is not playing ads for subscribers",
-   "topic": "openai",
-   "created_at": "2026-08-28T07:48:06+00:00",
-   "parent_handle": "dhruv_rathee",
-   "parent_url": "https://x.com/i/web/status/2093230842600620469",
-   "reply_url": "https://x.com/dhoolpeta/status/2093244215530811462",
-   "permalink": "/hereforthereplies/c/1689"
-  },
-  {
    "author": "cc_capital_hq",
    "source": "x",
    "like_count": 849,
@@ -10352,18 +9872,6 @@
    "parent_url": "https://x.com/i/web/status/2093515564786540695",
    "reply_url": "https://x.com/tetsuoai/status/2093528176257638632",
    "permalink": "/hereforthereplies/c/1691"
-  },
-  {
-   "author": "theo",
-   "source": "x",
-   "like_count": 720,
-   "text": "@meowkoteeq Did you seriously expect better from that Theo guy? Clearly he’s paid by OpenAI to shill Fable 5",
-   "topic": "openai",
-   "created_at": "2026-08-27T20:03:21+00:00",
-   "parent_handle": "meowkoteeq",
-   "parent_url": "https://x.com/i/web/status/2092977103624966308",
-   "reply_url": "https://x.com/theo/status/2093066859725918385",
-   "permalink": "/hereforthereplies/c/1692"
   },
   {
    "author": "alx",
@@ -10402,18 +9910,6 @@
    "permalink": "/hereforthereplies/c/1695"
   },
   {
-   "author": "litcapital",
-   "source": "x",
-   "like_count": 509,
-   "text": "@mntruell @tylergold “OpenAI models serve about 5% of Cursor user traffic” https://t.co/wVJU1cBPqR",
-   "topic": "openai",
-   "created_at": "2026-08-29T13:18:17+00:00",
-   "parent_handle": "mntruell",
-   "parent_url": "https://x.com/i/web/status/2093532254006063557",
-   "reply_url": "https://x.com/litcapital/status/2093689699353186547",
-   "permalink": "/hereforthereplies/c/1696"
-  },
-  {
    "author": "kienbuilds",
    "source": "x",
    "like_count": 501,
@@ -10424,42 +9920,6 @@
    "parent_url": "https://x.com/i/web/status/2093074192636018977",
    "reply_url": "https://x.com/kienbuilds/status/2093075190678745293",
    "permalink": "/hereforthereplies/c/1697"
-  },
-  {
-   "author": "HillshireJ64226",
-   "source": "x",
-   "like_count": 490,
-   "text": "@thsottiaux This is a REALLY bad look for OpenAI.  Grow up.",
-   "topic": "openai",
-   "created_at": "2026-08-29T20:02:00+00:00",
-   "parent_handle": "thsottiaux",
-   "parent_url": "https://x.com/i/web/status/2093784314714657110",
-   "reply_url": "https://x.com/HillshireJ64226/status/2093791296754250110",
-   "permalink": "/hereforthereplies/c/1698"
-  },
-  {
-   "author": "ajambrosino",
-   "source": "x",
-   "like_count": 481,
-   "text": "@tekbog openai will have to acquire a coding harness. and probably name it something silly like CodeX",
-   "topic": "openai",
-   "created_at": "2026-08-29T16:53:11+00:00",
-   "parent_handle": "tekbog",
-   "parent_url": "https://x.com/i/web/status/2093551880714719272",
-   "reply_url": "https://x.com/ajambrosino/status/2093743781300588700",
-   "permalink": "/hereforthereplies/c/1699"
-  },
-  {
-   "author": "polynoamial",
-   "source": "x",
-   "like_count": 467,
-   "text": "@dadkins_ @OpenAI We already did, it didn't solve any of them. But we haven't thrown a ton of inference at them.",
-   "topic": "openai",
-   "created_at": "2026-08-28T22:07:26+00:00",
-   "parent_handle": "dadkins_",
-   "parent_url": "https://x.com/i/web/status/2093458512273944739",
-   "reply_url": "https://x.com/polynoamial/status/2093460474738393511",
-   "permalink": "/hereforthereplies/c/1700"
   },
   {
    "author": "schertzt",
@@ -10508,6 +9968,90 @@
    "parent_url": "https://x.com/i/web/status/2093515564786540695",
    "reply_url": "https://x.com/tmppbr/status/2093523845571371017",
    "permalink": "/hereforthereplies/c/1704"
+  },
+  {
+   "author": "KareG6",
+   "source": "x",
+   "like_count": 332,
+   "text": "@OpenAI @AnthropicAI @awscloud @Google @Microsoft @Oracle https://t.co/oWoy69faoN",
+   "topic": "openai",
+   "created_at": "2026-08-28T00:10:47+00:00",
+   "parent_handle": "OpenAI",
+   "parent_url": "https://x.com/i/web/status/2093074192636018977",
+   "reply_url": "https://x.com/KareG6/status/2093129130590007737",
+   "permalink": "/hereforthereplies/c/1705"
+  },
+  {
+   "author": "Xxi5olc",
+   "source": "x",
+   "like_count": 329,
+   "text": "@OpenAI Guess they figured out why Grok is moving fast? lol https://t.co/rdaKY7EO6y",
+   "topic": "openai",
+   "created_at": "2026-08-29T03:55:24+00:00",
+   "parent_handle": "OpenAI",
+   "parent_url": "https://x.com/i/web/status/2093515564786540695",
+   "reply_url": "https://x.com/Xxi5olc/status/2093548043224117326",
+   "permalink": "/hereforthereplies/c/1706"
+  },
+  {
+   "author": "jtrader",
+   "source": "x",
+   "like_count": 296,
+   "text": "@OpenAI @AnthropicAI @awscloud @Google @Microsoft @Oracle It’s coming https://t.co/52mYFTh32B",
+   "topic": "openai",
+   "created_at": "2026-08-27T21:53:47+00:00",
+   "parent_handle": "OpenAI",
+   "parent_url": "https://x.com/i/web/status/2093074192636018977",
+   "reply_url": "https://x.com/jtrader/status/2093094650970091619",
+   "permalink": "/hereforthereplies/c/1708"
+  },
+  {
+   "author": "freedomwillwork",
+   "source": "x",
+   "like_count": 291,
+   "text": "@OpenAI LOL grok is going to beat you",
+   "topic": "openai",
+   "created_at": "2026-08-29T02:12:29+00:00",
+   "parent_handle": "OpenAI",
+   "parent_url": "https://x.com/i/web/status/2093515564786540695",
+   "reply_url": "https://x.com/freedomwillwork/status/2093522145225650686",
+   "permalink": "/hereforthereplies/c/1709"
+  },
+  {
+   "author": "amidummystud",
+   "source": "x",
+   "like_count": 266,
+   "text": "@OpenAI this is not about the tech, this is about the man https://t.co/hBzSta11tp",
+   "topic": "openai",
+   "created_at": "2026-08-29T03:01:12+00:00",
+   "parent_handle": "OpenAI",
+   "parent_url": "https://x.com/i/web/status/2093515564786540695",
+   "reply_url": "https://x.com/amidummystud/status/2093534404010549492",
+   "permalink": "/hereforthereplies/c/1713"
+  },
+  {
+   "author": "polynoamial",
+   "source": "x",
+   "like_count": 467,
+   "text": "@dadkins_ @OpenAI We already did, it didn't solve any of them. But we haven't thrown a ton of inference at them.",
+   "topic": "openai",
+   "created_at": "2026-08-28T22:07:26+00:00",
+   "parent_handle": "dadkins_",
+   "parent_url": "https://x.com/i/web/status/2093458512273944739",
+   "reply_url": "https://x.com/polynoamial/status/2093460474738393511",
+   "permalink": "/hereforthereplies/c/1700"
+  },
+  {
+   "author": "tosheegee",
+   "source": "x",
+   "like_count": 325,
+   "text": "@vcfgdev @OpenAI You already know that part is directly written by Sam",
+   "topic": "openai",
+   "created_at": "2026-08-29T02:52:54+00:00",
+   "parent_handle": "vcfgdev",
+   "parent_url": "https://x.com/i/web/status/2093518932443590931",
+   "reply_url": "https://x.com/tosheegee/status/2093532313657491723",
+   "permalink": "/hereforthereplies/c/1707"
   },
   {
    "author": "bitcoin_clown",
@@ -11350,6 +10894,30 @@
    "permalink": "/hereforthereplies/c/501"
   },
   {
+   "author": "ZacksJerryRig",
+   "source": "x",
+   "like_count": 358,
+   "text": "@Tesla Can't drive at night nothing burger.",
+   "topic": "tesla",
+   "created_at": "2026-08-29T13:46:54+00:00",
+   "parent_handle": "Tesla",
+   "parent_url": "https://x.com/i/web/status/2093585372920123522",
+   "reply_url": "https://x.com/ZacksJerryRig/status/2093696898683240816",
+   "permalink": "/hereforthereplies/c/1767"
+  },
+  {
+   "author": "DirtyTesLa",
+   "source": "x",
+   "like_count": 312,
+   "text": "@Tesla robo...taxi?",
+   "topic": "tesla",
+   "created_at": "2026-08-24T20:58:37+00:00",
+   "parent_handle": "Tesla",
+   "parent_url": "https://x.com/i/web/status/2091982606955155810",
+   "reply_url": "https://x.com/DirtyTesLa/status/2091993606286381240",
+   "permalink": "/hereforthereplies/c/1770"
+  },
+  {
    "author": "SawyerMerritt",
    "source": "x",
    "like_count": 1063,
@@ -11362,18 +10930,6 @@
    "permalink": "/hereforthereplies/c/1753"
   },
   {
-   "author": "teslatomic01",
-   "source": "x",
-   "like_count": 855,
-   "text": "@decadadenoventa https://t.co/NJAt8lSAtS",
-   "topic": "tesla",
-   "created_at": "2026-08-29T05:37:29+00:00",
-   "parent_handle": "decadadenoventa",
-   "parent_url": "https://x.com/i/web/status/2093537866076791213",
-   "reply_url": "https://x.com/teslatomic01/status/2093573735286440426",
-   "permalink": "/hereforthereplies/c/1754"
-  },
-  {
    "author": "AIDRIVR",
    "source": "x",
    "like_count": 747,
@@ -11384,42 +10940,6 @@
    "parent_url": "https://x.com/i/web/status/2092729699436998724",
    "reply_url": "https://x.com/AIDRIVR/status/2092733423291122145",
    "permalink": "/hereforthereplies/c/1755"
-  },
-  {
-   "author": "hodlonaminute",
-   "source": "x",
-   "like_count": 698,
-   "text": "@theficouple If you bought any Tesla just to “save on gas,” then I agree with this post. But saving gas is like the 107th reason to own one. I get pure joy from mine.",
-   "topic": "tesla",
-   "created_at": "2026-08-23T22:19:46+00:00",
-   "parent_handle": "theficouple",
-   "parent_url": "https://x.com/i/web/status/2091631571212374174",
-   "reply_url": "https://x.com/hodlonaminute/status/2091651641309307209",
-   "permalink": "/hereforthereplies/c/1756"
-  },
-  {
-   "author": "SantoroSystems",
-   "source": "x",
-   "like_count": 641,
-   "text": "@redbottravels Trueeeeee.\n\nIt's also kind of funny because I'm pretty sure the Waymo 6th Gen has a more powerful processor than AI4 and a lower crash rate.\n\nLike right now realistically, the only thing Tesla the only thing Tesla has is more…",
-   "topic": "tesla",
-   "created_at": "2026-08-28T20:53:05+00:00",
-   "parent_handle": "redbottravels",
-   "parent_url": "https://x.com/i/web/status/2093441068322721832",
-   "reply_url": "https://x.com/SantoroSystems/status/2093441763931222078",
-   "permalink": "/hereforthereplies/c/1757"
-  },
-  {
-   "author": "GameDevJacob",
-   "source": "x",
-   "like_count": 515,
-   "text": "@GbolahanJu31497 Shit, give me a Tesla and I'll call you my friend",
-   "topic": "tesla",
-   "created_at": "2026-08-29T13:39:23+00:00",
-   "parent_handle": "GbolahanJu31497",
-   "parent_url": "https://x.com/i/web/status/2093636120378589276",
-   "reply_url": "https://x.com/GameDevJacob/status/2093695009849500108",
-   "permalink": "/hereforthereplies/c/1758"
   },
   {
    "author": "StopAntisemites",
@@ -11446,42 +10966,6 @@
    "permalink": "/hereforthereplies/c/1761"
   },
   {
-   "author": "TeslaTrucklet",
-   "source": "x",
-   "like_count": 428,
-   "text": "@libsoftiktok Obama must be furious. https://t.co/6lmyLE4RLC",
-   "topic": "tesla",
-   "created_at": "2026-08-25T18:19:46+00:00",
-   "parent_handle": "libsoftiktok",
-   "parent_url": "https://x.com/i/web/status/2092308560721891657",
-   "reply_url": "https://x.com/TeslaTrucklet/status/2092316016626053171",
-   "permalink": "/hereforthereplies/c/1762"
-  },
-  {
-   "author": "impuntualmente",
-   "source": "x",
-   "like_count": 426,
-   "text": "@Nicotransito No era que no arrancaba si la puerta estaba abierta??? Menos sensores y tecnología tienen. Poneme un sensor para saber si alguien está bajando, si alguien está agarrado aún del caño, que verga puede ver el chófer con todo el b…",
-   "topic": "tesla",
-   "created_at": "2026-08-25T21:50:31+00:00",
-   "parent_handle": "Nicotransito",
-   "parent_url": "https://x.com/i/web/status/2092293676089160140",
-   "reply_url": "https://x.com/impuntualmente/status/2092369054916809055",
-   "permalink": "/hereforthereplies/c/1763"
-  },
-  {
-   "author": "AbdullahYlmzer",
-   "source": "x",
-   "like_count": 404,
-   "text": "@darkwebhaber Babasından dayak yiyen abisini izleyen tesla https://t.co/MI9xwUoCKs",
-   "topic": "tesla",
-   "created_at": "2026-08-25T06:52:39+00:00",
-   "parent_handle": "darkwebhaber",
-   "parent_url": "https://x.com/i/web/status/2092120327744549025",
-   "reply_url": "https://x.com/AbdullahYlmzer/status/2092143097001975890",
-   "permalink": "/hereforthereplies/c/1764"
-  },
-  {
    "author": "SnazzyLabs",
    "source": "x",
    "like_count": 377,
@@ -11492,66 +10976,6 @@
    "parent_url": "https://x.com/i/web/status/2091116989292929405",
    "reply_url": "https://x.com/SnazzyLabs/status/2091344610325090575",
    "permalink": "/hereforthereplies/c/1765"
-  },
-  {
-   "author": "Gimply32",
-   "source": "x",
-   "like_count": 369,
-   "text": "@blandCinema Doing this to fight against M4A while also doing online panhandling for lung meds I can’t https://t.co/EXM3uuOEU8",
-   "topic": "tesla",
-   "created_at": "2026-08-25T18:52:36+00:00",
-   "parent_handle": "blandCinema",
-   "parent_url": "https://x.com/i/web/status/2092310789956776270",
-   "reply_url": "https://x.com/Gimply32/status/2092324279954161966",
-   "permalink": "/hereforthereplies/c/1766"
-  },
-  {
-   "author": "ZacksJerryRig",
-   "source": "x",
-   "like_count": 358,
-   "text": "@Tesla Can't drive at night nothing burger.",
-   "topic": "tesla",
-   "created_at": "2026-08-29T13:46:54+00:00",
-   "parent_handle": "Tesla",
-   "parent_url": "https://x.com/i/web/status/2093585372920123522",
-   "reply_url": "https://x.com/ZacksJerryRig/status/2093696898683240816",
-   "permalink": "/hereforthereplies/c/1767"
-  },
-  {
-   "author": "TeslaCoilStud",
-   "source": "x",
-   "like_count": 350,
-   "text": "@MK881955 That translation must be inaccurate.",
-   "topic": "tesla",
-   "created_at": "2026-08-23T13:51:32+00:00",
-   "parent_handle": "MK881955",
-   "parent_url": "https://x.com/i/web/status/2091372172950528061",
-   "reply_url": "https://x.com/TeslaCoilStud/status/2091523739271782855",
-   "permalink": "/hereforthereplies/c/1768"
-  },
-  {
-   "author": "dedreviil",
-   "source": "x",
-   "like_count": 314,
-   "text": "@GirlOfNox Tesla, no te arrepentirás",
-   "topic": "tesla",
-   "created_at": "2026-08-26T18:09:52+00:00",
-   "parent_handle": "GirlOfNox",
-   "parent_url": "https://x.com/i/web/status/2092661978527363258",
-   "reply_url": "https://x.com/dedreviil/status/2092675914307899849",
-   "permalink": "/hereforthereplies/c/1769"
-  },
-  {
-   "author": "DirtyTesLa",
-   "source": "x",
-   "like_count": 312,
-   "text": "@Tesla robo...taxi?",
-   "topic": "tesla",
-   "created_at": "2026-08-24T20:58:37+00:00",
-   "parent_handle": "Tesla",
-   "parent_url": "https://x.com/i/web/status/2091982606955155810",
-   "reply_url": "https://x.com/DirtyTesLa/status/2091993606286381240",
-   "permalink": "/hereforthereplies/c/1770"
   },
   {
    "author": "KuttanThambi_22",
@@ -11566,18 +10990,6 @@
    "permalink": "/hereforthereplies/c/1771"
   },
   {
-   "author": "TeslaGirlSWFL",
-   "source": "x",
-   "like_count": 272,
-   "text": "@RyanSaavedra I already don't buy GS cookies due to their support of Planned Parenthood.",
-   "topic": "tesla",
-   "created_at": "2026-08-24T22:03:43+00:00",
-   "parent_handle": "RyanSaavedra",
-   "parent_url": "https://x.com/i/web/status/2091977106297160145",
-   "reply_url": "https://x.com/TeslaGirlSWFL/status/2092009986616332747",
-   "permalink": "/hereforthereplies/c/1772"
-  },
-  {
    "author": "JamieMetzl",
    "source": "x",
    "like_count": 267,
@@ -11588,18 +11000,6 @@
    "parent_url": "https://x.com/i/web/status/2091870338233614759",
    "reply_url": "https://x.com/JamieMetzl/status/2091878851974459613",
    "permalink": "/hereforthereplies/c/1775"
-  },
-  {
-   "author": "sarapcanagina",
-   "source": "x",
-   "like_count": 253,
-   "text": "@gsarayruhu1905_ Simeone dostum Galatasaray rehabilitasyon merkezinin namını duymuşsundur ekstra olarak senin için maaşının %20 sini de öderiz",
-   "topic": "tesla",
-   "created_at": "2026-08-28T19:45:20+00:00",
-   "parent_handle": "gsarayruhu1905_",
-   "parent_url": "https://x.com/i/web/status/2093422732050362880",
-   "reply_url": "https://x.com/sarapcanagina/status/2093424714530083183",
-   "permalink": "/hereforthereplies/c/1776"
   },
   {
    "author": "dasfacc",
@@ -11614,102 +11014,6 @@
    "permalink": "/hereforthereplies/c/1663"
   },
   {
-   "author": "BPD1776",
-   "source": "x",
-   "like_count": 728,
-   "text": "@SVP_of_Retail They are going to get checks in the mail from me. \n\nThis will cost them more time (money) than the 1% would make anyone. \n\nMy read of it is that this is a Stripe created issue.",
-   "topic": "stripe",
-   "created_at": "2026-08-18T19:21:21+00:00",
-   "parent_handle": "SVP_of_Retail",
-   "parent_url": "https://x.com/i/web/status/2089793938156622138",
-   "reply_url": "https://x.com/BPD1776/status/2089794799163330954",
-   "permalink": "/hereforthereplies/c/1664"
-  },
-  {
-   "author": "_jdiking",
-   "source": "x",
-   "like_count": 626,
-   "text": "@fashion_nfl Orange stripe is leagues better",
-   "topic": "stripe",
-   "created_at": "2026-08-22T23:27:20+00:00",
-   "parent_handle": "fashion_nfl",
-   "parent_url": "https://x.com/i/web/status/2091305510914117692",
-   "reply_url": "https://x.com/_jdiking/status/2091306253352059142",
-   "permalink": "/hereforthereplies/c/1665"
-  },
-  {
-   "author": "HeadNaughty",
-   "source": "x",
-   "like_count": 602,
-   "text": "@MrGrEenFR I feel as though people don’t actually want realism in their games, especially shooters, they just want it to be real enough to imagine themselves as a hero of some stripe.",
-   "topic": "stripe",
-   "created_at": "2026-08-27T20:56:39+00:00",
-   "parent_handle": "MrGrEenFR",
-   "parent_url": "https://x.com/i/web/status/2093079150848352571",
-   "reply_url": "https://x.com/HeadNaughty/status/2093080275026608520",
-   "permalink": "/hereforthereplies/c/1666"
-  },
-  {
-   "author": "twiz19071051",
-   "source": "x",
-   "like_count": 589,
-   "text": "@thdxr cute of you to assume that stripe doesn't block legitimate customers",
-   "topic": "stripe",
-   "created_at": "2026-08-25T14:54:55+00:00",
-   "parent_handle": "thdxr",
-   "parent_url": "https://x.com/i/web/status/2092238606987370884",
-   "reply_url": "https://x.com/twiz19071051/status/2092264463948812644",
-   "permalink": "/hereforthereplies/c/1667"
-  },
-  {
-   "author": "stripe1968",
-   "source": "x",
-   "like_count": 567,
-   "text": "@nihonpatriot 日本人が強く豊かになるには、自民党を壊滅する事が必要不可欠。 https://t.co/SVoI5bfsEe",
-   "topic": "stripe",
-   "created_at": "2026-08-01T23:21:50+00:00",
-   "parent_handle": "nihonpatriot",
-   "parent_url": "https://x.com/i/web/status/2083631538173043019",
-   "reply_url": "https://x.com/stripe1968/status/2083694726310744460",
-   "permalink": "/hereforthereplies/c/1668"
-  },
-  {
-   "author": "0FighterFairy",
-   "source": "x",
-   "like_count": 491,
-   "text": "@oliverglazer &gt;lolicon flag\nNo such thing especially with that gay ass stripe format",
-   "topic": "stripe",
-   "created_at": "2026-08-10T04:39:13+00:00",
-   "parent_handle": "oliverglazer",
-   "parent_url": "https://x.com/i/web/status/2086546859129028645",
-   "reply_url": "https://x.com/0FighterFairy/status/2086673699487502556",
-   "permalink": "/hereforthereplies/c/1669"
-  },
-  {
-   "author": "anthony_lipira",
-   "source": "x",
-   "like_count": 464,
-   "text": "@SoakUpThe_Sun This is true. Goth is nothing but a porn costume now, like French maids and candy stripe nurses.",
-   "topic": "stripe",
-   "created_at": "2026-08-11T11:12:47+00:00",
-   "parent_handle": "SoakUpThe_Sun",
-   "parent_url": "https://x.com/i/web/status/2086800188857835527",
-   "reply_url": "https://x.com/anthony_lipira/status/2087135133144953009",
-   "permalink": "/hereforthereplies/c/1670"
-  },
-  {
-   "author": "DavidZsutty",
-   "source": "x",
-   "like_count": 456,
-   "text": "@KeithWoodsYT If @elonmusk wanted to strike a serious blow against censorship he would set up an alternative to Stripe, PayPal, and a free speech credit union. \n\nHe would actually make a lot of money too!",
-   "topic": "stripe",
-   "created_at": "2026-08-06T21:09:47+00:00",
-   "parent_handle": "KeithWoodsYT",
-   "parent_url": "https://x.com/i/web/status/2085451800899998155",
-   "reply_url": "https://x.com/DavidZsutty/status/2085473432540446992",
-   "permalink": "/hereforthereplies/c/1671"
-  },
-  {
    "author": "yungbzz",
    "source": "x",
    "like_count": 335,
@@ -11722,18 +11026,6 @@
    "permalink": "/hereforthereplies/c/1672"
   },
   {
-   "author": "Hikaru_Chansey",
-   "source": "x",
-   "like_count": 328,
-   "text": "@22liv22 When I was very young I stole some zebra stripe gum and my Mom made me take it back to the cashier and apologize.  That lesson stuck with me forever.  Good on her.",
-   "topic": "stripe",
-   "created_at": "2026-08-14T17:08:14+00:00",
-   "parent_handle": "22liv22",
-   "parent_url": "https://x.com/i/web/status/2088303078235877390",
-   "reply_url": "https://x.com/Hikaru_Chansey/status/2088311750433120496",
-   "permalink": "/hereforthereplies/c/1673"
-  },
-  {
    "author": "MoonlitMaven",
    "source": "x",
    "like_count": 323,
@@ -11744,30 +11036,6 @@
    "parent_url": "https://x.com/i/web/status/2092230794169184403",
    "reply_url": "https://x.com/MoonlitMaven/status/2092264753745805553",
    "permalink": "/hereforthereplies/c/1674"
-  },
-  {
-   "author": "jason_haugh",
-   "source": "x",
-   "like_count": 315,
-   "text": "@thdxr Stripe claims a 32% reduction in fraud. I hope this doesn't mean that you had ~$600M+ get through. https://t.co/AAUlWq8IHZ",
-   "topic": "stripe",
-   "created_at": "2026-08-25T13:17:47+00:00",
-   "parent_handle": "thdxr",
-   "parent_url": "https://x.com/i/web/status/2092238606987370884",
-   "reply_url": "https://x.com/jason_haugh/status/2092240021122154948",
-   "permalink": "/hereforthereplies/c/1675"
-  },
-  {
-   "author": "CompassDrifter",
-   "source": "x",
-   "like_count": 274,
-   "text": "@howcoryseesit A wise old \"red stripe\" Chief once told me,\n\"If the United States Government doesn't have to officially apologize to the host country for something you did ashore on liberty, how much fun did you really have?\"",
-   "topic": "stripe",
-   "created_at": "2026-08-25T13:41:24+00:00",
-   "parent_handle": "howcoryseesit",
-   "parent_url": "https://x.com/i/web/status/2092199851203166231",
-   "reply_url": "https://x.com/CompassDrifter/status/2092245962605383884",
-   "permalink": "/hereforthereplies/c/1678"
   },
   {
    "author": "imjustbrando",
@@ -12574,18 +11842,6 @@
    "permalink": "/hereforthereplies/c/1581"
   },
   {
-   "author": "viculiada",
-   "source": "x",
-   "like_count": 1398,
-   "text": "@Jajakakajajsjkd @Argconeta @porqueTTarg y si son españoles boludo qué pretendias jajsjsj",
-   "topic": "xai",
-   "created_at": "2026-08-13T19:27:41+00:00",
-   "parent_handle": "Jajakakajajsjkd",
-   "parent_url": "https://x.com/i/web/status/2087982961228476716",
-   "reply_url": "https://x.com/viculiada/status/2087984453713113253",
-   "permalink": "/hereforthereplies/c/1808"
-  },
-  {
    "author": "thsottiaux",
    "source": "x",
    "like_count": 935,
@@ -12596,6 +11852,42 @@
    "parent_url": "https://x.com/i/web/status/2091190454167421189",
    "reply_url": "https://x.com/thsottiaux/status/2091290999381184620",
    "permalink": "/hereforthereplies/c/1810"
+  },
+  {
+   "author": "xx25yy33zz12ww",
+   "source": "x",
+   "like_count": 412,
+   "text": "@capgiremmoia @Lakshmi0606 Una pregunta, per la festa del Xai, on es maten xais sense atortdir-los prèviament, on podem trobar el vídeo on us queixeu i demaneu prohibir-lo?",
+   "topic": "xai",
+   "created_at": "2026-08-27T23:44:15+00:00",
+   "parent_handle": "capgiremmoia",
+   "parent_url": "https://x.com/i/web/status/2093067366452154457",
+   "reply_url": "https://x.com/xx25yy33zz12ww/status/2093122452884770818",
+   "permalink": "/hereforthereplies/c/1815"
+  },
+  {
+   "author": "BartemyS",
+   "source": "x",
+   "like_count": 377,
+   "text": "@kevinnbass I also think Elon's creation of XAI may end up being more consequential \n\nA truth seeking AI that connects in with X\n\nAnd it now looks like XAI will be the leader.\n\nIt is transformative technology.",
+   "topic": "xai",
+   "created_at": "2026-08-20T03:18:20+00:00",
+   "parent_handle": "kevinnbass",
+   "parent_url": "https://x.com/i/web/status/2090038548011372580",
+   "reply_url": "https://x.com/BartemyS/status/2090277224297488682",
+   "permalink": "/hereforthereplies/c/1816"
+  },
+  {
+   "author": "viculiada",
+   "source": "x",
+   "like_count": 1398,
+   "text": "@Jajakakajajsjkd @Argconeta @porqueTTarg y si son españoles boludo qué pretendias jajsjsj",
+   "topic": "xai",
+   "created_at": "2026-08-13T19:27:41+00:00",
+   "parent_handle": "Jajakakajajsjkd",
+   "parent_url": "https://x.com/i/web/status/2087982961228476716",
+   "reply_url": "https://x.com/viculiada/status/2087984453713113253",
+   "permalink": "/hereforthereplies/c/1808"
   },
   {
    "author": "xaigorgo",
@@ -12644,30 +11936,6 @@
    "parent_url": "https://x.com/i/web/status/2089922412758364251",
    "reply_url": "https://x.com/xai_trto/status/2090212617562525761",
    "permalink": "/hereforthereplies/c/1814"
-  },
-  {
-   "author": "xx25yy33zz12ww",
-   "source": "x",
-   "like_count": 412,
-   "text": "@capgiremmoia @Lakshmi0606 Una pregunta, per la festa del Xai, on es maten xais sense atortdir-los prèviament, on podem trobar el vídeo on us queixeu i demaneu prohibir-lo?",
-   "topic": "xai",
-   "created_at": "2026-08-27T23:44:15+00:00",
-   "parent_handle": "capgiremmoia",
-   "parent_url": "https://x.com/i/web/status/2093067366452154457",
-   "reply_url": "https://x.com/xx25yy33zz12ww/status/2093122452884770818",
-   "permalink": "/hereforthereplies/c/1815"
-  },
-  {
-   "author": "BartemyS",
-   "source": "x",
-   "like_count": 377,
-   "text": "@kevinnbass I also think Elon's creation of XAI may end up being more consequential \n\nA truth seeking AI that connects in with X\n\nAnd it now looks like XAI will be the leader.\n\nIt is transformative technology.",
-   "topic": "xai",
-   "created_at": "2026-08-20T03:18:20+00:00",
-   "parent_handle": "kevinnbass",
-   "parent_url": "https://x.com/i/web/status/2090038548011372580",
-   "reply_url": "https://x.com/BartemyS/status/2090277224297488682",
-   "permalink": "/hereforthereplies/c/1816"
   },
   {
    "author": "NaturalFreshAir",
@@ -15332,18 +14600,6 @@
    "parent_url": "https://x.com/i/web/status/2093022581515284879",
    "reply_url": "https://x.com/elonmusk/status/2093788711011910134",
    "permalink": "/hereforthereplies/c/1604"
-  },
-  {
-   "author": "KeithWoodsYT",
-   "source": "x",
-   "like_count": 1487,
-   "text": "@grok @JoelWBerry Thank you Grok. And how did their academic performance compare?",
-   "topic": "grok",
-   "created_at": "2026-08-29T23:57:20+00:00",
-   "parent_handle": "grok",
-   "parent_url": "https://x.com/i/web/status/2093849672724910425",
-   "reply_url": "https://x.com/KeithWoodsYT/status/2093850520733556980",
-   "permalink": "/hereforthereplies/c/1721"
   }
  ]
 }
