@@ -19,6 +19,7 @@ import os
 import sys
 import urllib.error
 import urllib.parse
+import html as _html
 import re
 import urllib.request
 
@@ -150,6 +151,56 @@ def cap_by_author(rows: list[dict], preserve_order: bool = False) -> list[dict]:
     return out
 
 
+def clean_text(text: str) -> str:
+    """Entities come off the wire raw: "&amp;" must read as "&"."""
+    return _html.unescape(text or "")
+
+
+def strip_leading_handles(text: str, parent: str) -> str:
+    """Drop the @mentions a reply opens with when the card already shows them.
+
+    "@Chime_Fave iPhone 11 ke" under "→ @Chime_Fave" says the handle twice.
+    Only leading mentions go, and only while the first one is the parent.
+    """
+    body = (text or "").strip()
+    parent = (parent or "").strip().lstrip("@").lower()
+    if not body or not parent or not body.startswith("@"):
+        return body
+    # Only the parent's own handle goes. Other mentions are content: dropping
+    # "@stripe" from "@cline @stripe ..." would hide why the row is here.
+    while body.startswith("@"):
+        parts = body[1:].split(None, 1)
+        head = parts[0].rstrip(",:.!?").lower()
+        if head != parent:
+            break
+        if len(parts) < 2:
+            return (text or "").strip()      # nothing but the parent: keep it
+        body = parts[1].strip()
+    return body or (text or "").strip()
+
+
+def needs_exact_phrase(q: str) -> bool:
+    """A query with a number means the number: "iphone 18" is not "iPhone 11".
+
+    Loose all-words matching is fine for "grok bot"; it is wrong the moment a
+    model number, year or version is involved.
+    """
+    q = (q or "").strip()
+    if q.startswith('"') and q.endswith('"') and len(q) > 2:
+        return True
+    return any(ch.isdigit() for ch in q)
+
+
+def matches_query(row: dict, q: str) -> bool:
+    """Does this row actually answer the query, not just share its words."""
+    needle = normalize(q).strip('"')
+    if not needle:
+        return True
+    hay = " ".join(str(row.get(f) or "") for f in
+                   ("text", "topic", "parent_handle", "author")).lower()
+    return needle in hay
+
+
 def search_rows(rows: list[dict], q: str) -> list[dict]:
     """Substring match over what a person would actually search: the reply text,
     the topic it was filed under, who it answered, and who wrote it.
@@ -163,7 +214,9 @@ def search_rows(rows: list[dict], q: str) -> list[dict]:
     fields = ("text", "topic", "parent_handle", "author")
     stacks = [(r, " ".join(str(r.get(f) or "") for f in fields).lower()) for r in rows]
     hits = [r for r, hay in stacks if needle in hay]
-    if hits:
+    if hits or needs_exact_phrase(q):
+        # A numbered query means that number. "iphone 18" must never fall back
+        # to rows that merely say iphone and 18 somewhere.
         return hits
     # "grok bot" should still find a reply that says grok and bot, in any order.
     words = [w for w in needle.split() if len(w) > 2]
@@ -244,7 +297,8 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
         if parent and parent.lower() != author.lower():
             line += f" → @{parent}"
         out.append(line)
-        out.append(f"    {one_line(r.get('text', ''))}")
+        body = strip_leading_handles(clean_text(r.get("text", "")), parent)
+        out.append(f"    {one_line(body)}")
         tail = f"    ▲{int(r.get('like_count') or 0):,}"
         if r.get("reply_url"):
             tail += f" · {r['reply_url']}"
@@ -306,6 +360,9 @@ def main(argv: list[str] | None = None) -> int:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         from concurrent.futures import ThreadPoolExecutor
 
+        # Fetch a pool, not a page. Reply/phrase filtering removes most of what
+        # a search returns, so asking for exactly `limit` rows leaves one card.
+        pool_size = max(limit * 4, 25)
         notes, rows = [], []
 
         def from_x():
@@ -314,7 +371,7 @@ def main(argv: list[str] | None = None) -> int:
             except ImportError:
                 return []
             try:
-                return livex.search_replies(args.q, args.days, limit)
+                return livex.search_replies(args.q, args.days, pool_size)
             except livex.NoCredentials:
                 notes.append("X: no credential on this machine")
                 return []
@@ -328,7 +385,7 @@ def main(argv: list[str] | None = None) -> int:
             except ImportError:
                 return []
             try:
-                return livereddit.search_comments(args.q, args.days, limit)
+                return livereddit.search_comments(args.q, args.days, pool_size)
             except Exception as exc:
                 notes.append(f"Reddit: {exc}" if str(exc) else "Reddit: unavailable")
                 return []
@@ -340,6 +397,20 @@ def main(argv: list[str] | None = None) -> int:
                     rows += f.result(timeout=LIVE_TIMEOUT)
                 except Exception:
                     pass
+
+        # The board rejects root posts and self-threads: a reply answers
+        # SOMEONE ELSE. Live must apply the same rule, or a thread opener with
+        # no parent handle - or one replying to itself - leads the card list.
+        def is_real_reply(r: dict) -> bool:
+            parent = (r.get("parent_handle") or "").strip().lower()
+            if (r.get("source") or "") != "x":
+                return bool(r.get("parent_url"))
+            return bool(parent) and parent != (r.get("author") or "").strip().lower()
+
+        rows = [r for r in rows if is_real_reply(r)]
+        # And a numbered query means that number: "iphone 18" is not "iPhone 11".
+        if needs_exact_phrase(args.q) and not is_identity(args.q):
+            rows = [r for r in rows if matches_query(r, args.q)]
 
         if not rows:
             # Name every source we consulted, not only the ones that errored -
