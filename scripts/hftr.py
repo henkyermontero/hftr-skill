@@ -179,6 +179,32 @@ def strip_leading_handles(text: str, parent: str) -> str:
     return body or (text or "").strip()
 
 
+# How far apart the words of a multi-word query may sit and still be about the
+# same thing. Measured against a real "lg tv" result set: at 7 words it keeps 7
+# of 8 genuine LG-television replies and drops half the rows where "lg" is
+# Indonesian slang for "lagi" sitting in the same sentence as "tv". Tighter
+# windows throw away real answers faster than they remove wrong ones.
+NEAR_WINDOW = 7
+
+
+def words_are_near(text: str, tokens: list[str]) -> bool:
+    """Do all the query's words appear close together, in any order?
+
+    "Any LG tv with this controller" is about a television. A paragraph that
+    says "tv" in one clause and "lg" four sentences later is usually a different
+    language or a different sense of the letters.
+    """
+    words = re.findall(r"[a-z0-9]+", (text or "").lower())
+    if not words:
+        return False
+    for i in range(len(words)):
+        window = set(words[i:i + NEAR_WINDOW])
+        if all(any(t == w or (len(t) >= 4 and t in w) for w in window)
+               for t in tokens):
+            return True
+    return False
+
+
 def needs_exact_phrase(q: str) -> bool:
     """A query with a number means the number: "iphone 18" is not "iPhone 11".
 
@@ -212,7 +238,11 @@ def matches_query(row: dict, q: str, *, text_only: bool = False) -> bool:
     if needs_exact_phrase(q):
         return False                      # a numbered query means that number
     tokens = [t for t in needle.split() if len(t) > 1]
-    return bool(tokens) and all(t in text for t in tokens)
+    if not tokens:
+        return False
+    if len(tokens) == 1:
+        return tokens[0] in text
+    return words_are_near(text, tokens)
 
 
 def search_rows(rows: list[dict], q: str) -> list[dict]:
