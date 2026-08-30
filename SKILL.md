@@ -12,9 +12,11 @@ author, every row linking to the original.
 ## When to use
 
 - "best replies", "most-liked comments", "what landed on X this month"
-- `/hftr <topic>` — `stripe`, `openai`, `world cup`, `gpt-5 launch`
-- `/hftr @handle` — `@openai`, `x:elonmusk`, `u/spez`
-- Company or product listening: what people actually said back
+- `/hftr <topic>` — `ufc`, `bitcoin`, `world cup`
+- `/hftr @handle` — `@elonmusk`, `x:elonmusk`, `u/spez`
+
+The board answers for topics it already tracks. An unknown topic returns an
+honest empty result rather than a guess.
 
 ## When NOT to use
 

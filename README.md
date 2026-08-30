@@ -3,9 +3,9 @@
 Ranked public replies from the last 30 days, by topic or `@handle`.
 
 ```
-/hftr stripe
-/hftr @openai
-/hftr world cup
+/hftr ufc
+/hftr bitcoin
+/hftr @elonmusk
 ```
 
 ```
@@ -27,13 +27,13 @@ different job, don't bolt them together.
 Agent Skills host (Claude Code, Codex, Cursor, Gemini CLI):
 
 ```bash
-npx skills add OWNER/hftr-skill -g
+npx skills add henkyermontero/hftr-skill -g
 ```
 
 Grok Build CLI:
 
 ```bash
-grok plugin install OWNER/hftr-skill
+grok plugin install henkyermontero/hftr-skill
 ```
 
 Manual: copy this folder into your host's skills directory. No keys, no
@@ -58,8 +58,8 @@ dependencies — Python 3 standard library and one HTTP GET.
 ## Direct use
 
 ```bash
-python3 scripts/hftr.py --q "stripe"
-python3 scripts/hftr.py --q "@openai" --days 7
+python3 scripts/hftr.py --q "ufc"
+python3 scripts/hftr.py --q "@elonmusk" --days 7
 python3 scripts/hftr.py --q "world cup" --raw      # uncapped
 python3 scripts/hftr.py --q "world cup" --json     # raw payload
 ```
