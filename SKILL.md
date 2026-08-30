@@ -15,8 +15,9 @@ author, every row linking to the original.
 - `/hftr <topic>` — `ufc`, `bitcoin`, `world cup`
 - `/hftr @handle` — `@elonmusk`, `x:elonmusk`, `u/spez`
 
-The board answers for topics it already tracks. An unknown topic returns an
-honest empty result rather than a guess.
+The board answers for what it has already collected. The catalog grows when the
+ingest job runs, so a brand-new topic can be empty today and answer next week -
+an empty result is an honest "nobody landed a reply on that", never a guess.
 
 ## When NOT to use
 
@@ -28,6 +29,19 @@ honest empty result rather than a guess.
 These are different jobs. last30days tells you what happened; HFTR tells you
 which replies landed. Do not substitute one for the other, and do not call
 last30days to pad an empty HFTR result.
+
+## Where the rows come from
+
+Two hops, fastest first:
+
+1. **Snapshot** - a static copy of the in-window board on GitHub raw. Always
+   awake, answers in well under a second.
+2. **Live API** - fresher, but the board runs on free hosting that sleeps, so a
+   first call can wait on a cold start.
+
+The script does this for you. Rows are only ever a copy of what the board
+already stored: it never scrapes at ask time, and it never invents a row. A
+query the snapshot cannot answer falls through to the live board automatically.
 
 ## How to run it
 
@@ -56,6 +70,7 @@ last30days to pad an empty HFTR result.
 | `--limit` | rows, max 25 (default 12) |
 | `--raw` | uncapped: allow several rows from the same account |
 | `--json` | print the raw API payload instead of the readable list |
+| `--no-snapshot` | skip the snapshot and ask the live board directly |
 
 `HFTR_BASE_URL` overrides the board's address; the default is the public site.
 
@@ -72,6 +87,7 @@ last30days to pad an empty HFTR result.
 
 ## Failure
 
-The board runs on free hosting that sleeps. If the first request times out, the
-script prints one line saying the board may be waking and exits 2. Run it again
-a minute later. It never falls back to live scraping.
+If the snapshot and the live board are both unreachable, the script prints one
+line saying the board may be waking and exits 2. Run it again a minute later.
+It never falls back to live scraping, and it never pads an empty result with
+another tool.

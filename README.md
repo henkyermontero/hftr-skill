@@ -69,6 +69,24 @@ unreachable. The board runs on free hosting that sleeps, so a first request
 after idle can take a moment; the script says so in one line instead of
 crashing.
 
+## How it stays fast
+
+The script reads a **snapshot** (`data/board.json`, served from GitHub raw)
+before it touches the live API. The board runs on free hosting that sleeps, so
+without the snapshot a first call could wait ~50s on a cold start; with it, the
+answer is sub-second and the API is only needed for queries the snapshot has
+not captured.
+
+Refresh the snapshot while the site is awake:
+
+```bash
+python3 scripts/build_snapshot.py     # writes data/board.json
+git commit -am "snapshot" && git push
+```
+
+It is deliberately not wired into the ingest cron: nothing about this may ever
+change that job's exit code.
+
 ## The API behind it
 
 ```
