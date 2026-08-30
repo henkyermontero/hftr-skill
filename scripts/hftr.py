@@ -214,36 +214,46 @@ def from_api(q: str, days: int, limit: int, cap: int,
 
 # --- output ------------------------------------------------------------------
 
-def one_line(text: str, width: int = 160) -> str:
+def one_line(text: str, width: int = 240) -> str:
     t = " ".join((text or "").split())
     return t if len(t) <= width else t[:width].rstrip() + "…"
 
 
+def who(row: dict) -> str:
+    prefix = "u/" if (row.get("source") or "").lower() == "reddit" else "@"
+    return f"{prefix}{row.get('author', '')}"
+
+
 def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
-           updated_at: str | None, mode: str) -> str:
-    head = f"HFTR · last {days} days · {q}"
-    head += " · author" if mode == "author" else (" · capped" if capped else " · raw")
-    head += f" · {source}"
+           updated_at: str | None, mode: str, links: bool = False) -> str:
+    """A card per reply: who answered whom, what they said, what it earned.
+
+    Deliberately quiet - no source column, no parent URL unless asked. The
+    reply is the content; everything else is a label.
+    """
+    kind = "author" if mode == "author" else ("capped" if capped else "raw")
+    head = f"HFTR · {days} days · {q} · {source} · {kind}"
     if not rows:
         return f"{head}\nNo replies in-window. Not last month's leftovers."
 
-    out = [head]
+    out = [head, ""]
+    for i, r in enumerate(rows[:MAX_ROWS], start=1):
+        parent = (r.get("parent_handle") or "").strip()
+        author = (r.get("author") or "").strip()
+        line = f"{i:>2}  {who(r)}"
+        if parent and parent.lower() != author.lower():
+            line += f" → @{parent}"
+        out.append(line)
+        out.append(f"    {one_line(r.get('text', ''))}")
+        tail = f"    ▲{int(r.get('like_count') or 0):,}"
+        if r.get("reply_url"):
+            tail += f" · {r['reply_url']}"
+        if links and r.get("parent_url"):
+            tail += f" · parent {r['parent_url']}"
+        out.append(tail)
+        out.append("")
     if updated_at:
         out.append(f"board updated {updated_at}")
-    out.append("")
-    for i, r in enumerate(rows[:MAX_ROWS], start=1):
-        parent = r.get("parent_handle") or "—"
-        out.append(f"{i:>2}  ▲{int(r.get('like_count') or 0):,}  @{r.get('author','')}"
-                   f"  {r.get('source','')}  → @{parent}")
-        out.append(f"    {one_line(r.get('text', ''))}")
-        links = []
-        if r.get("parent_url"):
-            links.append(f"Parent {r['parent_url']}")
-        if r.get("reply_url"):
-            links.append(f"Reply {r['reply_url']}")
-        if links:
-            out.append("    " + " · ".join(links))
-        out.append("")
     return "\n".join(out).rstrip()
 
 
@@ -259,6 +269,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", action="store_true", help="print the raw payload")
     ap.add_argument("--no-snapshot", action="store_true",
                     help="skip the snapshot and ask the live board")
+    ap.add_argument("--links", action="store_true",
+                    help="also print the parent post URL on each row")
     ap.add_argument("--no-live", action="store_true",
                     help="do not fall back to a live X search when the board is empty")
     args = ap.parse_args(argv)
@@ -280,7 +292,7 @@ def main(argv: list[str] | None = None) -> int:
                                   "rows": snap_rows[:limit]}, indent=2))
             else:
                 print(render(args.q, snap_rows[:limit], days=args.days, capped=True,
-                             source="snapshot", mode=mode,
+                             source="board", mode=mode, links=args.links,
                              updated_at=(snap or {}).get("updated_at")))
             return 0
 
@@ -329,8 +341,12 @@ def main(argv: list[str] | None = None) -> int:
                 except Exception:
                     pass
 
-        if not rows and notes:
-            reason_out.append("looked: " + "; ".join(notes))
+        if not rows:
+            # Name every source we consulted, not only the ones that errored -
+            # "Reddit: 403" alone reads as if X was never asked.
+            looked = ["X", "Reddit"]
+            detail = ("; ".join(notes)) if notes else "nothing matched"
+            reason_out.append(f"looked at {' and '.join(looked)}: {detail}")
         if not is_identity(args.q):
             rows = rank_brand(rows, args.q)
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
@@ -347,7 +363,7 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         # snapshot answered, it simply had nothing for this query
         print(render(args.q, [], days=args.days, capped=not args.raw,
-                     source="snapshot", mode=mode,
+                     source="board", mode=mode, links=args.links,
                      updated_at=(snap or {}).get("updated_at")))
         return 0
 
@@ -365,8 +381,8 @@ def main(argv: list[str] | None = None) -> int:
                                   "rows": fresh}, indent=2))
             else:
                 print(render(args.q, fresh, days=args.days, capped=True,
-                             source="live · not on board", mode=mode,
-                             updated_at=None))
+                             source="live", mode=mode,
+                             updated_at=None, links=args.links))
             return 0
 
     if args.json:
@@ -374,8 +390,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(payload, indent=2))
         return 0
     out = render(args.q, rows, days=payload.get("window_days", args.days),
-                 capped=bool(payload.get("capped")), source="live",
-                 mode=payload.get("mode", mode),
+                 capped=bool(payload.get("capped")), source="board",
+                 mode=payload.get("mode", mode), links=args.links,
                  updated_at=payload.get("updated_at"))
     if not rows and note:
         out += f"\n{note[0]}."

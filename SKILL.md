@@ -82,6 +82,7 @@ one row per author, and present it in the same format labelled
 | `--json` | print the raw API payload instead of the readable list |
 | `--no-snapshot` | skip the snapshot and ask the live board directly |
 | `--no-live` | do not fall back to a live X search when the board is empty |
+| `--links` | also print the parent post URL on each row |
 
 `HFTR_BASE_URL` overrides the board's address; the default is the public site.
 
