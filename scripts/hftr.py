@@ -292,6 +292,25 @@ def search_rows(rows: list[dict], q: str) -> list[dict]:
     return [r for r, hay in stacks if all(w in hay for w in words)]
 
 
+def rank_relevance(rows: list[dict], q: str) -> list[dict]:
+    """Put rows that actually say the thing above rows that merely sit under it.
+
+    Board rows carry the topic ingest filed them under, so a reply can be on the
+    "World Cup 2026" board while its own text is about an edited video. Those
+    are still replies that landed in that conversation - the parent link proves
+    it - so they are demoted, not dropped. A brand query keeps its own stronger
+    rule.
+    """
+    if brand_for(q):
+        return rank_brand(rows, q)
+    if is_identity(q) or not normalize(q):
+        return rows
+    scored = [(0 if matches_query(r, q, text_only=True) else 1,
+               -(r.get("like_count") or 0), i, r) for i, r in enumerate(rows)]
+    scored.sort(key=lambda t: (t[0], t[1], t[2]))
+    return [t[3] for t in scored]
+
+
 def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
     try:
         snap = _get(snapshot_url(), SNAPSHOT_TIMEOUT)
@@ -313,8 +332,8 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
             rows = search_rows(snap.get("rows") or [], q)
     rows = [r for r in rows if in_window(r, days, now)]
     if not is_identity(q):
-        rows = rank_brand(rows, q)
-    return cap_by_author(rows, preserve_order=bool(brand_for(q))), snap
+        rows = rank_relevance(rows, q)
+    return cap_by_author(rows, preserve_order=not is_identity(q)), snap
 
 
 def from_api(q: str, days: int, limit: int, cap: int,
@@ -513,6 +532,10 @@ def main(argv: list[str] | None = None) -> int:
     # An unreachable board is not the end of the answer - a sleeping Render
     # used to stop the run here, before live search ever got a turn.
     rows = (payload or {}).get("rows") or []
+    if rows and not is_identity(args.q):
+        # Same rule as the snapshot: a reply that names the topic outranks one
+        # that was merely filed under it.
+        rows = cap_by_author(rank_relevance(rows, args.q), preserve_order=True)
 
     # 3. Nothing on the board: look at X itself before saying no.
     note: list[str] = []
