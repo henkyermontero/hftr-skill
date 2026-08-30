@@ -62,10 +62,13 @@ run that query now, then present the results yourself:
 
 1. Keep **replies only**. Drop root posts, and drop a reply whose author is the
    same account it is replying to (a self-thread is not a reply to anyone).
-2. Keep rows whose **own text** contains the query - the phrase, or every word
-   of it. A reply that only shares a thread with the topic is not an answer. If
-   the query contains a number, require the exact phrase: "iphone 18" is never
-   "iPhone 11".
+2. Keep rows whose **own text** contains the query. A reply that only shares a
+   thread with the topic is not an answer. For a multi-word query, the words
+   must sit together **in one sentence**, in any order, with at most two words
+   between them: "Grok Bot messes up" and "@bot The Grok app" both count,
+   "corporate chat bot. Grok has become..." does not - that is two thoughts.
+   If the query contains a number, require the exact phrase: "iphone 18" is
+   never "iPhone 11".
 3. Keep **one row per author**, the highest-liked one.
 4. Sort by likes, at most 12 rows, and unescape HTML (`&amp;` is `&`).
 5. Print the same cards, with the header labelled `live` instead of `board`:

@@ -180,28 +180,51 @@ def strip_leading_handles(text: str, parent: str) -> str:
 
 
 # How far apart the words of a multi-word query may sit and still be about the
-# same thing. Measured against a real "lg tv" result set: at 7 words it keeps 7
-# of 8 genuine LG-television replies and drops half the rows where "lg" is
-# Indonesian slang for "lagi" sitting in the same sentence as "tv". Tighter
-# windows throw away real answers faster than they remove wrong ones.
-NEAR_WINDOW = 7
+# same thing, and whether they may sit either side of a full stop.
+#
+# Measured, not guessed. On a real "grok bot" result set, allowing any distance
+# inside a 7-word window kept both wrong rows - "an AI bot account that has grok
+# write fan fiction", and "a safe, corporate chat bot. Grok has become..." where
+# the two words are adjacent but belong to different sentences. Confining the
+# match to one sentence with at most 2 words between neighbours keeps all 10
+# genuine rows and drops both wrong ones.
+NEAR_GAP = 2
 
 
 def words_are_near(text: str, tokens: list[str]) -> bool:
-    """Do all the query's words appear close together, in any order?
+    """Do the query's words sit together, in one sentence, in any order?
 
-    "Any LG tv with this controller" is about a television. A paragraph that
-    says "tv" in one clause and "lg" four sentences later is usually a different
-    language or a different sense of the letters.
+    "Grok Bot messes up" and "@bot The Grok app" both qualify - order does not
+    matter, closeness does. A sentence boundary ends the match, because
+    "corporate chat bot. Grok has become..." is two thoughts, not one topic.
     """
-    words = re.findall(r"[a-z0-9]+", (text or "").lower())
-    if not words:
-        return False
-    for i in range(len(words)):
-        window = set(words[i:i + NEAR_WINDOW])
-        if all(any(t == w or (len(t) >= 4 and t in w) for w in window)
-               for t in tokens):
-            return True
+    for sentence in re.split(r"[.!?\n]+", text or ""):
+        words = re.findall(r"[a-z0-9]+", sentence.lower())
+        if not words:
+            continue
+        hits = []
+        for i, w in enumerate(words):
+            for t in tokens:
+                if t == w or (len(t) >= 4 and t in w):
+                    hits.append((i, t))
+                    break
+        if len({t for _, t in hits}) < len(set(tokens)):
+            continue
+        # Slide the smallest span that covers every token and check the gaps.
+        need = len(set(tokens))
+        left = 0
+        seen: dict[str, int] = {}
+        for right, (idx, tok) in enumerate(hits):
+            seen[tok] = seen.get(tok, 0) + 1
+            while len(seen) == need:
+                span = [hits[i][0] for i in range(left, right + 1)]
+                if all(b - a - 1 <= NEAR_GAP for a, b in zip(span, span[1:])):
+                    return True
+                out = hits[left][1]
+                seen[out] -= 1
+                if not seen[out]:
+                    del seen[out]
+                left += 1
     return False
 
 
