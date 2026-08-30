@@ -257,6 +257,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", action="store_true", help="print the raw payload")
     ap.add_argument("--no-snapshot", action="store_true",
                     help="skip the snapshot and ask the live board")
+    ap.add_argument("--no-live", action="store_true",
+                    help="do not fall back to a live X search when the board is empty")
     args = ap.parse_args(argv)
 
     limit = min(args.limit, 25)
@@ -280,6 +282,28 @@ def main(argv: list[str] | None = None) -> int:
                              updated_at=(snap or {}).get("updated_at")))
             return 0
 
+    def live_x(reason_out: list) -> list:
+        """3. Ask X directly, once, for a query the board has never collected."""
+        try:
+            import livex
+        except ImportError:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            try:
+                import livex
+            except ImportError:
+                return []
+        try:
+            rows = livex.search_replies(args.q, args.days, limit)
+        except livex.NoCredentials:
+            reason_out.append("looked, no credential for live search")
+            return []
+        except Exception:
+            reason_out.append("looked, live search unavailable")
+            return []
+        if not is_identity(args.q):
+            rows = rank_brand(rows, args.q)
+        return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
+
     # 2. the live board: fresher, may need to wake up. If the snapshot already
     # loaded and simply had no match, we have a truthful answer in hand, so we
     # give the sleeping board a short window rather than a long one.
@@ -297,14 +321,34 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     rows = payload.get("rows") or []
+
+    # 3. Nothing on the board: look at X itself before saying no.
+    note: list[str] = []
+    if not rows and not args.no_live:
+        fresh = live_x(note)
+        if fresh:
+            if args.json:
+                print(json.dumps({"query": args.q, "mode": mode, "source": "live-x",
+                                  "window_days": args.days, "capped": True,
+                                  "on_board": False, "count": len(fresh),
+                                  "rows": fresh}, indent=2))
+            else:
+                print(render(args.q, fresh, days=args.days, capped=True,
+                             source="live · not on board", mode=mode,
+                             updated_at=None))
+            return 0
+
     if args.json:
         payload["source"] = "live"
         print(json.dumps(payload, indent=2))
         return 0
-    print(render(args.q, rows, days=payload.get("window_days", args.days),
+    out = render(args.q, rows, days=payload.get("window_days", args.days),
                  capped=bool(payload.get("capped")), source="live",
                  mode=payload.get("mode", mode),
-                 updated_at=payload.get("updated_at")))
+                 updated_at=payload.get("updated_at"))
+    if not rows and note:
+        out += f"\n{note[0]}."
+    print(out)
     return 0
 
 

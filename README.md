@@ -87,6 +87,17 @@ git commit -am "snapshot" && git push
 It is deliberately not wired into the ingest cron: nothing about this may ever
 change that job's exit code.
 
+## When the board has never heard of it
+
+If the snapshot and the API both come up empty, the script runs **one**
+read-only X search for public replies in the window and labels the result
+`live · not on board`. Those rows are shown, not stored: the board's ranking is
+unchanged and nothing is written to its database.
+
+That step needs `AUTH_TOKEN` / `CT0` in the environment or in
+`~/.config/last30days/.env`. Without them you get "looked, no credential for
+live search" and an honest empty. Use `--no-live` to skip the step entirely.
+
 ## The API behind it
 
 ```

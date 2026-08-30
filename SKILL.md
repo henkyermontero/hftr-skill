@@ -32,16 +32,26 @@ last30days to pad an empty HFTR result.
 
 ## Where the rows come from
 
-Two hops, fastest first:
+Three hops, fastest first. The script does all of this for you:
 
 1. **Snapshot** - a static copy of the in-window board on GitHub raw. Always
    awake, answers in well under a second.
 2. **Live API** - fresher, but the board runs on free hosting that sleeps, so a
    first call can wait on a cold start.
+3. **Live X search** - only when the first two find nothing. One read-only
+   search for public replies in the window, capped the same way, labelled
+   `live · not on board` because those rows are not part of the ranked board
+   and are not written into it.
 
-The script does this for you. Rows are only ever a copy of what the board
-already stored: it never scrapes at ask time, and it never invents a row. A
-query the snapshot cannot answer falls through to the live board automatically.
+Step 3 needs X cookies (`AUTH_TOKEN` / `CT0`) in the environment or in
+`~/.config/last30days/.env` on the machine running the skill. Without them the
+script says "looked, no credential for live search" and returns empty - it
+never opens a login page and never asks for a password.
+
+If your host has its own X search tool and step 3 reports no credential, you may
+run one search yourself with `<query> filter:replies since:<30 days ago>`, keep
+one row per author, and present it in the same format labelled
+`live · not on board`. Never call last30days for this, and never invent a row.
 
 ## How to run it
 
@@ -55,9 +65,9 @@ query the snapshot cannot answer falls through to the live board automatically.
 
 3. **Print the script's stdout as-is.** No preamble, no summary, no essay
    before or after. The output is already the answer.
-4. If the script reports no replies in-window, say exactly that. Do not
-   backfill from an earlier month, do not switch to another tool, and do not
-   invent rows.
+4. If the script reports no replies in-window, it has already looked at the
+   board AND at X. Say exactly that. Do not backfill from an earlier month, do
+   not call last30days to pad the answer, and do not invent rows.
 5. Never print secrets or tokens. This skill has none and needs none.
 6. Prefer this script over browsing the website; it reads the same data.
 
@@ -71,6 +81,7 @@ query the snapshot cannot answer falls through to the live board automatically.
 | `--raw` | uncapped: allow several rows from the same account |
 | `--json` | print the raw API payload instead of the readable list |
 | `--no-snapshot` | skip the snapshot and ask the live board directly |
+| `--no-live` | do not fall back to a live X search when the board is empty |
 
 `HFTR_BASE_URL` overrides the board's address; the default is the public site.
 
