@@ -26,6 +26,9 @@ SNAPSHOT_URL = ("https://raw.githubusercontent.com/henkyermontero/hftr-skill"
                 "/main/data/board.json")
 SNAPSHOT_TIMEOUT = 8
 API_TIMEOUT = 20
+# When the snapshot already answered "nothing here", the live board is only a
+# second opinion - we do not make the user wait out a cold start for it.
+API_TIMEOUT_AFTER_SNAPSHOT = 6
 MAX_ROWS = 12
 
 
@@ -136,11 +139,12 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
     return cap_by_author(rows), snap
 
 
-def from_api(q: str, days: int, limit: int, cap: int) -> dict | None:
+def from_api(q: str, days: int, limit: int, cap: int,
+             timeout: int = API_TIMEOUT) -> dict | None:
     params = urllib.parse.urlencode({"q": q, "days": days, "limit": limit,
                                      "cap_author": cap})
     try:
-        return _get(f"{base_url()}/api/board?{params}", API_TIMEOUT)
+        return _get(f"{base_url()}/api/board?{params}", timeout)
     except urllib.error.HTTPError as exc:
         if exc.code == 429:
             print("HFTR: rate limited (60 requests/minute). Try again shortly.",
@@ -220,8 +224,11 @@ def main(argv: list[str] | None = None) -> int:
                              updated_at=(snap or {}).get("updated_at")))
             return 0
 
-    # 2. the live board: fresher, may need to wake up
-    payload = from_api(args.q, args.days, limit, 0 if args.raw else 1)
+    # 2. the live board: fresher, may need to wake up. If the snapshot already
+    # loaded and simply had no match, we have a truthful answer in hand, so we
+    # give the sleeping board a short window rather than a long one.
+    payload = from_api(args.q, args.days, limit, 0 if args.raw else 1,
+                       timeout=API_TIMEOUT_AFTER_SNAPSHOT if snap else API_TIMEOUT)
     if payload is None:
         if snap is None:
             print("HFTR: board unreachable (it may be waking). Try again in a minute.",
