@@ -1,0 +1,40 @@
+name: rebuild-snapshot
+
+# Keeps data/board.json in step with the board without a human commit.
+#
+# Timed 40 minutes after the Render ingest cron (`0 */12 * * *`), so it reads a
+# board that has just been refreshed. It only touches THIS repo: it cannot
+# reach the ingest job, and a failure here can never change that job's exit
+# code or the unattended clock.
+#
+# If the API is empty or unreachable, build_snapshot.py exits 1 and this job
+# goes red WITHOUT committing - the previous snapshot stays live.
+on:
+  schedule:
+    - cron: "40 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pull live board into data/board.json
+        run: python3 scripts/build_snapshot.py
+      - name: Commit only if the snapshot changed
+        run: |
+          git config user.name "hftr-snapshot[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/board.json
+          if git diff --staged --quiet; then
+            echo "snapshot unchanged"
+            exit 0
+          fi
+          git commit -m "chore: refresh snapshot after ingest window"
+          git push
