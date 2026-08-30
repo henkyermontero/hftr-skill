@@ -1,0 +1,13 @@
+{
+  "name": "hftr",
+  "version": "0.1.0",
+  "description": "Ranked public replies, last 30 days, by topic or @handle. Not a research brief.",
+  "author": {
+    "name": "HFTR / FM",
+    "url": "https://here-for-the-replies.onrender.com"
+  },
+  "homepage": "https://here-for-the-replies.onrender.com",
+  "license": "MIT",
+  "skills": "./",
+  "keywords": ["hftr", "here for the replies", "replies", "most-liked", "x", "reddit"]
+}
