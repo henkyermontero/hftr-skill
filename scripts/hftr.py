@@ -30,6 +30,8 @@ API_TIMEOUT = 20
 # When the snapshot already answered "nothing here", the live board is only a
 # second opinion - we do not make the user wait out a cold start for it.
 API_TIMEOUT_AFTER_SNAPSHOT = 6
+# Both live sources run in parallel, so this is the wall clock for the pair.
+LIVE_TIMEOUT = 25
 MAX_ROWS = 12
 
 
@@ -282,24 +284,53 @@ def main(argv: list[str] | None = None) -> int:
                              updated_at=(snap or {}).get("updated_at")))
             return 0
 
-    def live_x(reason_out: list) -> list:
-        """3. Ask X directly, once, for a query the board has never collected."""
-        try:
-            import livex
-        except ImportError:
-            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    def live_search(reason_out: list) -> list:
+        """3. Ask the networks directly for a query the board never collected.
+
+        X and Reddit run at the same time, so the slower one costs nothing. A
+        source that has no credential, or that refuses us, drops out quietly -
+        one working source still answers.
+        """
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from concurrent.futures import ThreadPoolExecutor
+
+        notes, rows = [], []
+
+        def from_x():
             try:
                 import livex
             except ImportError:
                 return []
-        try:
-            rows = livex.search_replies(args.q, args.days, limit)
-        except livex.NoCredentials:
-            reason_out.append("looked, no credential for live search")
-            return []
-        except Exception:
-            reason_out.append("looked, live search unavailable")
-            return []
+            try:
+                return livex.search_replies(args.q, args.days, limit)
+            except livex.NoCredentials:
+                notes.append("X: no credential on this machine")
+                return []
+            except Exception:
+                notes.append("X: unavailable")
+                return []
+
+        def from_reddit():
+            try:
+                import livereddit
+            except ImportError:
+                return []
+            try:
+                return livereddit.search_comments(args.q, args.days, limit)
+            except Exception as exc:
+                notes.append(f"Reddit: {exc}" if str(exc) else "Reddit: unavailable")
+                return []
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures = [pool.submit(from_x), pool.submit(from_reddit)]
+            for f in futures:
+                try:
+                    rows += f.result(timeout=LIVE_TIMEOUT)
+                except Exception:
+                    pass
+
+        if not rows and notes:
+            reason_out.append("looked: " + "; ".join(notes))
         if not is_identity(args.q):
             rows = rank_brand(rows, args.q)
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
@@ -325,7 +356,7 @@ def main(argv: list[str] | None = None) -> int:
     # 3. Nothing on the board: look at X itself before saying no.
     note: list[str] = []
     if not rows and not args.no_live:
-        fresh = live_x(note)
+        fresh = live_search(note)
         if fresh:
             if args.json:
                 print(json.dumps({"query": args.q, "mode": mode, "source": "live-x",
