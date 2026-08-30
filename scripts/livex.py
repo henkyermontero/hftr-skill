@@ -38,6 +38,13 @@ TIMEOUT = 25
 FALLBACK_QUERY_IDS = ("M1jEez78PEfVfbQLvlWMvQ", "5h0kNbk3ii97rmfY6CdgAA",
                       "Tp1sewRU1AsZpBWhqCZicQ")
 
+# Engagement floors, tried high to low - the same ladder the board's ingest
+# uses. Asking X for "Top" alone hands back whatever is recent for a niche
+# query, which is how a live search ended up leading with a 1-like reply while
+# 1000-like replies on the same topic existed. min_faves makes the floor
+# explicit, and we stop as soon as a floor yields enough rows.
+FLOOR_LADDER = (500, 100, 25, 5, 1)
+
 FEATURES = {
     "rweb_video_screen_enabled": False,
     "profile_label_improvements_pcf_label_in_post_enabled": True,
@@ -195,40 +202,51 @@ def search_replies(query: str, days: int = 30, limit: int = 25) -> list[dict[str
     have no cookies; returns [] when X simply has nothing."""
     creds = credentials()
     since = (dt.date.today() - dt.timedelta(days=days)).isoformat()
-    variables = {
-        "rawQuery": f"{query} filter:replies since:{since}",
-        "count": min(max(limit * 2, 20), 50),
-        "querySource": "typed_query", "product": "Top",
-    }
-    params = urllib.parse.urlencode({"variables": json.dumps(variables)})
-    body = None
-    for qid in query_ids():
-        url = f"{API}/{qid}/SearchTimeline?{params}"
-        payload = json.dumps({"features": FEATURES, "queryId": qid}).encode()
-        try:
-            body = _fetch(url, _headers(creds), payload)
-            break
-        except urllib.error.HTTPError as exc:
-            if exc.code in (400, 404):     # stale query id, try the next one
-                continue
-            raise
-    if body is None:
-        return []
-    data = json.loads(body)
-    if data.get("errors"):
-        return []
-    instructions = (data.get("data", {}).get("search_by_raw_query", {})
-                    .get("search_timeline", {}).get("timeline", {})
-                    .get("instructions", []))
+    ids = query_ids()
     now = dt.datetime.now(dt.timezone.utc)
-    rows = []
-    for result in _tweets(instructions):
-        row = _row(result)
-        if not row:
+    found: dict[str, dict[str, Any]] = {}
+
+    for floor in FLOOR_LADDER:
+        raw = f"{query} filter:replies min_faves:{floor} since:{since}"
+        variables = {"rawQuery": raw, "count": min(max(limit * 2, 20), 50),
+                     "querySource": "typed_query", "product": "Top"}
+        params = urllib.parse.urlencode({"variables": json.dumps(variables)})
+        body = None
+        for qid in ids:
+            try:
+                body = _fetch(f"{API}/{qid}/SearchTimeline?{params}",
+                              _headers(creds),
+                              json.dumps({"features": FEATURES, "queryId": qid}).encode())
+                break
+            except urllib.error.HTTPError as exc:
+                if exc.code in (400, 404):   # stale query id, try the next one
+                    continue
+                raise
+            except Exception:
+                break
+        if body is None:
             continue
-        when = dt.datetime.fromisoformat(row["created_at"])
-        if (now - when).total_seconds() > days * 86400:
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
             continue
-        rows.append(row)
-    rows.sort(key=lambda r: -r["like_count"])
+        if data.get("errors"):
+            continue
+        instructions = (data.get("data", {}).get("search_by_raw_query", {})
+                        .get("search_timeline", {}).get("timeline", {})
+                        .get("instructions", []))
+        for result in _tweets(instructions):
+            row = _row(result)
+            if not row:
+                continue
+            when = dt.datetime.fromisoformat(row["created_at"])
+            if (now - when).total_seconds() > days * 86400:
+                continue
+            found.setdefault(row["reply_url"], row)
+        # A high floor that already filled the page is the best answer we can
+        # get; only keep digging when the topic is genuinely quiet.
+        if len(found) >= limit:
+            break
+
+    rows = sorted(found.values(), key=lambda r: -r["like_count"])
     return rows[:limit]
