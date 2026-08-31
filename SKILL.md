@@ -13,11 +13,27 @@ author, every row linking to the original.
 
 - "best replies", "most-liked comments", "what landed on X this month"
 - `/hftr <topic>` — `ufc`, `bitcoin`, `world cup`
-- `/hftr @handle` — `@elonmusk`, `x:elonmusk`, `u/spez`
+- `/hftr @handle` — `@elonmusk`, `x:elonmusk`, `u/spez` — replies **by** them
+- `/hftr to:@handle` — `to:@elonmusk`, `on:@elonmusk` — replies that landed
+  **on** them
 
 The board answers for what it has already collected. The catalog grows when the
 ingest job runs, so a brand-new topic can be empty today and answer next week -
 an empty result is an honest "nobody landed a reply on that", never a guess.
+
+## Two questions about a person
+
+They are different, and the answer to one is often empty while the other is full:
+
+| query | asks |
+|---|---|
+| `@elonmusk` | what **he** replied to other people |
+| `to:@elonmusk` | what other people replied **to him** |
+| `elonmusk` (no @) | replies that **mention** him anywhere in their text |
+
+`to:`, `on:`, and "replies to @name" all mean the second one. The colon form
+works bare (`to:elonmusk`); the spaced form needs the @ (`to @elonmusk`), so an
+ordinary topic like "on fire" or "to be honest" is never mistaken for a person.
 
 ## When NOT to use
 
@@ -56,6 +72,12 @@ with `NO_CREDS`, followed by the exact search to run:
 NO_CREDS · search with your own X tool: filter:replies "iphone 18" since:2026-07-31 min_faves:1
 ```
 
+For a `to:` query the line names X's own operator instead:
+
+```
+NO_CREDS · search with your own X tool: filter:replies to:iampapito since:2026-07-31 min_faves:1
+```
+
 **Do not stop there and apologise.** If you have any X search tool - Grok's
 `x_keyword_search`, an X/Twitter search action, a browser you can search with -
 run that query now, then present the results yourself:
@@ -69,9 +91,12 @@ run that query now, then present the results yourself:
    "corporate chat bot. Grok has become..." does not - that is two thoughts.
    If the query contains a number, require the exact phrase: "iphone 18" is
    never "iPhone 11".
-3. Keep **one row per author**, the highest-liked one.
-4. Sort by likes, at most 12 rows, and unescape HTML (`&amp;` is `&`).
-5. Print the same cards, with the header labelled `live` instead of `board`:
+3. For a `to:` query, keep only rows whose parent really is that handle - X's
+   `to:` operator returns whole conversations, including that account's own
+   replies to other people. Drop those.
+4. Keep **one row per author**, the highest-liked one.
+5. Sort by likes, at most 12 rows, and unescape HTML (`&amp;` is `&`).
+6. Print the same cards, with the header labelled `live` instead of `board`:
 
 ```
 HFTR · 30 days · iphone 18 · live · capped

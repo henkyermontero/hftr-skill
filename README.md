@@ -5,7 +5,8 @@ Ranked public replies from the last 30 days, by topic or `@handle`.
 ```
 /hftr ufc
 /hftr bitcoin
-/hftr @elonmusk
+/hftr @elonmusk       # what he replied
+/hftr to:@elonmusk    # what landed on him
 ```
 
 ```

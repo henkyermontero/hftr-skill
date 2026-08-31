@@ -197,9 +197,14 @@ def _row(result: dict) -> dict[str, Any] | None:
     }
 
 
-def search_replies(query: str, days: int = 30, limit: int = 25) -> list[dict[str, Any]]:
-    """In-window public replies matching a query. Raises NoCredentials if we
-    have no cookies; returns [] when X simply has nothing."""
+def search_replies(query: str, days: int = 30, limit: int = 25,
+                   to_handle: str | None = None) -> list[dict[str, Any]]:
+    """In-window public replies matching a query.
+
+    ``to_handle`` switches to X's ``to:`` operator, which asks what landed ON
+    that account rather than what it said. Raises NoCredentials if we have no
+    cookies; returns [] when X simply has nothing.
+    """
     creds = credentials()
     since = (dt.date.today() - dt.timedelta(days=days)).isoformat()
     ids = query_ids()
@@ -207,7 +212,8 @@ def search_replies(query: str, days: int = 30, limit: int = 25) -> list[dict[str
     found: dict[str, dict[str, Any]] = {}
 
     for floor in FLOOR_LADDER:
-        raw = f"{query} filter:replies min_faves:{floor} since:{since}"
+        subject = f"to:{to_handle}" if to_handle else query
+        raw = f"{subject} filter:replies min_faves:{floor} since:{since}"
         variables = {"rawQuery": raw, "count": min(max(limit * 2, 20), 50),
                      "querySource": "typed_query", "product": "Top"}
         params = urllib.parse.urlencode({"variables": json.dumps(variables)})

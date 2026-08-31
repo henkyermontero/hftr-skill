@@ -104,10 +104,27 @@ def normalize(q: str) -> str:
 
 
 def is_identity(q: str) -> bool:
+    """A query about a person's own replies. "to:@name" is a different mode."""
     q = (q or "").strip()
+    if to_target(q):
+        return False
     return q.startswith("@") or q.lower().startswith("u/") or (
         ":" in q and q.split(":", 1)[0].lower()
         in {"x", "twitter", "reddit", "bluesky", "youtube"})
+
+
+# "to:@handle" asks what landed ON someone; "@handle" asks what they said.
+# The colon form works bare ("to:elonmusk"); the spaced form needs the @, so an
+# ordinary topic like "on fire" or "to be honest" is never mistaken for a person.
+TO_PATTERN = re.compile(
+    r"^(?:replies\s+to|to|on)\s*(?::\s*@?|\s+@)\s*([A-Za-z0-9_]{1,15})$",
+    re.IGNORECASE)
+
+
+def to_target(q: str) -> str | None:
+    """The handle a "replies to X" query is about, or None."""
+    m = TO_PATTERN.match((q or "").strip())
+    return m.group(1).lower() if m else None
 
 
 def identity_key(q: str) -> str:
@@ -317,6 +334,15 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
     except Exception:
         return [], None
     now = dt.datetime.now(dt.timezone.utc)
+    target = to_target(q)
+    if target:
+        # What landed ON this account: rows whose parent is that handle. Never
+        # their own replies to themselves.
+        rows = [r for r in (snap.get("rows") or [])
+                if (r.get("parent_handle") or "").strip().lower() == target
+                and (r.get("author") or "").strip().lower() != target]
+        rows = [r for r in rows if in_window(r, days, now)]
+        return cap_by_author(rows), snap
     if is_identity(q):
         key = identity_key(q)
         rows = snap.get("queries", {}).get(key) or []
@@ -370,7 +396,9 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
     Deliberately quiet - no source column, no parent URL unless asked. The
     reply is the content; everything else is a label.
     """
-    kind = "author" if mode == "author" else ("capped" if capped else "raw")
+    kind = ("to" if mode == "to" else
+            "author" if mode == "author" else
+            "capped" if capped else "raw")
     head = f"HFTR · {days} days · {q} · {source} · {kind}"
     if not rows:
         return f"{head}\nNo replies in-window. Not last month's leftovers."
@@ -416,7 +444,8 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     limit = min(args.limit, 25)
-    mode = "author" if is_identity(args.q) else "topic"
+    target = to_target(args.q)
+    mode = "to" if target else ("author" if is_identity(args.q) else "topic")
     snap_rows: list[dict] = []
     snap = None
 
@@ -458,7 +487,8 @@ def main(argv: list[str] | None = None) -> int:
             except ImportError:
                 return []
             try:
-                return livex.search_replies(args.q, args.days, pool_size)
+                return livex.search_replies(args.q, args.days, pool_size,
+                                            to_handle=target)
             except livex.NoCredentials:
                 no_creds.append(True)
                 notes.append("X: no credential on this machine")
@@ -499,7 +529,10 @@ def main(argv: list[str] | None = None) -> int:
         # The reply itself must carry the query. Search hands back thread
         # siblings, and a card showing a reply that never mentions what was
         # asked is unverifiable to whoever reads it.
-        if not is_identity(args.q):
+        if target:
+            rows = [r for r in rows
+                    if (r.get("parent_handle") or "").strip().lower() == target]
+        elif not is_identity(args.q):
             rows = [r for r in rows if matches_query(r, args.q, text_only=True)]
 
         if not rows:
@@ -512,18 +545,20 @@ def main(argv: list[str] | None = None) -> int:
                 # itself, but the agent running it may be able to. Exit 0 -
                 # "I cannot reach X" is an answer, not a crash.
                 since = (dt.date.today() - dt.timedelta(days=args.days)).isoformat()
+                subject = f"to:{target}" if target else f'"{args.q}"'
                 reason_out.append(
                     f'NO_CREDS · search with your own X tool: '
-                    f'filter:replies "{args.q}" since:{since} min_faves:1')
-        if not is_identity(args.q):
+                    f'filter:replies {subject} since:{since} min_faves:1')
+        if not target and not is_identity(args.q):
             rows = rank_brand(rows, args.q)
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
 
     # 2. the live board: fresher, may need to wake up. If the snapshot already
     # loaded and simply had no match, we have a truthful answer in hand, so we
     # give the sleeping board a short window rather than a long one.
-    payload = from_api(args.q, args.days, limit, 0 if args.raw else 1,
-                       timeout=API_TIMEOUT_AFTER_SNAPSHOT if snap else API_TIMEOUT)
+    payload = None if target else from_api(
+        args.q, args.days, limit, 0 if args.raw else 1,
+        timeout=API_TIMEOUT_AFTER_SNAPSHOT if snap else API_TIMEOUT)
     if payload is None and snap is None:
         # Nothing answered at all: no snapshot, no board. Live search still gets
         # its turn below; only a total failure is worth an error exit.
