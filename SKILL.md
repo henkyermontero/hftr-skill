@@ -68,6 +68,10 @@ script tries the cheap one first:
 3. **Live X and Reddit search** - the answer for anything the cache never
    collected, which is most queries. Read-only, same window, capped the same
    way, labelled `live` because those rows are not written into the cache.
+   Reddit needs no key: its `.json` API is closed to anonymous clients, so the
+   lane searches `search.rss` for posts and then reads each post's comments
+   from the `svc/shreddit` partial, which still serves real scores. X needs
+   your own cookies; Reddit does not.
 
 Live runs on **your own** X credentials (`AUTH_TOKEN` / `CT0` in the
 environment or in `~/.config/last30days/.env`). Most installs will not have
@@ -204,6 +208,14 @@ the snapshot is read from.
   whole cache file. `0 in-window for this query` is about your query. A full
   file can still miss your topic, and a file with nothing left in-window
   answers nothing at all. Never report one as the other.
+- **An X reply must name the query itself; a Reddit comment may be qualified
+  by its thread.** They reach us differently. X search returns thread
+  siblings, so the reply has to carry the query or a reader cannot check it.
+  A Reddit comment is found by matching a *post* and then reading it, so the
+  thread is the evidence - and the card prints it (`u/name → r/sub · thread
+  title`) rather than asking you to take it on trust. Requiring the comment to
+  repeat the topic word silenced the lane completely: 0 of 25 real r/Bitcoin
+  comments contained "bitcoin halving".
 
 ## Empty results
 

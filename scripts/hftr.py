@@ -505,6 +505,29 @@ def one_line(text: str, width: int = 240) -> str:
     return t if len(t) <= width else t[:width].rstrip() + "…"
 
 
+def carries_query(row: dict, q: str) -> bool:
+    """May this row appear on a card for Q, and can a reader verify that?
+
+    On X the reply itself must name the query. Search hands back thread
+    siblings, the card shows only the reply, and a reader cannot check a row
+    whose text never mentions what was asked.
+
+    A Reddit comment arrives a different way: we searched for a POST matching
+    the query and then read that post's comments, so the thread is the
+    evidence, not the sentence. Demanding the comment repeat the topic word
+    silences the lane almost entirely - 0 of 25 real r/Bitcoin comments carried
+    "bitcoin halving". So the thread qualifies the row, and render() prints the
+    subreddit and title on the card so the evidence is visible rather than
+    assumed. This is how last30days gates its keyless Reddit tier too.
+    """
+    if matches_query(row, q, text_only=True):
+        return True
+    if (row.get("source") or "").lower() == "x":
+        return False
+    thread = " ".join(str(row.get(f) or "") for f in ("context", "topic"))
+    return bool(thread.strip()) and matches_query({"text": thread}, q, text_only=True)
+
+
 def who(row: dict) -> str:
     prefix = "u/" if (row.get("source") or "").lower() == "reddit" else "@"
     return f"{prefix}{row.get('author', '')}"
@@ -536,6 +559,13 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
         line = f"{i:>2}  {who(r)}"
         if parent and parent.lower() != author.lower():
             line += f" → @{parent}"
+        elif (r.get("source") or "").lower() == "reddit" and r.get("topic"):
+            # The thread is why this row is on a card for Q. Print it, so the
+            # reader checks the claim instead of trusting it.
+            line += f" → r/{r['topic']}"
+            title = one_line(clean_text(r.get("context") or ""))
+            if title:
+                line += f" · {title[:70]}"
         out.append(line)
         body = strip_leading_handles(clean_text(r.get("text", "")), parent)
         out.append(f"    {one_line(body)}")
@@ -724,7 +754,7 @@ def main(argv: list[str] | None = None) -> int:
                     if (r.get("author") or "").strip().lstrip("@").lower() == who]
         else:
             pool = rows
-            rows = [r for r in pool if matches_query(r, args.q, text_only=True)]
+            rows = [r for r in pool if carries_query(r, args.q)]
             if not rows:
                 miss = phrase_miss(pool, args.q)
 

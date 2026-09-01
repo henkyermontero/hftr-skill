@@ -126,9 +126,17 @@ If the snapshot and the optional board API both come up empty, the script runs
 labels the header `live`. Those rows are shown, not stored: no ranking changes
 and nothing is written to any database.
 
-That step needs `AUTH_TOKEN` / `CT0` in the environment or in
-`~/.config/last30days/.env`. Without them you get "looked, no credential for
-live search" and an honest empty. Use `--no-live` to skip the step entirely.
+The X half needs `AUTH_TOKEN` / `CT0` in the environment or in
+`~/.config/last30days/.env`. Without them you get a `NO_CREDS` line naming the
+exact query for your host to run. Use `--no-live` to skip the step entirely.
+
+The Reddit half needs nothing. Reddit's `.json` API answers 403 to anonymous
+clients, so this lane searches `search.rss` for posts and reads each one's
+comments from the `svc/shreddit` partial, which still serves author and score
+without a key. Technique cloned from the
+[last30days](https://github.com/mvanhorn/last30days-skill) skill, which mapped
+the way around the same wall. Reddit rate-limits hard, so a burst of queries
+will see `429`, reported as itself rather than as an empty result.
 
 ## The optional board API
 
