@@ -33,8 +33,8 @@ SNAPSHOT_URL = ("https://raw.githubusercontent.com/henkyermontero/hftr-skill"
                 "/main/data/board.json")
 SNAPSHOT_TIMEOUT = 8
 API_TIMEOUT = 20
-# When the snapshot already answered "nothing here", the live board is only a
-# second opinion - we do not make the user wait out a cold start for it.
+# When the snapshot already answered "nothing here", a configured private board
+# is only a second opinion - we do not spend the full timeout on it.
 API_TIMEOUT_AFTER_SNAPSHOT = 6
 # Both live sources run in parallel, so this is the wall clock for the pair.
 LIVE_TIMEOUT = 25
@@ -168,6 +168,26 @@ def in_window(row: dict, days: int, now: dt.datetime) -> bool:
     if when.tzinfo is None:
         when = when.replace(tzinfo=dt.timezone.utc)
     return (now - when).total_seconds() <= days * 86400
+
+
+def frozen_at(snap: dict | None) -> str:
+    """When the cache stopped moving.
+
+    ``updated_at`` is when the board this file copied last ingested, which is
+    the moment the data froze. build_snapshot.py deliberately writes no
+    ``generated_at``: a per-run timestamp churned the file on every build and
+    defeated the workflow's commit-only-if-changed guard.
+    """
+    return ((snap or {}).get("updated_at") or "").strip()
+
+
+def cache_health(snap: dict | None, days: int, now: dt.datetime) -> tuple[int, int]:
+    """How many of the cache's rows are still eligible AT ALL, and how many
+    it holds. This is file health, not a hit count for anyone's query - the
+    two are different facts and must never be printed as one.
+    """
+    rows = (snap or {}).get("rows") or []
+    return sum(1 for r in rows if in_window(r, days, now)), len(rows)
 
 
 def cap_by_author(rows: list[dict], preserve_order: bool = False) -> list[dict]:
@@ -348,43 +368,68 @@ def rank_relevance(rows: list[dict], q: str) -> list[dict]:
     return [t[3] for t in scored]
 
 
-def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
+def from_snapshot(q: str, days: int, *, archive: bool = False,
+                  cap: bool = True) -> tuple[list[dict], dict | None, dict]:
+    """Rows for Q out of the cache, plus what the cache knows about itself.
+
+    The third return value is why a miss happened, which is the difference
+    between "this cache aged out" and "nobody replied". ``archive=True`` drops
+    the window filter for cache rows only - never for live search, which is
+    always the last ``--days``.
+    """
     try:
         snap = _get(snapshot_url(), SNAPSHOT_TIMEOUT)
     except Exception:
-        return [], None
+        return [], None, {}
     now = dt.datetime.now(dt.timezone.utc)
     target = to_target(q)
+    identity = is_identity(q)
     if target:
         # What landed ON this account: rows whose parent is that handle. Never
         # their own replies to themselves.
-        rows = [r for r in (snap.get("rows") or [])
-                if (r.get("parent_handle") or "").strip().lower() == target
-                and (r.get("author") or "").strip().lower() != target]
-        rows = [r for r in rows if in_window(r, days, now)]
-        return cap_by_author(rows), snap
-    if is_identity(q):
+        matched = [r for r in (snap.get("rows") or [])
+                   if (r.get("parent_handle") or "").strip().lower() == target
+                   and (r.get("author") or "").strip().lower() != target]
+    elif identity:
         key = identity_key(q)
-        rows = snap.get("queries", {}).get(key) or []
-        if not rows:
+        matched = snap.get("queries", {}).get(key) or []
+        if not matched:
             # "@handle" means replies BY that person. Falling back to a text
             # match would answer with everyone who mentioned them instead.
             handle = key.lstrip("@")
-            rows = [r for r in (snap.get("rows") or [])
-                    if (r.get("author") or "").lower() == handle]
+            matched = [r for r in (snap.get("rows") or [])
+                       if (r.get("author") or "").lower() == handle]
     else:
-        rows = snap.get("queries", {}).get(normalize(q)) or []
-        if not rows:
-            rows = search_rows(snap.get("rows") or [], q)
-    rows = [r for r in rows if in_window(r, days, now)]
-    if not is_identity(q):
-        rows = rank_relevance(rows, q)
-    if is_identity(q):
+        matched = snap.get("queries", {}).get(normalize(q)) or []
+        if not matched:
+            matched = search_rows(snap.get("rows") or [], q)
+
+    fresh, older = [], []
+    for r in matched:
+        (fresh if in_window(r, days, now) else older).append(r)
+    info = {
+        "matched": len(matched),
+        "in_window": len(fresh),
+        "older": len(older),
+        "newest_older": max((r.get("created_at") or "" for r in older), default=""),
+    }
+
+    if archive:
+        # History, newest first. Ranking by likes here would bury the newest
+        # rows under a viral one from the far end of the file.
+        rows = sorted(matched, key=lambda r: r.get("created_at") or "", reverse=True)
+    else:
+        rows = fresh
+    if target:
+        return (cap_by_author(rows) if cap else rows), snap, info
+    if identity:
         # Author mode is one person by definition: one row per author would
         # collapse their whole month into a single reply. Rows already arrive
         # newest-first, which is what this mode promises.
-        return rows, snap
-    return cap_by_author(rows, preserve_order=True), snap
+        return rows, snap, info
+    if not archive:
+        rows = rank_relevance(rows, q)
+    return (cap_by_author(rows, preserve_order=True) if cap else rows), snap, info
 
 
 def from_api(q: str, days: int, limit: int, cap: int,
@@ -419,7 +464,8 @@ def who(row: dict) -> str:
 
 
 def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
-           updated_at: str | None, mode: str, links: bool = False) -> str:
+           updated_at: str | None, mode: str, links: bool = False,
+           notes: tuple[str, ...] = ()) -> str:
     """A card per reply: who answered whom, what they said, what it earned.
 
     Deliberately quiet - no source column, no parent URL unless asked. The
@@ -428,11 +474,15 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
     kind = ("to" if mode == "to" else
             "author" if mode == "author" else
             "capped" if capped else "raw")
-    head = f"HFTR · {days} days · {q} · {source} · {kind}"
+    head = [f"HFTR · {days} days · {q} · {source} · {kind}"]
+    # One line under the header, every time: where these rows came from and how
+    # old that source is. A reader must never have to guess whether an empty
+    # page means the cache expired or the world was silent.
+    head.extend(n for n in notes if n)
     if not rows:
-        return f"{head}\nNo replies in-window. Not last month's leftovers."
+        return "\n".join(head)
 
-    out = [head, ""]
+    out = head + [""]
     for i, r in enumerate(rows[:MAX_ROWS], start=1):
         parent = (r.get("parent_handle") or "").strip()
         author = (r.get("author") or "").strip()
@@ -449,8 +499,6 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
             tail += f" · parent {r['parent_url']}"
         out.append(tail)
         out.append("")
-    if updated_at:
-        out.append(f"board updated {updated_at}")
     return "\n".join(out).rstrip()
 
 
@@ -470,28 +518,84 @@ def main(argv: list[str] | None = None) -> int:
                     help="also print the parent post URL on each row")
     ap.add_argument("--no-live", action="store_true",
                     help="do not fall back to live X/Reddit search when nothing above answered")
+    ap.add_argument("--archive", action="store_true",
+                    help="list cached rows for this query that have aged out of "
+                         "--days, newest first (local cache only, never live)")
     args = ap.parse_args(argv)
 
     limit = min(args.limit, 25)
     target = to_target(args.q)
     mode = "to" if target else ("author" if is_identity(args.q) else "topic")
+    now = dt.datetime.now(dt.timezone.utc)
     snap_rows: list[dict] = []
     snap = None
+    sinfo: dict = {}
 
-    # 1. snapshot: always awake, sub-second
-    if not args.raw and not args.no_snapshot:
-        snap_rows, snap = from_snapshot(args.q, args.days)
+    def cache_note(hit: bool) -> str:
+        """Where these rows came from and how old that source is. Two different
+        counts live here and are labelled apart on purpose (see below): how much
+        of the FILE is still eligible, and how many rows matched THIS query."""
+        when = frozen_at(snap)
+        if snap is None:
+            return "snapshot not read (unreachable, or skipped by --raw / --no-snapshot)"
+        live_rows, total = cache_health(snap, args.days, now)
+        stamp = f"cache frozen {when}" if when else "cache frozen (no timestamp)"
+        if hit:
+            return f"{stamp} · {live_rows} of {total} rows still in-window"
+        return (f"not in snapshot ({stamp} · "
+                f"{sinfo.get('in_window', 0)} in-window for this query · "
+                f"{live_rows} of {total} still in-window anywhere)")
+
+    def archive_note() -> str:
+        """A windowed miss that the cache could still answer as history."""
+        older = sinfo.get("older") or 0
+        if not older or args.archive:
+            return ""
+        newest = (sinfo.get("newest_older") or "")[:10]
+        seen = f", newest {newest}" if newest else ""
+        return (f"snapshot has {older} older row{'s' if older != 1 else ''} for this "
+                f"query{seen}. Pass --archive to list them (labelled archive, "
+                f"outside window).")
+
+    # 1. snapshot: always awake, sub-second, and free. Tried first for speed,
+    # not because it is the product - a query it never collected is a live
+    # question, and that is the path that scales.
+    if not args.no_snapshot and (args.archive or not args.raw):
+        snap_rows, snap, sinfo = from_snapshot(args.q, args.days,
+                                               archive=args.archive,
+                                               cap=not args.raw)
         if snap_rows:
+            src = "archive" if args.archive else "snapshot"
+            when = frozen_at(snap)
+            if args.archive:
+                # "not in window" would be a lie about the rows that ARE still
+                # in window: --archive ignores the filter, it does not invert it.
+                stamp = f"cache frozen {when}" if when else "cache with no timestamp"
+                note = (f"window ignored · {stamp} · {sinfo.get('matched', 0)} cached "
+                        f"row(s) for this query, {sinfo.get('older', 0)} outside "
+                        f"--days {args.days}")
+            else:
+                note = cache_note(hit=True)
             if args.json:
-                print(json.dumps({"query": args.q, "mode": mode, "source": "snapshot",
-                                  "window_days": args.days, "capped": True,
+                print(json.dumps({"query": args.q, "mode": mode, "source": src,
+                                  "window_days": None if args.archive else args.days,
+                                  "capped": not args.raw,
                                   "updated_at": (snap or {}).get("updated_at"),
                                   "count": len(snap_rows[:limit]),
                                   "rows": snap_rows[:limit]}, indent=2))
             else:
-                print(render(args.q, snap_rows[:limit], days=args.days, capped=True,
-                             source="board", mode=mode, links=args.links,
+                print(render(args.q, snap_rows[:limit], days=args.days,
+                             capped=not args.raw, source=src, mode=mode,
+                             links=args.links, notes=(note,),
                              updated_at=(snap or {}).get("updated_at")))
+            return 0
+        if args.archive:
+            # Archive is the local cache only. Never search live for history:
+            # live search is always the last --days, by definition.
+            print(render(args.q, [], days=args.days, capped=not args.raw,
+                         source="archive", mode=mode, updated_at=None,
+                         notes=(cache_note(hit=False),
+                                "no cached rows for this query, in-window or older.")))
             return 0
 
     def live_search(reason_out: list) -> list:
@@ -598,9 +702,10 @@ def main(argv: list[str] | None = None) -> int:
             return rows[:limit]
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
 
-    # 2. the live board: fresher, may need to wake up. If the snapshot already
-    # loaded and simply had no match, we have a truthful answer in hand, so we
-    # give the sleeping board a short window rather than a long one.
+    # 2. a private board, only if HFTR_BASE_URL names one. There is no shared
+    # public board, so this hop is normally skipped. When the snapshot already
+    # loaded and simply had no match we hold a truthful answer, so a configured
+    # board gets the shorter timeout.
     payload = None if target else from_api(
         args.q, args.days, limit,
         0 if (args.raw or is_identity(args.q)) else 1,
@@ -630,11 +735,14 @@ def main(argv: list[str] | None = None) -> int:
                                   "rows": fresh}, indent=2))
             else:
                 print(render(args.q, fresh, days=args.days, capped=True,
-                             source="live", mode=mode,
+                             source="live", mode=mode, notes=(cache_note(hit=False),),
                              updated_at=None, links=args.links))
             return 0
 
-    if payload is None and snap is None and not rows:
+    if payload is None and snap is None and not rows and not note:
+        # Exit 2 is for a run with nothing to say. A run that reached live
+        # search and came back with a NO_CREDS handoff has plenty to say, and
+        # dropping it here would strand the host that could have answered.
         print("HFTR: nothing answered - snapshot not read (unreachable or skipped), "
               "no board payload, no live search rows.", file=sys.stderr)
         return 2
@@ -645,8 +753,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     out = render(args.q, rows, days=(payload or {}).get("window_days", args.days),
                  capped=bool((payload or {}).get("capped", not args.raw)),
-                 source="board", mode=(payload or {}).get("mode", mode),
+                 source=("board" if rows else
+                         "snapshot" if snap is not None else "no source"),
+                 mode=(payload or {}).get("mode", mode),
                  links=args.links,
+                 notes=() if rows else (cache_note(hit=False), archive_note()),
                  updated_at=(payload or (snap or {})).get("updated_at"))
     if not rows and note:
         # Every note matters: the second one is the NO_CREDS handoff a host
