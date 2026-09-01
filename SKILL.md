@@ -48,20 +48,26 @@ last30days to pad an empty HFTR result.
 
 ## Where the rows come from
 
-Three hops, fastest first. The script does all of this for you:
+Two hops, fastest first, plus one you can opt into. The script does all of
+this for you:
 
-1. **Snapshot** - a static copy of the in-window board on GitHub raw. Always
-   awake, answers in well under a second.
-2. **Live API** - fresher, but the board runs on free hosting that sleeps, so a
-   first call can wait on a cold start.
-3. **Live X search** - only when the first two find nothing. One read-only
-   search for public replies in the window, capped the same way, labelled
+1. **Snapshot** - a static copy of the board on GitHub raw. Always awake,
+   answers in well under a second. Free, no account, no keys.
+2. **Live X search** - when the snapshot has nothing. One read-only search for
+   public replies in the window, capped the same way, labelled
    `live · not on board` because those rows are not part of the ranked board
    and are not written into it.
 
-Step 3 needs X cookies (`AUTH_TOKEN` / `CT0`) in the environment or in
-`~/.config/last30days/.env`. Most installs will not have them, and that is a
-handled case, not a failure.
+Step 2 runs on **your own** X credentials (`AUTH_TOKEN` / `CT0` in the
+environment or in `~/.config/last30days/.env`). Most installs will not have
+them, and that is a handled case, not a failure - see step 4, where your host
+runs the search with whatever X tool it already has.
+
+There is no shared hosted board. The public one was retired on 2026-09-01:
+answering live handle lookups for strangers meant putting one person's X
+session behind a URL anyone could drive, which is somebody's account getting
+rate-limited on everybody else's traffic. If you run your own board server,
+set `HFTR_BASE_URL` and the script will use it as a middle hop.
 
 ### Step 4 — the host takes over (REQUIRED when you see `NO_CREDS`)
 

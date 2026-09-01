@@ -23,7 +23,12 @@ import html as _html
 import re
 import urllib.request
 
-DEFAULT_BASE = "https://here-for-the-replies.onrender.com"
+# No default board. The hosted one was retired on 2026-09-01: serving live
+# handle lookups meant putting one person's X session cookies behind a public
+# URL anyone could drive. The skill answers from the snapshot and from YOUR OWN
+# X credentials instead. Point HFTR_BASE_URL at your own board server to
+# re-enable this hop.
+DEFAULT_BASE = ""
 SNAPSHOT_URL = ("https://raw.githubusercontent.com/henkyermontero/hftr-skill"
                 "/main/data/board.json")
 SNAPSHOT_TIMEOUT = 8
@@ -384,6 +389,10 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
 
 def from_api(q: str, days: int, limit: int, cap: int,
              timeout: int = API_TIMEOUT) -> dict | None:
+    """The live board, when one is configured. Skipped entirely otherwise -
+    an unset HFTR_BASE_URL is the normal case, not a failure."""
+    if not base_url():
+        return None
     params = urllib.parse.urlencode({"q": q, "days": days, "limit": limit,
                                      "cap_author": cap})
     try:

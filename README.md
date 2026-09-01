@@ -70,9 +70,11 @@ dependencies — Python 3 standard library and one HTTP GET.
 
 ## Configuration
 
-| variable | default |
-|---|---|
-| `HFTR_BASE_URL` | `https://here-for-the-replies.onrender.com` |
+| variable | default | what it does |
+|---|---|---|
+| `HFTR_BASE_URL` | unset | Your own board server, used as a middle hop between the snapshot and live X search. There is no shared hosted board; unset is the normal case. |
+| `HFTR_SNAPSHOT_URL` | this repo's `data/board.json` on GitHub raw | Where the static board is read from. |
+| `AUTH_TOKEN` / `CT0` | unset | **Your own** X session cookies, for live search when the snapshot has nothing. Read from the environment or `~/.config/last30days/.env`. Without them the skill prints a `NO_CREDS` line naming the exact search for your host to run. |
 
 ## Direct use
 
