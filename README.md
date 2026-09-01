@@ -85,20 +85,20 @@ python3 scripts/hftr.py --q "world cup" --raw      # uncapped
 python3 scripts/hftr.py --q "world cup" --json     # raw payload
 ```
 
-Exit codes: `0` success (including an honest empty result), `2` board
-unreachable. The board runs on free hosting that sleeps, so a first request
-after idle can take a moment; the script says so in one line instead of
-crashing.
+Exit codes: `0` success, including an honest empty result and the `NO_CREDS`
+handoff. `2` only when nothing answered at all: the snapshot could not be
+fetched, no board payload came back, and live search produced no rows.
 
 ## How it stays fast
 
 The script reads a **snapshot** (`data/board.json`, served from GitHub raw)
-before it touches the live API. The board runs on free hosting that sleeps, so
-without the snapshot a first call could wait ~50s on a cold start; with it, the
-answer is sub-second and the API is only needed for queries the snapshot has
-not captured.
+first. GitHub raw is always awake, so the answer is sub-second and needs no
+account and no keys. The snapshot is a dated cache: it does not grow on its
+own, and a row leaves it once it falls outside the requested window. Queries it
+never captured fall through to `HFTR_BASE_URL` if you set one, then to live
+search.
 
-Refresh the snapshot while the site is awake:
+Refresh the snapshot against a board you run:
 
 ```bash
 python3 scripts/build_snapshot.py     # writes data/board.json
@@ -110,10 +110,10 @@ change that job's exit code.
 
 ## When the board has never heard of it
 
-If the snapshot and the API both come up empty, the script runs **one**
-read-only X search for public replies in the window and labels the result
-`live · not on board`. Those rows are shown, not stored: the board's ranking is
-unchanged and nothing is written to its database.
+If the snapshot and the optional board API both come up empty, the script runs
+**one** read-only X and Reddit search for public replies in the window and
+labels the header `live`. Those rows are shown, not stored: no ranking changes
+and nothing is written to any database.
 
 That step needs `AUTH_TOKEN` / `CT0` in the environment or in
 `~/.config/last30days/.env`. Without them you get "looked, no credential for
