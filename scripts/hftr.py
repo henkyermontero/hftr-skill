@@ -136,6 +136,21 @@ def identity_key(q: str) -> str:
     return "@" + q.strip().lower()
 
 
+def x_author_target(q: str) -> str | None:
+    """The X handle whose OWN replies are being asked for, or None.
+
+    Used to pick X's ``from:`` operator. Reddit identities have no X handle to
+    ask about, so they stay out of it.
+    """
+    q = (q or "").strip()
+    if not is_identity(q):
+        return None
+    low = q.lower().lstrip("@")
+    if low.startswith("u/") or low.startswith("reddit:"):
+        return None
+    return identity_key(q).lstrip("@")
+
+
 def in_window(row: dict, days: int, now: dt.datetime) -> bool:
     """A snapshot ages. Never serve a row that has fallen out of the window."""
     created = row.get("created_at")
@@ -359,7 +374,12 @@ def from_snapshot(q: str, days: int) -> tuple[list[dict], dict | None]:
     rows = [r for r in rows if in_window(r, days, now)]
     if not is_identity(q):
         rows = rank_relevance(rows, q)
-    return cap_by_author(rows, preserve_order=not is_identity(q)), snap
+    if is_identity(q):
+        # Author mode is one person by definition: one row per author would
+        # collapse their whole month into a single reply. Rows already arrive
+        # newest-first, which is what this mode promises.
+        return rows, snap
+    return cap_by_author(rows, preserve_order=True), snap
 
 
 def from_api(q: str, days: int, limit: int, cap: int,
@@ -480,6 +500,7 @@ def main(argv: list[str] | None = None) -> int:
         pool_size = max(limit * 4, 25)
         notes, rows = [], []
         no_creds = []
+        author_handle = x_author_target(args.q)
 
         def from_x():
             try:
@@ -488,7 +509,8 @@ def main(argv: list[str] | None = None) -> int:
                 return []
             try:
                 return livex.search_replies(args.q, args.days, pool_size,
-                                            to_handle=target)
+                                            to_handle=target,
+                                            from_handle=author_handle)
             except livex.NoCredentials:
                 no_creds.append(True)
                 notes.append("X: no credential on this machine")
@@ -532,7 +554,14 @@ def main(argv: list[str] | None = None) -> int:
         if target:
             rows = [r for r in rows
                     if (r.get("parent_handle") or "").strip().lower() == target]
-        elif not is_identity(args.q):
+        elif is_identity(args.q):
+            # "@handle" asks what THEY replied. Search hands back the whole
+            # conversation around a handle, so without this the author lane
+            # answers the to: question instead - the exact opposite result.
+            who = identity_key(args.q).lstrip("@")
+            rows = [r for r in rows
+                    if (r.get("author") or "").strip().lstrip("@").lower() == who]
+        else:
             rows = [r for r in rows if matches_query(r, args.q, text_only=True)]
 
         if not rows:
@@ -545,19 +574,27 @@ def main(argv: list[str] | None = None) -> int:
                 # itself, but the agent running it may be able to. Exit 0 -
                 # "I cannot reach X" is an answer, not a crash.
                 since = (dt.date.today() - dt.timedelta(days=args.days)).isoformat()
-                subject = f"to:{target}" if target else f'"{args.q}"'
+                if target:
+                    subject = f"to:{target}"
+                elif author_handle:
+                    subject = f"from:{author_handle}"
+                else:
+                    subject = f'"{args.q}"'
                 reason_out.append(
                     f'NO_CREDS · search with your own X tool: '
                     f'filter:replies {subject} since:{since} min_faves:1')
         if not target and not is_identity(args.q):
             rows = rank_brand(rows, args.q)
+        if is_identity(args.q):
+            return rows[:limit]
         return cap_by_author(rows, preserve_order=bool(brand_for(args.q)))[:limit]
 
     # 2. the live board: fresher, may need to wake up. If the snapshot already
     # loaded and simply had no match, we have a truthful answer in hand, so we
     # give the sleeping board a short window rather than a long one.
     payload = None if target else from_api(
-        args.q, args.days, limit, 0 if args.raw else 1,
+        args.q, args.days, limit,
+        0 if (args.raw or is_identity(args.q)) else 1,
         timeout=API_TIMEOUT_AFTER_SNAPSHOT if snap else API_TIMEOUT)
     if payload is None and snap is None:
         # Nothing answered at all: no snapshot, no board. Live search still gets

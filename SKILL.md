@@ -78,6 +78,13 @@ For a `to:` query the line names X's own operator instead:
 NO_CREDS · search with your own X tool: filter:replies to:iampapito since:2026-07-31 min_faves:1
 ```
 
+For an `@handle` query it names `from:` instead, because a bare `@handle` is a
+MENTION search on X and would answer the opposite question:
+
+```
+NO_CREDS · search with your own X tool: filter:replies from:iampapito since:2026-07-31 min_faves:1
+```
+
 **Do not stop there and apologise.** If you have any X search tool - Grok's
 `x_keyword_search`, an X/Twitter search action, a browser you can search with -
 run that query now, then present the results yourself:
@@ -94,9 +101,14 @@ run that query now, then present the results yourself:
 3. For a `to:` query, keep only rows whose parent really is that handle - X's
    `to:` operator returns whole conversations, including that account's own
    replies to other people. Drop those.
-4. Keep **one row per author**, the highest-liked one.
-5. Sort by likes, at most 12 rows, and unescape HTML (`&amp;` is `&`).
-6. Print the same cards, with the header labelled `live` instead of `board`:
+4. For an `@handle` query, mirror it: keep only rows that account **wrote**.
+   A search around a handle returns everyone replying *to* them too, and
+   keeping those answers the `to:` question instead.
+5. Keep **one row per author**, the highest-liked one - except in `@handle`
+   mode, which is one person by definition and is never capped.
+6. Sort by likes (`@handle` mode: newest first), at most 12 rows, and unescape
+   HTML (`&amp;` is `&`).
+7. Print the same cards, with the header labelled `live` instead of `board`:
 
 ```
 HFTR · 30 days · iphone 18 · live · capped

@@ -198,12 +198,16 @@ def _row(result: dict) -> dict[str, Any] | None:
 
 
 def search_replies(query: str, days: int = 30, limit: int = 25,
-                   to_handle: str | None = None) -> list[dict[str, Any]]:
+                   to_handle: str | None = None,
+                   from_handle: str | None = None) -> list[dict[str, Any]]:
     """In-window public replies matching a query.
 
     ``to_handle`` switches to X's ``to:`` operator, which asks what landed ON
-    that account rather than what it said. Raises NoCredentials if we have no
-    cookies; returns [] when X simply has nothing.
+    that account rather than what it said. ``from_handle`` switches to
+    ``from:``, which asks what that account said to other people - a bare
+    "@handle" is a MENTION search on X, so without the operator the author
+    lane silently answers the to: question instead. Raises NoCredentials if we
+    have no cookies; returns [] when X simply has nothing.
     """
     creds = credentials()
     since = (dt.date.today() - dt.timedelta(days=days)).isoformat()
@@ -212,7 +216,12 @@ def search_replies(query: str, days: int = 30, limit: int = 25,
     found: dict[str, dict[str, Any]] = {}
 
     for floor in FLOOR_LADDER:
-        subject = f"to:{to_handle}" if to_handle else query
+        if to_handle:
+            subject = f"to:{to_handle}"
+        elif from_handle:
+            subject = f"from:{from_handle}"
+        else:
+            subject = query
         raw = f"{subject} filter:replies min_faves:{floor} since:{since}"
         variables = {"rawQuery": raw, "count": min(max(limit * 2, 20), 50),
                      "querySource": "typed_query", "product": "Top"}
