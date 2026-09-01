@@ -635,8 +635,8 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
     if payload is None and snap is None and not rows:
-        print("HFTR: board unreachable (it may be waking). Try again in a minute.",
-              file=sys.stderr)
+        print("HFTR: nothing answered - snapshot not read (unreachable or skipped), "
+              "no board payload, no live search rows.", file=sys.stderr)
         return 2
 
     if args.json:
