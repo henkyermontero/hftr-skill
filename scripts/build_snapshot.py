@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 import sys
 import time
 import urllib.error
@@ -25,7 +26,9 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-BASE = "https://here-for-the-replies.onrender.com"
+# The board to copy. There is no shared public board any more, so this only
+# does anything when HFTR_BASE_URL names one you run.
+BASE = (os.getenv("HFTR_BASE_URL") or "").rstrip("/")
 OUT = Path(__file__).resolve().parents[1] / "data" / "board.json"
 TIMEOUT = 60
 PER_QUERY = 25
@@ -75,6 +78,13 @@ def main(argv: list[str] | None = None) -> int:
     global BASE
     if args.base:
         BASE = args.base.rstrip("/")
+
+    if not BASE:
+        # Refusing beats writing an empty file over a good archive.
+        print("build_snapshot: no board to copy. Set HFTR_BASE_URL to a board "
+              "server you run. The existing snapshot is left untouched.",
+              file=sys.stderr)
+        return 1
 
     queries = ["", *topics()]
     if args.dry_run:

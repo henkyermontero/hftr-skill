@@ -10,8 +10,8 @@ Ranked public replies from the last 30 days, by topic or `@handle`.
 ```
 
 ```
-HFTR · last 30 days · world cup · capped
-updated 2026-08-30T04:46:00+00:00
+HFTR · 30 days · world cup · snapshot · capped
+cache frozen 2026-09-01T00:01:06+00:00 · 565 of 565 rows still in-window
 
  1  ▲1,234  @_I_am_Randy  x  → @theMadridZone
     But we need the intense investigation about the FIFA World Cup tournament…
@@ -25,12 +25,8 @@ different job, don't bolt them together.
 
 ## Two modes
 
-**Fast board — no keys, works everywhere.** Topics the board already collects
-answer from a static snapshot on GitHub raw in about half a second. No account,
-no cookies, no server to wake.
-
-**Live — anything else.** For a topic the board has never collected, the skill
-searches X directly. That needs either:
+**Live — the one that scales.** Most topics nobody has ever collected, so the
+real answer comes from searching X now. That needs either:
 
 - `AUTH_TOKEN` / `CT0` in the environment or `~/.config/last30days/.env` on the
   machine running the skill, **or**
@@ -40,6 +36,13 @@ searches X directly. That needs either:
 
 So a Grok Bot with no cookies still answers a live topic - the host does the
 search, the skill supplies the rules.
+
+**Snapshot cache — free, instant, and dated.** A static file on GitHub raw
+holds queries collected earlier. It is tried first because it costs nothing and
+is always awake, not because it is the product: it does not grow, it names its
+freeze date on every render, and a row leaves it once that row ages out of the
+window. Aged rows stay in the file and are readable with `--archive`. A cache
+miss is a fact about the cache, never about the world.
 
 ## Install
 
@@ -83,22 +86,30 @@ python3 scripts/hftr.py --q "ufc"
 python3 scripts/hftr.py --q "@elonmusk" --days 7
 python3 scripts/hftr.py --q "world cup" --raw      # uncapped
 python3 scripts/hftr.py --q "world cup" --json     # raw payload
+python3 scripts/hftr.py --q "bitcoin" --archive    # cached rows that aged out
 ```
 
 Exit codes: `0` success, including an honest empty result and the `NO_CREDS`
 handoff. `2` only when nothing answered at all: the snapshot could not be
 fetched, no board payload came back, and live search produced no rows.
 
-## How it stays fast
+## The cache, and its age
 
-The script reads a **snapshot** (`data/board.json`, served from GitHub raw)
-first. GitHub raw is always awake, so the answer is sub-second and needs no
-account and no keys. The snapshot is a dated cache: it does not grow on its
-own, and a row leaves it once it falls outside the requested window. Queries it
-never captured fall through to `HFTR_BASE_URL` if you set one, then to live
-search.
+The script reads `data/board.json` from GitHub raw first, purely for speed.
+Every render says where the rows came from and how old that source is:
 
-Refresh the snapshot against a board you run:
+```
+HFTR · 30 days · bitcoin · snapshot · capped
+cache frozen 2026-09-01T00:01:06+00:00 · 565 of 565 rows still in-window
+```
+
+Two counts, two meanings. `N of M still in-window` is the health of the whole
+file. `0 in-window for this query` is about your query. When the cache holds
+only aged rows for a query, it says so and points at `--archive` rather than
+pretending nobody replied. Queries it never captured fall through to
+`HFTR_BASE_URL` if you set one, then to live search.
+
+Refresh the snapshot against a board you run (set `HFTR_BASE_URL` to it):
 
 ```bash
 python3 scripts/build_snapshot.py     # writes data/board.json
@@ -108,7 +119,7 @@ git commit -am "snapshot" && git push
 It is deliberately not wired into the ingest cron: nothing about this may ever
 change that job's exit code.
 
-## When the board has never heard of it
+## When the cache has never heard of it
 
 If the snapshot and the optional board API both come up empty, the script runs
 **one** read-only X and Reddit search for public replies in the window and
@@ -119,13 +130,14 @@ That step needs `AUTH_TOKEN` / `CT0` in the environment or in
 `~/.config/last30days/.env`. Without them you get "looked, no credential for
 live search" and an honest empty. Use `--no-live` to skip the step entirely.
 
-## The API behind it
+## The optional board API
+
+If you set `HFTR_BASE_URL` to a board server you run, the script asks it:
 
 ```
 GET /api/board?q=&days=30&limit=12&cap_author=1
 ```
 
-No auth, 60 requests/minute per IP. Same queries the website runs, so the site
-and the skill cannot disagree. Full contract: `HFTR.md` in the main repo.
+There is no shared public board and no default. Unset simply skips that hop.
 
 MIT.

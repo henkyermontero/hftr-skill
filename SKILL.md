@@ -1,6 +1,6 @@
 ---
 name: hftr
-description: Ranked public replies from the last 30 days for a topic or @handle. Use when asked for the best replies, most-liked comments, what landed on a topic this month, or to look up a specific account's replies. Do NOT use for a multi-source research brief of what happened - that is last30days.
+description: Ranked public replies from the last 30 days for a topic or @handle. Use when asked for the best replies, most-liked comments, what landed on a topic this month, or to look up a specific account's replies. Answers from live X search (your own credentials, or your host's X tool) with a dated snapshot as a fast local cache. Do NOT use for a multi-source research brief of what happened - that is last30days.
 ---
 
 # HFTR — which replies landed
@@ -17,11 +17,15 @@ the original.
 - `/hftr to:@handle` — `to:@elonmusk`, `on:@elonmusk` — replies that landed
   **on** them
 
-The snapshot answers from rows it already holds that are still inside the
-requested window. Nothing in this skill grows that cache, so never promise that
-a missing topic will show up next week. An empty snapshot result means this
-cache has no in-window row for that query. It does not by itself mean nobody
-replied - see **Empty results** below.
+**This skill answers from live X search** - your own credentials, or your
+host's X tool when the script prints `NO_CREDS`. That is the path that answers
+a topic nobody has ever collected, which is most topics.
+
+A static snapshot ships with the skill as a **fast local cache** of queries
+collected earlier. It is tried first because it is free and always awake, not
+because it is the product. It does not grow, it names its own freeze date, and
+a row leaves it once that row ages out of `--days`. A snapshot miss is a fact
+about the cache, never about the world - see **Empty results**.
 
 ## Two questions about a person
 
@@ -50,23 +54,27 @@ last30days to pad an empty HFTR result.
 
 ## Where the rows come from
 
-Three hops, in the order the script tries them:
+The product is ranked public replies. Three sources can supply them, and the
+script tries the cheap one first:
 
-1. **Snapshot** - a dated cache of what the board had collected, served from
-   GitHub raw. Always awake, answers in well under a second. Free, no account,
-   no keys. It does not grow on its own, and a row leaves it once it falls
-   outside the `--days` window.
+1. **Snapshot cache** - a dated file served from GitHub raw. Always awake,
+   answers in well under a second, no account and no keys. Tried first for
+   speed only. It does not grow, and a row leaves it once it falls outside
+   `--days`. Rows served from here are labelled `snapshot`, under a line naming
+   the freeze date and how much of the file is still in-window.
 2. **Your own board** - only when `HFTR_BASE_URL` is set. There is no shared
    public board, so unset means this hop is skipped entirely. `to:` queries
    skip it either way.
-3. **Live X and Reddit search** - when nothing above answered. Read-only, same
-   window, capped the same way, and labelled `live` in the header because those
-   rows are not part of the ranked board and are not written into it.
+3. **Live X and Reddit search** - the answer for anything the cache never
+   collected, which is most queries. Read-only, same window, capped the same
+   way, labelled `live` because those rows are not written into the cache.
 
-Step 3 runs on **your own** X credentials (`AUTH_TOKEN` / `CT0` in the
+Live runs on **your own** X credentials (`AUTH_TOKEN` / `CT0` in the
 environment or in `~/.config/last30days/.env`). Most installs will not have
 them, and that is a handled case, not a failure - see step 4, where your host
-runs the search with whatever X tool it already has.
+runs the search with whatever X tool it already has. Between the script's
+cookies and the host's own X tool, the live path is what makes a brand-new
+topic answerable at all.
 
 There is no shared hosted board. The public one was retired on 2026-09-01:
 answering live handle lookups for strangers meant putting one person's X
@@ -170,6 +178,7 @@ answer, and the only wording that earns the phrase "nobody landed a reply".
 | `--no-snapshot` | skip the GitHub raw snapshot. The next hop is `HFTR_BASE_URL` if set, otherwise live search / `NO_CREDS` |
 | `--no-live` | do not fall back to live X and Reddit search when nothing above answered. No `NO_CREDS` handoff either |
 | `--links` | also print the parent post URL on each row |
+| `--archive` | list cached rows for this query that have aged out of `--days`, newest first. Cache only - never searches live, because live is always the last `--days`. Still capped unless `--raw` |
 
 `HFTR_BASE_URL` is optional and **unset by default**. There is no shared public
 board to fall back on, so unset simply means hop 2 is skipped. Set it to your
@@ -187,25 +196,40 @@ the snapshot is read from.
 - The window is real: rows outside `--days` are dropped, including from the
   snapshot. What an empty result means depends on how far the run got - see
   below.
+- **The header names its source and its age.** `snapshot` means the cache
+  answered, and the line under it reads `cache frozen DATE · N of M rows still
+  in-window`. `live` means X or Reddit answered just now. `archive` means the
+  window was deliberately ignored.
+- **Two counts, two meanings.** `N of M still in-window` is the health of the
+  whole cache file. `0 in-window for this query` is about your query. A full
+  file can still miss your topic, and a file with nothing left in-window
+  answers nothing at all. Never report one as the other.
 
 ## Empty results
 
-Three different empties. Do not report one as another.
+Four different empties. Do not report one as another. The script tells you
+which one you are looking at on the line under the header - read it.
 
-1. **Cache-empty.** The snapshot loaded and held no in-window row for the
-   query. The snapshot is a dated cache that does not grow, so this says
-   nothing about the world. Report it as: nothing in the snapshot for this
-   window. If the header carries an `updated_at`, that is the cache's date, and
-   it is worth naming.
-2. **No credentials.** The script could not search X itself and printed a
-   `NO_CREDS` line. Still says nothing about the world. Run that query with
-   your own X tool (step 4), then answer from what you find.
-3. **Searched and empty.** A live search ran - by the script, or by you after
-   `NO_CREDS` - and nothing survived the seven filters. Only now may you say
-   the snapshot had nothing in-window and X had nothing either.
+1. **Cache miss, no credentials.** The cache held no in-window row for the
+   query and the script could not search X itself, so it printed `NO_CREDS`.
+   The header names the freeze date and both counts. This says nothing about
+   the world. Run that query with your own X tool (step 4), then answer from
+   what you find. Exit 0.
+2. **Cache miss, searched, nothing survived.** A live search ran - by the
+   script with its cookies, or by you after `NO_CREDS` - and nothing passed the
+   seven filters. Only now may you say the cache had nothing in-window and X
+   had nothing either. Exit 0.
+3. **Cache aged out.** The cache holds rows for this query but every one of
+   them is older than `--days`. The header says `0 in-window for this query`
+   and the note says how many older rows exist and that `--archive` lists them.
+   This is a fact about a frozen file, not about the world. Live / `NO_CREDS`
+   still follows. Exit 0.
+4. **Nothing answered at all.** Snapshot not read, no board payload, no live
+   rows. One line on stderr, empty stdout, exit 2.
 
-Only level 3 earns "nobody landed a reply". Levels 1 and 2 mean "not in this
-cache" and "not searched yet".
+Only case 2 earns the phrase "nobody landed a reply". Cases 1 and 3 mean "not
+in this cache" and "not searched yet", and case 4 means the run could not
+look.
 
 ## Failure
 
