@@ -297,6 +297,53 @@ def needs_exact_phrase(q: str) -> bool:
     return any(ch.isdigit() for ch in q)
 
 
+# Words that make a query longer without making it narrower. Suggesting
+# "on ios" helps nobody.
+_FILLER = {"the", "a", "an", "and", "or", "of", "to", "on", "in", "for", "with",
+           "at", "by", "from", "is", "it", "its", "this", "that", "be", "are",
+           "was", "my", "your", "their", "about", "new", "best", "top"}
+
+
+def phrase_miss(pool: list[dict], q: str) -> str:
+    """Why a multi-word topic came back empty, answered from the pool itself.
+
+    A phrase query needs every word inside ONE reply AND close together, so a
+    reply mentioning all of them paragraphs apart still fails. That distinction
+    is the whole answer: "nobody discussed this" and "people discussed these
+    words separately" are different facts, and a bare empty hides which one
+    happened. Everything here is counted against the rows the search actually
+    returned - never guessed.
+    """
+    tokens = [t for t in normalize(q).strip('"').split() if len(t) > 1]
+    if len(tokens) < 2 or not pool:
+        return ""
+    texts = [str(r.get("text") or "").lower() for r in pool]
+    seen = {t: sum(1 for x in texts if t in x) for t in tokens}
+    every_word = sum(1 for x in texts if all(t in x for t in tokens))
+
+    # A narrower query worth suggesting must be one the user would actually
+    # get rows from, so score candidates with the same nearness rule the real
+    # query uses - not with a looser one that would over-promise.
+    content = [t for t in tokens if t not in _FILLER] or tokens
+    best, best_n = "", 0
+    for i, a in enumerate(content):
+        for b in content[i + 1:]:
+            n = sum(1 for x in texts if words_are_near(x, [a, b]))
+            if n > best_n:
+                best, best_n = f"{a} {b}", n
+
+    if every_word:
+        head = (f"{every_word} of {len(pool)} replies mention every word, but "
+                f"never close enough together to be about it")
+    else:
+        head = f"no reply in {len(pool)} searched mentioned all of these words"
+    out = (f"{head} · seen separately: "
+           + ", ".join(f"{t} {seen[t]}" for t in tokens))
+    if best_n:
+        out += f' · try "{best}" ({best_n} of them)'
+    return out
+
+
 def matches_query(row: dict, q: str, *, text_only: bool = False) -> bool:
     """Does this row actually answer the query, not just share a thread with it?
 
@@ -465,7 +512,7 @@ def who(row: dict) -> str:
 
 def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
            updated_at: str | None, mode: str, links: bool = False,
-           notes: tuple[str, ...] = ()) -> str:
+           notes: tuple[str, ...] = (), limit: int = MAX_ROWS) -> str:
     """A card per reply: who answered whom, what they said, what it earned.
 
     Deliberately quiet - no source column, no parent URL unless asked. The
@@ -483,7 +530,7 @@ def render(q: str, rows: list[dict], *, days: int, capped: bool, source: str,
         return "\n".join(head)
 
     out = head + [""]
-    for i, r in enumerate(rows[:MAX_ROWS], start=1):
+    for i, r in enumerate(rows[:limit], start=1):
         parent = (r.get("parent_handle") or "").strip()
         author = (r.get("author") or "").strip()
         line = f"{i:>2}  {who(r)}"
@@ -586,7 +633,7 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 print(render(args.q, snap_rows[:limit], days=args.days,
                              capped=not args.raw, source=src, mode=mode,
-                             links=args.links, notes=(note,),
+                             links=args.links, notes=(note,), limit=limit,
                              updated_at=(snap or {}).get("updated_at")))
             return 0
         if args.archive:
@@ -612,6 +659,7 @@ def main(argv: list[str] | None = None) -> int:
         # a search returns, so asking for exactly `limit` rows leaves one card.
         pool_size = max(limit * 4, 25)
         notes, rows = [], []
+        miss = ""
         no_creds = []
         author_handle = x_author_target(args.q)
 
@@ -675,13 +723,18 @@ def main(argv: list[str] | None = None) -> int:
             rows = [r for r in rows
                     if (r.get("author") or "").strip().lstrip("@").lower() == who]
         else:
-            rows = [r for r in rows if matches_query(r, args.q, text_only=True)]
+            pool = rows
+            rows = [r for r in pool if matches_query(r, args.q, text_only=True)]
+            if not rows:
+                miss = phrase_miss(pool, args.q)
 
         if not rows:
             # Name every source we consulted, not only the ones that errored -
             # "Reddit: 403" alone reads as if X was never asked.
             detail = ("; ".join(notes)) if notes else "nothing matched"
             reason_out.append(f"looked at X and Reddit: {detail}")
+            if miss:
+                reason_out.append(miss)
             if no_creds:
                 # A machine-readable handoff: this install cannot search X
                 # itself, but the agent running it may be able to. Exit 0 -
@@ -734,7 +787,7 @@ def main(argv: list[str] | None = None) -> int:
                                   "on_board": False, "count": len(fresh),
                                   "rows": fresh}, indent=2))
             else:
-                print(render(args.q, fresh, days=args.days, capped=True,
+                print(render(args.q, fresh, days=args.days, capped=True, limit=limit,
                              source="live", mode=mode, notes=(cache_note(hit=False),),
                              updated_at=None, links=args.links))
             return 0
@@ -751,7 +804,8 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(payload or {"query": args.q, "count": 0, "rows": []},
                          indent=2))
         return 0
-    out = render(args.q, rows, days=(payload or {}).get("window_days", args.days),
+    out = render(args.q, rows, limit=limit,
+                 days=(payload or {}).get("window_days", args.days),
                  capped=bool((payload or {}).get("capped", not args.raw)),
                  source=("board" if rows else
                          "snapshot" if snap is not None else "no source"),

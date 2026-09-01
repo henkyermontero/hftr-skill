@@ -172,7 +172,7 @@ answer, and the only wording that earns the phrase "nobody landed a reply".
 |---|---|
 | `--q` | topic or identity (required) |
 | `--days` | 7 or 30 (default 30) |
-| `--limit` | rows, max 25 (default 12) |
+| `--limit` | rows, max 25 (default 12). Honoured by the readable list, not only by `--json` |
 | `--raw` | uncapped: allow several rows from the same account. Also **skips the snapshot**, so the answer comes from `HFTR_BASE_URL` or live search |
 | `--json` | print the raw payload instead of the readable list (`source` is `snapshot`, `live-x`, or your board's own payload) |
 | `--no-snapshot` | skip the GitHub raw snapshot. The next hop is `HFTR_BASE_URL` if set, otherwise live search / `NO_CREDS` |
@@ -219,6 +219,14 @@ which one you are looking at on the line under the header - read it.
    script with its cookies, or by you after `NO_CREDS` - and nothing passed the
    seven filters. Only now may you say the cache had nothing in-window and X
    had nothing either. Exit 0.
+
+   On a multi-word topic the script adds one more line, counted from the rows
+   the search actually returned: how many of them mention every word but never
+   close enough together to be about it, how often each word appeared on its
+   own, and a narrower query that would match. Pass that on. "No reply put
+   *hot*, *ios* and *apps* together, though 23 mentioned ios" is a different
+   and far more useful answer than silence, and it is the one case where an
+   empty can point somewhere.
 3. **Cache aged out.** The cache holds rows for this query but every one of
    them is older than `--days`. The header says `0 in-window for this query`
    and the note says how many older rows exist and that `--archive` lists them.
