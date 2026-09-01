@@ -465,11 +465,11 @@ def main(argv: list[str] | None = None) -> int:
                     help="uncapped: allow several rows from the same account")
     ap.add_argument("--json", action="store_true", help="print the raw payload")
     ap.add_argument("--no-snapshot", action="store_true",
-                    help="skip the snapshot and ask the live board")
+                    help="skip the GitHub raw snapshot (next hop: HFTR_BASE_URL if set, else live search)")
     ap.add_argument("--links", action="store_true",
                     help="also print the parent post URL on each row")
     ap.add_argument("--no-live", action="store_true",
-                    help="do not fall back to a live X search when the board is empty")
+                    help="do not fall back to live X/Reddit search when nothing above answered")
     args = ap.parse_args(argv)
 
     limit = min(args.limit, 25)
