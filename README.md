@@ -119,6 +119,18 @@ git commit -am "snapshot" && git push
 It is deliberately not wired into the ingest cron: nothing about this may ever
 change that job's exit code.
 
+**There is no automatic rebuild.** `.github/workflows/rebuild-snapshot.yml` is
+`workflow_dispatch` only. It used to run twice a day against the hosted board,
+but that board was retired on 2026-09-01, so from then until 2026-09-14 every
+run found nothing to copy, exited 1 by design, and mailed a failure notice: 33
+red runs in a row. The schedule is gone. Run it by hand, with `HFTR_BASE_URL`
+pointing at a board you run, or just run the script locally and commit.
+
+The failures were harmless by construction and that is worth keeping: when the
+API is empty or unreachable `build_snapshot.py` exits 1 **without** writing, so
+a broken rebuild can never overwrite a good snapshot with an empty one. Do not
+"fix" that by letting it write a partial file.
+
 ## When the cache has never heard of it
 
 If the snapshot and the optional board API both come up empty, the script runs
